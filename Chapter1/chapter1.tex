@@ -10,13 +10,48 @@ A command line shell is the minimal interface between users and the operating sy
 
 \begin{itemize}
    \item All of the sections and text in this example are for illustration purposes. The main Chapters are a good starting point, but the content and actual sections that you include are likely to be different.
-   
    \item Look at the document on the Structure of the Final Report for additional guidance. 
-   
 \end {itemize}
 
 \section{Background}
-I became interested in doing this project during my year in industry. The 
+I became interested in doing this project during my year in industry when the ShellShock\cite{SHELLSHOCK-CVE,SHELLSHOCK-LWN,SHELLSHOCK-SYMANTEC} vunerability was annouced.
+Bash is the default shell on most linux distributions and is used by many applications including web servers such as apache to serve CGI scripts.
+This means that there was a huge attack surface for this bug.
+
+I started examining the source code of bash once the patches for shellshock and the subsequently discovered vunerabilities were released.
+The first thing I noticed was how insanely confusing it all was.
+
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Language           & files & blank & comment & code   \\ \midrule
+C                  & 252   & 20090 & 19392   & 102608 \\
+HTML               & 3     & 3762  & 39      & 25942  \\
+Bourne Shell       & 36    & 3330  & 3459    & 19857  \\
+Teamcenter def     & 44    & 2567  & 1491    & 13014  \\
+C/C++ Header       & 111   & 2719  & 3438    & 7286   \\
+yacc               & 2     & 800   & 885     & 5096   \\
+m4                 & 4     & 465   & 438     & 4656   \\
+Perl               & 2     & 535   & 834     & 4229   \\
+Bourne Again Shell & 24    & 196   & 249     & 786    \\
+make               & 3     & 48    & 36      & 110    \\
+Assembly           & 2     & 11    & 20      & 48     \\
+awk                & 1     & 8     & 15      & 24     \\
+sed                & 2     & 0     & 0       & 16     \\ \midrule
+SUM:               & 486   & 34531 & 30296   & 183672 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+I have used bash ever since I started programming and switched to using linux as my main operating system.
+I often use it during code golf competitions due to its terse yet powerful syntax.
 What was your background preparation for the project? What similar systems did you assess? What was your motivation and interest in this project? 
 
 \section{Analysis}
