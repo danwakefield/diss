@@ -1,20 +1,3 @@
-@misc{FOWLER-SCOUT,
-	author = {Martin Fowler},
-	title = {Opportunistic Refactoring},
-	howpublished = {\url{http://martinfowler.com/bliki/OpportunisticRefactoring.html}},
-	month = {},
-	year = {},
-	note = {(Visited on 12015-11-22)}
-}
-@misc{FOWLER-DESIGN,
-	author = {Martin Fowler},
-	title = {Is Design Dead?},
-	howpublished = {\url{http://martinfowler.com/articles/designDead.html}},
-	month = {},
-	year = {},
-	note = {(Visited on 2015-11-22)}
-}
-
 @book{CLEAN,
 	Author = {Robert C. Martin},
 	Title = {Clean Code: A Handbook of Agile Software Craftsmanship},
@@ -43,7 +26,7 @@
 }
 @misc{GOTOFAIL,
 	author = {Paul Ducklin},
-	title = {Anatomy of a “goto fail” – Apple’s SSL bug explained},
+	title = {Anatomy of a "goto fail" --- Apple's SSL bug explained},
 	howpublished = {\url{https://nakedsecurity.sophos.com/2014/02/24/anatomy-of-a-goto-fail-apples-ssl-bug-explained-plus-an-unofficial-patch/}},
 	month = {24 Feb},
 	year = {2014},
@@ -78,7 +61,7 @@
 }
 @misc{PIKE-LEXING-VIDEO,
 	author = {Rob Pike},
-	title = {Lexical Scanning in Go - Rob Pike - YouTube},
+	title = {Lexical Scanning in Go},
 	howpublished = {\url{https://www.youtube.com/watch?v=HxaD_trXwRE}},
 	month = {08},
 	year = {2011},
@@ -211,11 +194,226 @@
 	chapter     = {9},
 }
 @misc{UNIX-SHELL-HISTORY,
-author = {Nikolai Bezroukov},
+	author = {Nikolai Bezroukov},
 	title = {Introduction to the Unix shell history},
 	howpublished  = {\url{http://www.softpanorama.org/People/Shell_giants/introduction.shtml}},
 	month = {},
 	year = {},
-	note = {(Accessed on 2016-03-23)}
-	annote = {An opinionated (For csh) look at the progression of shells from the 1st generation (Thompson sh) to the 4th (zsh). }
+	note = {(Accessed on 2016-03-23)},
+	annote = {An opinionated look at the progression of shells from the 1st generation (Thompson sh) to the 4th (zsh). The author prefers csh style shells to the more common ash style.}
 }
+
+@misc{GOLANG-CHALLENGE,
+	author = {},
+	title = {Go Challenge – Learn Go by solving problems.},
+	howpublished = {\url{http://golang-challenge.org/}},
+	month = {},
+	year = {},
+	note = {(Accessed on 2016-03-28)},
+	annote = {A site that published challenges to be completed in Golang during my year in industry. I competed in the first two challenges and completed, but didn't submit, a solution for the third.}
+}
+
+@Book{APPRENTICESHIP-PATTERNS,
+	author = {Hoover, Dave},
+	title = {Apprenticeship patterns: guidance for the aspiring software craftsman},
+	publisher = {O'Reilly},
+	year = {2010},
+	address = {Beijing Cambridge Mass},
+	isbn = {0596518382}
+}
+ 
+@misc{DESIGN-OF-SH-VIDEO,
+	author = {Stephen Bourne},
+	title = {Early days of Unix and design of sh},
+	howpublished = {\url{https://www.youtube.com/watch?v=2kEJoWfobpA}},
+	month = {06},
+	year = {2015},
+	note = {(Accessed on 2016-03-30)},
+	annote = {}
+}
+
+@misc{ES-SHELL,
+	author = {James Haggerty},
+	title = {es - Extensible Shell},
+	howpublished = {\url{https://wryun.github.io/es-shell/}},
+	month = {},
+	year = {},
+	note = {(Accessed on 2016-03-31)},
+	annote = {The direct descendant of the rc shell from plan 9.}
+}
+
+@misc{OH-SHELL,
+	author = {Michael Macinnis},
+	title = {oh - MANUAL},
+	howpublished = {\url{https://github.com/michaelmacinnis/oh/blob/master/MANUAL.md}},
+	month = {},
+	year = {},
+	note = {(Accessed on 04/01/2016)},
+    annote = {An exotic lisp inspired shell written in golang. This shell makes  use of code generation tools especially for the lexer.}
+}
+@book{LITTLE-SCHEMER,
+  Author = {Daniel P. Friedman and Matthias Felleisen},
+  Title = {The Little Schemer - 4th Edition},
+  Publisher = {The MIT Press},
+  Year = {1995},
+  ISBN = {0262560992},
+  URL = {http://www.amazon.co.uk/dp/0262560992}
+}
+
+@book{SICP,
+  Author = {Harold Abelson and Gerald Jay Sussman},
+  Title = {Structure and Interpretation of Computer Programs - 2nd Edition (MIT Electrical Engineering and Computer Science)},
+  Publisher = {The MIT Press},
+  Year = {1996},
+  ISBN = {0262510871},
+  URL = {http://www.amazon.co.uk/dp/0262510871}
+}
+
+@book{LEX-AND-YACC,
+  Author = {Doug Brown and John Levine and Tony Mason},
+  Title = {lex \& yacc},
+  Publisher = {O'Reilly Media},
+  Year = {1995},
+  ISBN = {1565920007},
+  URL = {http://www.amazon.co.uk/dp/1565920007}
+}
+@misc{BUILD-INTERP,
+	author = {Ruslan Spivak},
+	title = {Let's Build A Simple Interpreter.},
+	howpublished = {\url{https://ruslanspivak.com/lsbasi-part1/}},
+	month = {06},
+	year = {2015},
+	note = {(Accessed on 04/01/2016)},
+    annote = {The first entry in an ongoing series about constructing an interpretor. The quote "If you don't know how compilers work, then you don't know how computers work" is included in the first section and was another thing that helped to make this project my first choice.}
+}
+@misc{BUSYBOX,
+	author = {},
+	title = {BusyBox},
+	howpublished = {\url{https://www.busybox.net/about.html}},
+	month = {},
+	year = {},
+	note = {(Accessed on 04/02/2016)},
+    annote = {A single executable containing most of the common shell utilities, including a POSIX shell (Clone of ash/dash).}
+}
+@misc{ALPINE-LINUX,
+	author = {},
+	title = {Alpine Linux},
+	howpublished = {\url{http://www.alpinelinux.org/about/}},
+	month = {},
+	year = {},
+	note = {(Accessed on 04/04/2016)},
+    annote = {One of the smallest linux distributions available. Widely used as a base image for docker containers.}
+}
+@misc{CODE-GOLF,
+	author = {Daniel Wakefield},
+    title = {StackExchange Codegolf},
+    howpublished = {\url{https://codegolf.stackexchange.com/users/41336/daniel-wakefield?tab=answers}},
+    note =  {(Accessed on 04/04/2016)},
+    annote = {Entries for code golf challenges. Some are written in bash using the more obscure syntax.}
+}
+
+@mastersthesis{GONET,
+	author = {Harshal Sheth and Aashish Welling},
+    title = {An Implementation and Analysis of a Kernel
+Network Stack in Go with the CSP Style},
+	school = {MIT PRIMES},
+    month = {03},
+    year = {2016},
+    annote = {Shows the use of Go in a context where C would historically be used.}
+}
+@misc{EVERY-COMPSCI-GRAD,
+	author = {Matt Might},
+	title = {What every computer science major should know},
+	howpublished = {\url{http://matt.might.net/articles/what-cs-majors-should-know/}},
+	month = {},
+	year = {},
+	note = {(Accessed on 2016-04-06)},
+	annote = {A list of things that a computer science graduate should be familiar with. While I don't agree that someone should know them all by the end of university I am still trying to get as many things ticked off the list as possible to become a well rounded programmer.}
+}
+
+@misc{SHELL-HISTORY,
+	author = {M. Tim Jones},
+	title = {Evolution of shells in Linux},
+	howpublished = {\url{https://www.ibm.com/developerworks/library/l-linux-shells/}},
+	month = {12},
+	year = {2011},
+	note = {(Accessed on 2016-04-06)}
+}
+
+@misc{COMPILERS-COURSE,
+	author = {Keith Schwarz},
+	title = {CS143: Compilers},
+	howpublished = {\url{http://www.keithschwarz.com/cs143/WWW/sum2011/}},
+	month = {2011},
+	year = {},
+	note = {(Accessed on 2016-04-07)},
+	annote = {}
+}
+
+@misc{CRENSHAW,
+	author = {Jack W. Crenshaw},
+    title = {How to build a compiler!},
+    howpublished = {\url{http://compilers.iecc.com/crenshaw/tutorfinal.pdf}},
+    month = {07},
+    year = {1988},
+    annote = {A step by step guide to implementing a compiler for an ALGOL like language in Pascal outputting Assembly files that can be linked into and executable.}
+}
+
+@misc{ELVISH-SHELL,
+	author = {Qi Xiao},
+    title = {Elvish Shell},
+    howpublished = {\url{https://github.com/elves/elvish}},
+    year = {2014},
+    month = {02},
+    annote = {A novel UNIX shell written in Golang.}
+}
+
+@misc{GO-READLINE,
+	author = {chzyer},
+    title = {GoReadline},
+	howpublished = {\url{https://github.com/chzyer/readline}},
+    year = {2015},
+    month = {09},
+    annote = {A golang package offering functionality similar to readline but aiming to be more powerful.}
+}
+
+@misc{UNIX-SHELL-COMPARISON,
+	author = {},
+	title = {Unix Shells Comparison - Hyperpolyglot},
+	howpublished = {\url{http://hyperpolyglot.org/unix-shells}},
+	month = {},
+	year = {},
+	note = {(Accessed on 04/08/2016)},
+    annote = {A comparison of features across five of the modern shells: Bash, Fish, Ksh, Tcsh and Zsh.}
+}
+
+@misc{GETTING-REAL,
+	author = {37Signals},
+	title = {Getting Real},
+	howpublished = {\url{https://gettingreal.37signals.com/toc.php}},
+	month = {},
+	year = {},
+	note = {(Accessed on 04/09/2016)},
+    annote = {Advice from the company behind rails about building your own company or product well.}
+}
+
+@misc{RUBBER-DUCK-DEBUG,
+	author = {},
+	title = {Rubber Duck Debugging},
+	howpublished = {\url{http://www.rubberduckdebugging.com/}},
+	month = {},
+	year = {},
+	note = {(Accessed on 04/09/2016)},
+    annote = {Collection of information on the infamous rubber duck debugging technique.}
+}
+
+
+
+
+
+
+
+
+
+
+

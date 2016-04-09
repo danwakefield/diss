@@ -29,11 +29,24 @@
 %\usepackage{natbib}
 
 % Use the following to selectively exclude chapters
-%\includeonly{cover,abstract,acknowledge,declare,chapter1,chapter2}
+%\includeonly{chapter1}
 
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 \usepackage{booktabs}
-\usepackage{graphicsx}
-\graphicspath{{./images/}}
+\usepackage[hypcap]{caption}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mdwlist}
+\usepackage{pdfpages}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!70!black},
+    citecolor={blue!70!black},
+    urlcolor={blue!80!black}
+}
+
 \begin{document}
 
 % all of the include directives below refer to tex files
