@@ -15,6 +15,91 @@
 
 \section{Overall Architecture}
 
+\section{Language Choice}
+My language of choice for this project was Go\cite{GOLANG}
+Also known as Golang, it is a statically typed, compiled, concurrent, garbage collected language that is heavily inspired by C for the general syntax, Limbo for it's use of Communicating Sequential Processes (CSP)\cite{HOARE-CSP} and Python for its emphasis on readability and an all inclusive standard library.
+It is a relatively modern language, released to the public in 2009, that was created to solve some of the problems experienced with the languages used at Google, namely C\verb!++!, Python and Java.
+I began to learn the language, through the Golang Challenge\cite{GOLANG-CHALLENGE},  during my industrial year after experiencing some of these problems with python myself.
+
+The creators of the language are all well respected in the world of computing.
+Rob Pike is known for Plan 9 and UTF8. 
+Robert Griesemer for the Java hotspot VM
+Ken Thompson for Unix, Plan 9 and B, the predecessor to C.
+Their combined hatred of the complexity and compile times of C\verb!++! where the catalyst for Go's development.
+They also saw it as an opportunity to improve upon the aspects of C that have been most problematic over the years including:
+
+\begin{itemize*}
+	\item Optional braces around if statements (The cause of apples GOTO fail bug\cite{GOTOFAIL}).
+	\item Pointer arithmetic.
+	\item Confusing side effects of post/pre increment and decrement. Go only allows the post version and only as a standalone expression.
+	\item GOTO statements that can jump anywhere at any time.
+    \item Overloaded return values used to indicate errors.
+\end{itemize*}
+
+The language also avoided style wars as it came with a tool, gofmt, that formats code 'the right way'.
+This is just one of the ways in which Go is extremely opinionated.
+Others include:
+\begin{itemize*}
+	\item Unused imports and variables are a compile time error.
+    \item Variables names should be generally be short. The longer they are in scope the longer and more descriptive the name should be.
+    \item The use of interface composition over polymorphism, generics and inheritance.
+    \item One loop construct, the for loop. Use with a break statement to create a while or until loop.
+\end{itemize*}
+
+It also comes with a simple built in testing framework that encourages tests right from the start and a documentation generator emphasising that.
+
+
+It also doesn't hurt that Go has been found that to be a great language to build components traditionally done with C, including things as complicated as a kernel subsystem\cite{GONET}.
+
+Concurrency after moores law, cores increasing faster than ghz.
+
+While this is the language I decided to go with in the end I did consider others.
+The candidate list included C, C\verb!++!, Python and OCaml.
+
+\subsection{C}
+C is a fast, low level, general purpose compiled language that is extremely powerful.
+Unfortunately this power comes at a cost.
+Historically the readability of C code is low which means that maintaining and extending code is hard.
+This would not a huge problem if I was only creating the project for the dissertation but I hope to continue development after submission.
+
+I considered it as a candidate as many shells have already been written using it proving it is a suitable choice.
+This could be considered both an advantage, the abundance of prior art, and a disadvantage, less room to find innovative solutions.
+
+While I have used some C in the past and have read the seminal book, K\&R C, I would not consider myself experienced in its use, especially with the more modern aspects like compiler directives and function annotations.
+This could have led to problems around having to learn parts of such a complex language while developing a large project.
+Even though I did not end up using this language I spent lots of time reading the source code for dash, bash and busybox which are all written in C, therefore using it  may have helped in my context switches. 
+
+One thing I was worried about was the minimal standard library that C implementations provide.
+I assumed that I would be required to spend valuable development time creating standard functions and data structures.
+However during my research I discovered that libraries such as GLib and qLibc are commonly used and provide most, if not all, of the things I am used to in the StdLib of Python.
+
+%XXX
+Something to note is that I discovered a library, libmill\cite{LIBMILL}, which provides functions and macros for Go like CSP.
+
+In conclusion the reasons I did not choose this as the implementation language was the verbosity of manual memory management and the aforementioned possibilities of bugs and lack of maintainability. 
+
+
+\subsection{C++}
+
+
+As with anything based in C, C\verb!++! may be considered the obvious step forward.
+I have never used the language but have read the source code for a few projects written using it.
+It has a fairly complete standard library and some of the memory management is abstracted behind constructor's and destructor's.
+Despite this it is notoriously difficult and If the project where to use it it may be tied to one architecture and OS unless a lot of extra effort was put in.
+
+\subsection{OCaml}
+OCaml is a garbage collected, functional compiled language.
+
+
+
+
+It is also garbage collected, boasts an impressive standard library and has cross platform compilation abilities. 
+The thing that reduces the interest in this language are the complete lack of experience using it and the fact it relies heavily on functional programming. 
+Learning a new language and new programming paradigm does not seem like a sensible thing to do while working on such an important project.
+
+\subsection{Python}
+
+
 \section{Some detailed design}
 
 \subsection{Even more detail}
