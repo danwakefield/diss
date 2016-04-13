@@ -94,12 +94,12 @@ It is a multi paradigm language that allows users to mix object oriented, impera
 I considered it as a candidate as it is often said that ML languages are superior to imperative ones at creating compilers and interpretors. 
 This is because construction and modification of tree structures, such as the abstract syntax tree required in interpretors, using pattern matching and algebraic data types is very idiomatic in these types of languages.
 
-I chose to consider it over other functional languages as it had recently come to my attention when it was used to create the high profile language Hack at Facebook
+I chose to consider it over other functional languages as it had recently come to my attention when it was used to create the high profile language Hack at Facebook.
 As well as this it has been used for the Haxe language, the MirageOS unikernel and many code analysis tools.
 These are all complex systems that show that the performance and the bulitin parsing tools are up to tasks well above the complexity of a simple interpretor.
 
+I however had no experience at all with OCaml and very little with ML languages in general.
 
-I however had no experience at all with OCaml and very little with ML languages in general
 
 
 \subsection{Python}
@@ -112,7 +112,10 @@ The program is, at its core, a series of transformations that result in the init
 Text is input is some way, either at an interactive prompt, by reading the contents of a file or least commonly, piped in through stdin.
 
 This text is then passed through to the lexer component.
-Most languages are able to run their lexer and parser as separate entities but due to some shell features, namely the various subshell constructs they are required to be able to parse, 
+Most languages are able to run their lexer and parser as separate entities but due to some  features, namely the various subshell constructs they are required to be able to parse, this shell has to couple them fairly tightly.
+
+The Lexer 
+
 
 \subsection{Even more detail}
 
