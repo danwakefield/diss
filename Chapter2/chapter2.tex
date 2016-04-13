@@ -114,7 +114,24 @@ Text is input is some way, either at an interactive prompt, by reading the conte
 This text is then passed through to the lexer component.
 Most languages are able to run their lexer and parser as separate entities but due to some  features, namely the various subshell constructs they are required to be able to parse, this shell has to couple them fairly tightly.
 
-The Lexer reads the text and returns Tokens that represent the 
+The Lexer reads the text and returns standardized Tokens that represent it.
+This is an important step as it normalizes scripts by removing white space, comments and unwanted newlines.
+It can also detect some errors such as strings that have not been closed 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \subsection{Even more detail}
