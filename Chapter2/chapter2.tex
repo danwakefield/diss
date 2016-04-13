@@ -107,7 +107,10 @@ I however had no experience at all with OCaml and very little with ML languages 
 \section{Some detailed design}
 The program is, at its core, a series of transformations that result in the initial text input eventually being executed in various ways on the machine.
 
-Text is input is some way, either at an interactive prompt, by reading the contents of a file or least commonly, piped into stdin though this works similarly to  
+Text is input is some way, either at an interactive prompt, by reading the contents of a file or least commonly, piped in through stdin.
+
+This text is then passed through to the lexer component.
+Most langauges are able to run there lexer and parser as separte entities but due to some of bashs features, namely the sub
 
 \subsection{Even more detail}
 
