@@ -127,8 +127,8 @@ This is also the point where any remaining syntax errors should be detected.
 %Using Go allowed me to use an interface instead of a union to represent a node.
 %This interface consists of a single method, Eval, which all the different nodes then satisfy allowing related code to be contained together.
 
-
-The terminal node of the tree is a NodeCommand, or in some cases a nil. 
+As with most tree structures each node in the AST contains other nodes, the exception being the NodeCommand which is the terminal node that encompasses running a command, builtin or user defined function.
+In the specification this node is referred to as a simple command however due to design decisions
 
 
 
