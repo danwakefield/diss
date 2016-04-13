@@ -117,7 +117,11 @@ Most languages are able to run their lexer and parser as separate entities but d
 The Lexer reads the text and returns standardized Tokens that represent it.
 This is an important step as it normalizes scripts by removing white space, comments and unwanted newlines.
 It can also detect some classes of syntax errors such as strings that have not been closed and incomplete variable substitutions.
-However the POSIX spec is very lenient in these scenarios and many things that would be considered errors are ignored or resolved in some way.
+However the POSIX spec is very lenient in these scenarios and many things that would be considered errors are ignored or resolved in some way. %XXX Give example
+
+The next step is using the Parser to turn these Tokens in nodes for the syntax tree.
+The parser is where the rest of the syntax errors are discovered.
+
 
 
 
