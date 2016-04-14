@@ -13,6 +13,8 @@
 %   \item Look at the document on the Structure of the Final Report for additional guidance. 
 %\end {itemize}
 
+
+
 \section{Background \& Motivations}
 A shell is the minimal interface between the user and the operating system kernel allowing users to directly execute programs, interact with files and devices (which can provide network access, e.g /dev/tcp/host/port) as well as providing a turing complete environment to perform interactive or automated tasks.
 All linux distributions right down to the very smallest\cite{ALPINE-LINUX} include a shell and until recently many used sysVinit scripts to boot the system.
@@ -119,6 +121,7 @@ With that in mind I set out the high level objectives for the project.
 Some of these goals are vague and subjective but most importantly they don't make good assessment criteria.
 To come up with them we need to look at a combination of what users expect from a shell and what the POSIX specification requires the shell to do.
 
+\newpage
 The man page for the rc shell begins with:
 \begin{lstlisting}
 All of the following behave as expected:
