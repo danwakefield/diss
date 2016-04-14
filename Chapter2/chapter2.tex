@@ -128,6 +128,9 @@ Nodes in this tree satisfy an interface called Node, which contains a single met
 Every Node's eval method knows how to perform the actions of that node and then hand execution off to its child nodes when appropriate.
 
 The terminal Node of the tree is the NodeCommand which handles execution of system utilites, builtins and user defined functions as well as the redirection of their input and output to the requested files, pipes or file descriptors.
+This is where another important step in the process happens.
+Before anything can be executed a whole bunch of different expansions have to be run. These include expanding variables and tildes, arithmetic substitution and filepath globbing in a POSIX shell.
+Bash and other modern shells extend these further to include brace expansion,
 
 
 
