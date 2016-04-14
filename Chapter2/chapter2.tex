@@ -108,11 +108,14 @@ I however had no experience at all with OCaml and very little with ML languages 
 
 
 \section{High level design}
-
-
 This section will describe the high level design of the shell and illustrate to a user with no knowledge of the internals of a shell how components interact with each other.
-There are some sections of the design where Go allowed me to be much more concise than C allows dash or bash.
-These will be clearly noted 
+There are some parts of the design where Go allowed me to be much more concise than C allows dash or bash.
+These will be clearly noted and explained in more detail in later sections
+
+Figure~\ref{fig:shell-flowchart} is a visual guide to this section and I will be referring to it often.
+It should be noted that the flowchart is not totally representation of the system and is just here to show the progression of data from beginning to end.
+
+
 
 Text is input is some way, either at an interactive prompt, by reading the contents of a file or least commonly, piped in through stdin.
 
