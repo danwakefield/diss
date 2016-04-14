@@ -125,7 +125,9 @@ This is also the point where any remaining syntax errors should be detected.
 % Write more.
 
 Nodes in this tree satisfy an interface called Node, which contains a single method called Eval.
-Every Node's eval method knows how to perform the actions of that node and then hand execution to its child nodes when appropriate.
+Every Node's eval method knows how to perform the actions of that node and then hand execution off to its child nodes when appropriate.
+
+The terminal Node of the tree is the NodeCommand which handles execution of system utilites, builtins and user defined functions, the redirection of input and output to the requested files, pipes or file descriptors and 
 
 As with most tree structures each node in the AST contains other nodes, the exception being the NodeCommand which is the terminal node that encompasses running commands, builtin's or user defined functions.
 
