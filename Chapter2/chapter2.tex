@@ -108,7 +108,11 @@ I however had no experience at all with OCaml and very little with ML languages 
 
 
 \section{High level design}
-The program is, at its core, a series of transformations, not unlike a shell pipeline.
+
+
+This section will describe the high level design of the shell and illustrate to a user with no knowledge of the internals of a shell how components interact with each other.
+There are some sections of the design where Go allowed me to be much more concise than C allows dash or bash.
+These will be clearly noted 
 
 Text is input is some way, either at an interactive prompt, by reading the contents of a file or least commonly, piped in through stdin.
 
