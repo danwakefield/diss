@@ -13,8 +13,6 @@
 
 %Some example sub-sections may be as follows, but the specific sections are for you to define. 
 
-\section{Overall Architecture}
-
 \section{Language Choice}
 My language of choice for this project was Go\cite{GOLANG}
 Also known as Golang, it is statically typed, compiled, concurrent and  garbage collected and is heavily inspired by C for the general syntax, Limbo for it's use of Communicating Sequential Processes (CSP)\cite{HOARE-CSP} and Python for its emphasis on readability and an all inclusive standard library.
@@ -49,7 +47,7 @@ Others include:
 
 It also comes with a simple built in testing framework that encourages tests right from the start and a documentation generator emphasising that.
 
-
+XXX
 It also doesn't hurt that Go has been found that to be a great language to build components traditionally done with C, including things as complicated as a kernel subsystem\cite{GONET}.
 
 Concurrency after moores law, cores increasing faster than ghz.
@@ -74,7 +72,7 @@ One thing I was worried about was the minimal standard library that C implementa
 I assumed that I would be required to spend valuable development time creating standard functions and data structures.
 However during my research I discovered that libraries such as GLib and qLibc are commonly used and provide most, if not all, of the things I am used to in the StdLib of Python.
 
-%XXX
+XXX
 Something to note is that I discovered a library, libmill\cite{LIBMILL}, which provides functions and macros for Go like CSP.
 
 In conclusion the reasons I did not choose this as the implementation language was the verbosity of manual memory management and the aforementioned possibilities of bugs and lack of maintainability. 
@@ -113,35 +111,82 @@ This section will describe the high level design of the shell and illustrate to 
 Figure~\ref{fig:shell-flowchart} is a visual guide to this though it should be noted that the flowchart is not totally representative of the system and is just here to show the progression of data.
 
 
+\subsection{Input}
 The first step we need to do is get the text that represents the shell program in some way.
-This can come from a file, a pipe or an interactive session.
-Due to the time restrictions gosh does not currently support interactive use though this something I plan to add in the near future.
+This can come in from a pipe, be read from a file or entered into an interactive session.d
+Due to the time restrictions, gosh does not currently support interactive use though this something I plan to add in the near future.
+This text is then used to construct a lexer, parser pair.
+
+\subsection{Lexer}
+The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
+These runes are turned into a stream of normalized tokens, removing comments and whitespace.
+In some cases, when we are expecting some other terminating token such as the 'fi' following an 'if' block, newlines are also removed.
+The lexer can also detect some errors that don't require deep knowledge of the language grammar.
+Unterminated strings and incomplete variable substitutions XXX
+
+However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
+An example of this is the variable symbol '\$', by itself or followed by a character that would be invalid in the first position of a variable name it becomes a literal character with no special meaning.
+
+\subsection{Parser}
+The tokens produced in the lexer are consumed by the parser one at a time.
 
 
-
-Text is input is some way, either at an interactive prompt, by reading the contents of a file or least commonly, piped in through stdin.
-
-This text is then passed through to the lexer component.
-Most languages are able to run their lexer and parser as separate entities but due to some  features, namely the various subshell constructs they are required to be able to parse, this shell has to couple them fairly tightly.
-
-The Lexer reads the text and returns standardized Tokens that represent it.
-This is an important step as it normalizes scripts by removing white space, comments and unwanted newlines.
-It can also detect some classes of syntax errors such as strings that have not been closed and incomplete variable substitutions.
-However the POSIX spec is very lenient in these scenarios and many things that would be considered errors are ignored or resolved in some way. %XXX Give example
 
 The next step is using the Parser to check the semantic meaning of these Tokens and use them to create the nodes for an AST.
 This is also the point where any remaining syntax errors should be detected.
-% Write more.
+XXX % Write more.
+
+\subsection{Nodes \& the AST}
+The Abstract Syntax Tree (AST) returned from the parser can consist of any number of nodes each of which can contain even more.
 
 Nodes in this tree satisfy an interface called Node, which contains a single method called Eval.
-Every Node's Eval method knows how to perform the actions of that node and then hand execution off to its child nodes when appropriate.
+Each Node is a separate type that contains fields relevant to itself.
+The types then satisfy this interface with code that knows how to perform the actions of that node and hand execution off to child nodes when appropriate.
 
-The exception to this is the terminal Node of the tree which in this case is the NodeCommand.
+With the concept of child nodes something has to be at the end of the tree and these are terminal nodes.
+There are three things that are considered terminal when returned from the parser and each is treated differently.
+
+The NodeCommand is terminal since it returns an exit code, but it is also a valid AST.
 This node handles execution of system utilites, builtins and user defined functions as well as the redirection of their input and output to the requested files, pipes or file descriptors.
-This is known as a 'simple command' in the specification and is the building block for the compound commands which group it in different ways.
+This is known as a 'simple command' in the specification and is the building block for 'compound commands'.
 
-This is where another important step in the process happens.
-Before anything can be executed a whole bunch of different expansions have to be run. In a POSIX shell these include expanding variables and tildes, arithmetic substitution, filepath globbing and the all important word splitting.
+The NodeEOF indicate that the input has been exhausted and the shell should return with the last exit code it received.
+The main loop checks explicitly for it with a type check.
+The layout of the parser means that nothing else can receive this as a valid node.
+
+Finally there is 'nil' which is to be used as a signal to the interactive session.
+It is also used in the NodeCaseList to indicate that the case contains no code.
+XXX %This should be changed to a NOOPNode which NodeEOF can embed.
+
+Go allowed me to express nodes in a clean way through the use of interfaces and structs.
+This is a big change from how they are expressed in dash's C code.
+There they consist of DEFINED constants, huge union structs and evaluation code in a single function with GOTO's and XXX
+
+\subsection{Expansion}
+While the diagram shows that only NodeCommands undergo expansion this is a slight lie to keep it simple.
+The Arg structures contained in a NodeFor and a NodeCase are also expanded when required but they don't cause any command execution.
+
+When evaluation hits a NodeCommand we know we are going to do one of three things, set some variables \verb!A=1 B=2! or run some sort of command, with optionally prepended variable assignments that only last until the end of the commands execution \verb!A=1 foo!
+In either case it is possible that a value exists that requires expansion e.g \verb!A="$X $(foo) $((3+4))" B=*.c!.
+
+The expansion pipeline performs these expansions in order returning a list of strings as some of the expansions can result in multiple words.
+These include:
+\begin{description*}
+	\item Tilde expansion \hfill \\
+    	Turning the '\~' character into the filepath of home or named directory's.
+    	This expansion only occurs at certain positions in unquoted words.
+    \item Subshell expansion \hfill \\
+    	This expansion starts another evaluation loop with certain IO redirections so the output of the subshell can be placed as a string in its place.
+	\item Arithmetic expansion \hfill \\
+    	Arithmetic is sufficently complicated that it requires a call to a separate lexer parser pair.
+        This expansion calls the exposed Parse function and receives an integer in return which can be converted to a string.
+    \item Variable Substitution \hfill \\
+    	There are some complex variable replacements which can alter the contents, assign new values or even exit the shell with an error in some cases.
+	\item Filepath globbing \hfill \\
+    	Unquoted strings containing globbing meta characters are expanded to a list of files in the current directory that match the pattern.
+        If no files match the pattern it is returned as a literal string.
+\end{description*}
+
 Bash and other modern shells extend these further to include brace expansion and process substitution.
 
 \begin{figure}[hp]
