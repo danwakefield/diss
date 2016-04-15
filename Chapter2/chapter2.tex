@@ -192,8 +192,9 @@ Bash and other modern shells extend these further to include brace expansion and
 \subsection{Execution}
 
 The expanded arguments are then used to determine what to execute.
-This decision is made in the order of precedence laid out in the specification.
-This is:
+This decision is made in the order of precedence laid out by the specification which depends on the format of the first argument.
+
+If the argument contains a slash it is taken to be a relative path and looked for from the current working directory.
 \begin{enumerate*}
 	\item Special builtin functions.
     \item User defined functions.
