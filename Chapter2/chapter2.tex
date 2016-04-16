@@ -117,7 +117,7 @@ Figure~\ref{fig:shell-flowchart} is a visual guide to this though it should be n
 
 \subsection{Input}
 The first step we need to do is get the text that represents the shell program in some way.
-This can come in from a pipe, be read from a file or entered into an interactive session.d
+This can come in from a pipe, be read from a file or entered into an interactive session.
 Due to the time restrictions, gosh does not currently support interactive use though this something I plan to add in the near future.
 This text is then used to construct a lexer, parser pair.
 
@@ -162,16 +162,9 @@ I chose to write a predictive recursive descent parser(RDP) for a few reasons.
     \item It works with the class of grammar that the shell language has (
     LL(1) explained further in XXX)
     \item dash and zsh both use RDP's giving some prior art to draw from as well as proving it is a suitable construct for the task.
-    \item 
 \end{enumerate*}
-dash and zsh use hand coded RDP's 
-First of all it as the shells grammar fits into a category known as LL(1), Left Lookahead 1 Token, this is one of the simplest parsers that will wok on it.
-Th
 
-There are also lexer generator tools such as ANTLR 
-
-Recursive descent predictive since shell has an LL(1) grammar.
-AN LALR/ LR Could have been generated using tools such as antlr but this wasnt choosen due to not having a great undertanding of the underlying techniques. Compiler construction texbooks are VERY expensive.
+There was also the option of LALR or LR lookahead parsers and backtrakin
 
 XXX % Write more.
 
