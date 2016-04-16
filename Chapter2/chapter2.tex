@@ -129,12 +129,10 @@ However the POSIX spec is very lenient in most scenarios and many things that wo
 An example of this is the variable symbol '\$', by itself or followed by a character that would be invalid in the first position of a variable name it becomes a literal character with no special meaning.
 
 \subsection{Parser}
-The tokens produced in the lexer are consumed by the parser one at a time.
-
-
-
 The next step is using the Parser to check the semantic meaning of these Tokens and use them to create the nodes for an AST.
 This is also the point where any remaining syntax errors should be detected.
+
+
 XXX % Write more.
 
 \subsection{Nodes \& the AST}
