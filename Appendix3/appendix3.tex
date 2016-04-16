@@ -1,6 +1,8 @@
 \chapter{Code Examples}
 
-\begin{lstlisting}[label=code:node-interface,caption={[The Node Interface]\\The Node interface used in the AST.\\ Also shows the NodeIf as an example of implementation.\\ Interfaces are implicitly satisfied if the type has the required methods.},frame=tb]
+\begin{figure}
+\label{code:node-interface}
+\begin{lstlisting}[frame=tb]
 type Node interface {
 	Eval(*variables.Scope, *IOContainer) ExitStatus
 }
@@ -22,3 +24,5 @@ func (n NodeIf) Eval(scp *variables.Scope, ioc *IOContainer) ExitStatus {
 	return ExitSuccess
 }     
 \end{lstlisting}
+\caption[The Node Interface]{The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods.}
+\end{figure}
