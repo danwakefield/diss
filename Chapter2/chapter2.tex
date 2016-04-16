@@ -133,13 +133,13 @@ An example of this is the variable symbol '\$', by itself or followed by a chara
 The lexer also handles alias expansion.
 This means that the first word of any line should be checked against a list of expansions, if it matches the word is replaced by the expanded text and lexing begins again at the start of the line.
 
-However as this modified example taken from bashes test suite shows this can result in the common compiler construction problem known as left recursion.
+However as this example shows this can result in the common compiler construction problem known as left recursion.
 \begin{verbatim}
-alias foo=bar
-alias bar=baz
-alias baz=foo
+$ alias foo=bar
+$ alias bar=baz
+$ alias baz=foo
 
-foo
+$ foo
 \end{verbatim}
 
 Care must be taken to avoid this as it will cause an infinite loop breaking the lexer.
@@ -161,7 +161,8 @@ I chose to write a predictive recursive descent parser(RDP) for a few reasons.
 	\item It is a simple, logical design and is relatively easy to implement by hand.
     \item It works with the class of grammar that the shell language has (
     LL(1) explained further in XXX)
-    \item dash and zsh both use RDP's giving some prior art to draw from as well 
+    \item dash and zsh both use RDP's giving some prior art to draw from as well as proving it is a suitable construct for the task.
+    \item 
 \end{enumerate*}
 dash and zsh use hand coded RDP's 
 First of all it as the shells grammar fits into a category known as LL(1), Left Lookahead 1 Token, this is one of the simplest parsers that will wok on it.
