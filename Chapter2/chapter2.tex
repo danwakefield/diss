@@ -151,7 +151,7 @@ XXX %Lexer generators, ANTLR (Doesnt support GO), Ragel (Does), Hard to do thing
 The next step is using the Parser to check the semantic meaning of these Tokens and to use them to create the nodes for an AST.
 This is also the point where any remaining syntax errors should be detected.
 
-There are many tools available to generate parsers and Go even includes an implementation of yacc, one of the most famous, in its toolchain.
+There are many tools available to generate parsers and Go includes an implementation of yacc, one of the most famous, in its toolchain.
 The Bash shell even uses bison to generate its parser.
 However I feared that using one would have taught me more about the tool than parsers in general making debugging of the generated code more difficult 
 Chet Ramey, the maintainer of bash has also stated if he was starting over he would write a recursive descent parser himself\cite{BASH-ARCH} instead of using a generator.
