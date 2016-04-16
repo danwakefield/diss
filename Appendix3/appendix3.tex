@@ -1,20 +1,6 @@
 \chapter{Code Examples}
 
-\begin{lstlisting}[label=code:node-interface,caption={}]
-type ExitStatus int
-const (
-	ExitSuccess        ExitStatus = 0
-	ExitFailure        ExitStatus = 1
-	ExitNotExecutable  ExitStatus = 126
-	ExitUnknownCommand ExitStatus = 127
-)
-
-type IOContainer struct {
-	In  io.Reader
-	Out io.Writer
-	Err io.Writer
-}
-
+\begin{lstlisting}[label=code:node-interface,caption={[The Node Interface]The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods.}]
 type Node interface {
 	Eval(*variables.Scope, *IOContainer) ExitStatus
 }
@@ -30,13 +16,9 @@ func (n NodeIf) Eval(scp *variables.Scope, ioc *IOContainer) ExitStatus {
 	if runBody == ExitSuccess {
 		return n.Body.Eval(scp, ioc)
 	}
-
 	if n.Else != nil {
 		return n.Else.Eval(scp, ioc)
 	}
-
 	return ExitSuccess
 }     
-
-
 \end{lstlisting}
