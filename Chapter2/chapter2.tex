@@ -14,8 +14,11 @@
 %Some example sub-sections may be as follows, but the specific sections are for you to define. 
 
 \section{Language Choice}
-My language of choice for this project was Go\cite{GOLANG}
-Also known as Golang, it is statically typed, compiled, concurrent and  garbage collected and is heavily inspired by C for the general syntax, Limbo for it's use of Communicating Sequential Processes (CSP)\cite{HOARE-CSP} and Python for its emphasis on readability and an all inclusive standard library.
+As previously stated the language I chose for this project was Go.
+This section aims to show why It was chosen over the other candidates I considered.
+
+\subsection{Go}
+Go, also known as Golang, is a statically typed, compiled, concurrent and garbage collected language heavily inspired by C for the general syntax, Limbo for it's use of Communicating Sequential Processes (CSP)\cite{HOARE-CSP} and Python for its emphasis on readability and an all inclusive standard library.
 It is relatively modern, only released to the public in 2009, and was created to solve some of the problems experienced with the languages used at Google, namely C\verb!++!, Python and Java.
 I began to learn it, through the Golang Challenge\cite{GOLANG-CHALLENGE},  during my industrial year after experiencing some of these problems with python myself.
 
@@ -129,9 +132,11 @@ However the POSIX spec is very lenient in most scenarios and many things that wo
 An example of this is the variable symbol '\$', by itself or followed by a character that would be invalid in the first position of a variable name it becomes a literal character with no special meaning.
 
 \subsection{Parser}
-The next step is using the Parser to check the semantic meaning of these Tokens and use them to create the nodes for an AST.
+The next step is using the Parser to check the semantic meaning of these Tokens and to use them to create the nodes for an AST.
 This is also the point where any remaining syntax errors should be detected.
 
+Recursive descent predictive since shell has an LL(1) grammer.
+AN LALR/ LR Could have been generated using tools such as antlr but this wasnt choosen due to not having a great undertanding of the underlying techniques. Compiler construction texbooks are VERY expensive.
 
 XXX % Write more.
 
@@ -142,7 +147,7 @@ Nodes in this tree satisfy an interface called Node, which contains a single met
 Each Node is a separate type that contains fields relevant to itself.
 The types then satisfy this interface with code that knows how to perform the actions of that node and hand execution off to child nodes when appropriate.
 
-With the concept of child nodes something has to be at the end of the tree and these are terminal nodes.
+As with any tree something has to be terminal.
 There are three things that are considered terminal when returned from the parser and each is treated differently.
 
 The NodeCommand is terminal since it returns an exit code, but it is also a valid AST.
