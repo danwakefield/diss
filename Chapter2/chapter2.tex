@@ -151,7 +151,7 @@ The next step is using the Parser to check the semantic meaning of these Tokens 
 This is also the point where any remaining syntax errors should be detected.
 
 There are many tools available to generate parsers and Go even includes an implementation of yacc, one of the most famous, in its toolchain.
-Bash uses bison to generate its parser but, Chet Ramey, 
+Bash uses bison to generate its parser but, Chet Ramey, its maintainer has stated that this was a bad decision and if he was starting over he would write a recursive descent parser himself\cite{BASH-ARCH}
 
 I chose to write a predictive recursive descent parser for a few reasons.
 First of all it works for the 
