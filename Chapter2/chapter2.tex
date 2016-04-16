@@ -131,11 +131,17 @@ Unterminated strings and incomplete variable substitutions XXX
 However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
 An example of this is the variable symbol '\$', by itself or followed by a character that would be invalid in the first position of a variable name it becomes a literal character with no special meaning.
 
+The lexer also handles alias expansion, not a currently included feature, which can be a tricky problem as it introduces indirect left recursion into the language.
+This is a common problem in compiler construction and care must be taken to avoid
+infinite loops, for example.
+\begin
+
 \subsection{Parser}
 The next step is using the Parser to check the semantic meaning of these Tokens and to use them to create the nodes for an AST.
 This is also the point where any remaining syntax errors should be detected.
 
-I chose to write a recursive de
+I chose to write a predictive recursive descent parser for a few reasons.
+First of all it works for the 
 
 Recursive descent predictive since shell has an LL(1) grammar.
 AN LALR/ LR Could have been generated using tools such as antlr but this wasnt choosen due to not having a great undertanding of the underlying techniques. Compiler construction texbooks are VERY expensive.
