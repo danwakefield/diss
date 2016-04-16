@@ -228,15 +228,9 @@ Bash and other modern shells extend these further to include brace expansion and
 The expanded arguments are then used to determine what to execute.
 This decision is made in the order of precedence laid out by the specification which depends on the format of the first argument.
 
-If the argument contains a slash it is taken to be a relative path and looked for from the current working directory.
+If it does not contain a slash it will either be a builtin command, a user defined function or a system executable.
 
 
-
-\begin{enumerate*}
-	\item Special builtin functions.
-    \item User defined functions.
-    \item 
-\end{enumerate*}
 
 \begin{figure}[hp]
     \centering
