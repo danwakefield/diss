@@ -125,8 +125,7 @@ This text is then used to construct a lexer, parser pair.
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
 These runes are turned into a stream of normalized tokens, removing comments and whitespace.
 In some cases, when we are expecting some other terminating token such as the 'fi' following an 'if' block, newlines are also removed.
-The lexer can also detect some errors that don't require deep knowledge of the language grammar.
-Unterminated strings and incomplete variable substitutions XXX
+The lexer can also detect some errors that don't require deep knowledge of the language grammar such as unterminated strings and incomplete variable substitutions. 
 
 However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
 An example of this is the variable symbol '\$', by itself or followed by a character that would be invalid in the first position of a variable name it becomes a literal character with no special meaning.
@@ -156,7 +155,10 @@ However I feared that using one would have taught me more about the tool than pa
 Chet Ramey, the maintainer of bash has also stated if he was starting over he would write a recursive descent parser himself\cite{BASH-ARCH} instead of using a generator.
 
 I chose to write a predictive recursive descent parser for a few reasons.
-First of all it as the shells grammar fits into a category known as LL(1), Left lookahed 1 token, it is possible to parse it using one.
+First of all it as the shells grammar fits into a category known as LL(1), Left Lookahead 1 Token, it is possible to parse it using one.
+Th
+
+There are also lexer generator tools such as ANTLR 
 
 Recursive descent predictive since shell has an LL(1) grammar.
 AN LALR/ LR Could have been generated using tools such as antlr but this wasnt choosen due to not having a great undertanding of the underlying techniques. Compiler construction texbooks are VERY expensive.
