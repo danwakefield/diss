@@ -1,4 +1,42 @@
 \chapter{Code Examples}
 
+\begin{lstlisting}[label=code:node-interface,caption={}]
+type ExitStatus int
+const (
+	ExitSuccess        ExitStatus = 0
+	ExitFailure        ExitStatus = 1
+	ExitNotExecutable  ExitStatus = 126
+	ExitUnknownCommand ExitStatus = 127
+)
+
+type IOContainer struct {
+	In  io.Reader
+	Out io.Writer
+	Err io.Writer
+}
+
+type Node interface {
+	Eval(*variables.Scope, *IOContainer) ExitStatus
+}
+
+type NodeIf struct {
+	Condition Node
+	Else      *NodeIf
+	Body      Node
+}
+
+func (n NodeIf) Eval(scp *variables.Scope, ioc *IOContainer) ExitStatus {
+	runBody := n.Condition.Eval(scp, ioc)
+	if runBody == ExitSuccess {
+		return n.Body.Eval(scp, ioc)
+	}
+
+	if n.Else != nil {
+		return n.Else.Eval(scp, ioc)
+	}
+
+	return ExitSuccess
+}     
 
 
+\end{lstlisting}
