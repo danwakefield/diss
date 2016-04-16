@@ -1,6 +1,6 @@
 \chapter{Code Examples}
 
-\begin{lstlisting}[label=code:node-interface,caption={[The Node Interface]The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods.}]
+\begin{lstlisting}[label=code:node-interface,caption={[The Node Interface]\\The Node interface used in the AST.\\ Also shows the NodeIf as an example of implementation.\\ Interfaces are implicitly satisfied if the type has the required methods.},frame=tb,language=golang]
 type Node interface {
 	Eval(*variables.Scope, *IOContainer) ExitStatus
 }
