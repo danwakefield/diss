@@ -165,7 +165,7 @@ I chose to write a predictive recursive descent parser(RDP) for a few reasons.
 \end{enumerate*}
 
 There was also the option of an LALR or LR lookahead parsers and backtracking parsers.
-The main reason I did not go with one of these was the lack of examples.
+The main reason I did not go with one of these was the lack of information available about them.
 
 
 XXX % Write more.
@@ -200,8 +200,8 @@ There they consist of DEFINED constants, huge union structs and evaluation code 
 While the diagram shows that only NodeCommands undergo expansion this is a slight lie to keep it simple.
 The Arg structures contained in a NodeFor and a NodeCase are also expanded when required but they don't cause any command execution.
 
-When evaluation hits a NodeCommand we know we are going to do either set some variables \lstinline!A=1 B=2! or run some sort of command, with optionally prepended assignments\lstinline!A=1 foo!.
-In either case it is possible that a value exists that requires expansion e.g \lstinline!A="$X $(foo) $((3+4))" B=*.c!.
+When evaluation hits a NodeCommand we know we are going to do either set some variables \verb!A=1 B=2! or run some sort of command, with optionally prepended assignments\verb!A=1 foo!.
+In either case it is possible that a value exists that requires expansion e.g \verb!A="$X $(foo) $((3+4))" B=*.c!.
 
 The expansion pipeline performs these expansions in order returning a list of strings as some of the expansions can result in multiple words.
 These include:
@@ -229,6 +229,9 @@ The expanded arguments are then used to determine what to execute.
 This decision is made in the order of precedence laid out by the specification which depends on the format of the first argument.
 
 If the argument contains a slash it is taken to be a relative path and looked for from the current working directory.
+
+
+
 \begin{enumerate*}
 	\item Special builtin functions.
     \item User defined functions.
