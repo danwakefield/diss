@@ -156,7 +156,7 @@ However I feared that using one would have taught me more about the tool than pa
 Chet Ramey, the maintainer of bash has also stated if he was starting over he would write a recursive descent parser himself\cite{BASH-ARCH} instead of using a generator.
 
 I chose to write a predictive recursive descent parser for a few reasons.
-First of all it works for the 
+First of all it as the shells grammar fits into a category known as LL(1), Left lookahed 1 token, it is possible to parse it using one.
 
 Recursive descent predictive since shell has an LL(1) grammar.
 AN LALR/ LR Could have been generated using tools such as antlr but this wasnt choosen due to not having a great undertanding of the underlying techniques. Compiler construction texbooks are VERY expensive.
