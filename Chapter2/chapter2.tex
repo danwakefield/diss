@@ -141,7 +141,7 @@ AN LALR/ LR Could have been generated using tools such as antlr but this wasnt c
 XXX % Write more.
 
 \subsection{Nodes \& the AST}
-The Abstract Syntax Tree (AST) returned from the parser can consist of any number of nodes each of which can contain even more.
+The Abstract Syntax Tree (AST) returned from the parser can consist of any number of nodes each of which can contain further child trees.
 
 Nodes in this tree satisfy an interface called Node, which contains a single method called Eval.
 Each Node is a separate type that contains fields relevant to itself.
