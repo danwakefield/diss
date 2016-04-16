@@ -186,7 +186,7 @@ As with any tree something has to be terminal.
 There are three things that are considered terminal when returned from the parser and each is treated differently.
 
 The NodeCommand is terminal since it returns an exit code, but it is also a valid AST.
-This node handles execution of system utilites, builtins and user defined functions as well as the redirection of their input and output to the requested files, pipes or file descriptors.
+This node handles execution of system utilities, builtins and user defined functions as well as the redirection of their input and output to the requested files, pipes or file descriptors.
 This is known as a 'simple command' in the specification and is the building block for 'compound commands'.
 
 The NodeEOF indicate that the input has been exhausted and the shell should return with the last exit code it received.
