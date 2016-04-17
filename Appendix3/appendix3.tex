@@ -26,3 +26,20 @@ func (n NodeIf) Eval(scp *variables.Scope, ioc *IOContainer) ExitStatus {
 \end{lstlisting}
 \caption[The Node Interface]{The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods.}
 \end{figure}
+
+\begin{figure}[hp]
+\label{code:node-eof-noop}
+\begin{lstlisting}[frame=tb]
+type NodeNoop struct{}
+
+func (NodeNoop) Eval(*variables.Scope, *IOContainer) ExitStatus {
+	return ExitSuccess 
+}
+
+// NodeEOF is end of file sentinal node.
+type NodeEOF struct {
+	NodeNoop
+}
+\end{lstlisting}
+\caption[The EOF and No Op node]{The NodeEOF uses struct embedding to receive the methods of the NodeNoop.}
+\end{figure}
