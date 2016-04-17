@@ -122,9 +122,12 @@ Due to the time restrictions, gosh does not currently support interactive use th
 This text is then used to construct a lexer, parser pair.
 
 \subsection{Lexer}
+The lexer I chose to write was a coroutine based non-deterministic finite automaton as described by rob pike in one of the presentations that inspired this project\cite{PIKE-LEXING-VIDEO}.
+However as I came to learn this was not the ideal choice (See XXX).
+
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
 These runes are turned into a stream of normalized tokens, removing comments and whitespace.
-In some cases, when we are expecting some other terminating token such as the 'fi' following an 'if' block, newlines are also removed.
+In some cases newlines are also removed i.e when we are expecting some other terminating token such as the 'fi' following an 'if' block.
 The lexer can also detect some errors that don't require deep knowledge of the language grammar such as unterminated strings and incomplete variable substitutions. 
 
 However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
@@ -238,7 +241,6 @@ XXX
 \section{Arithmetic}
 This section is about the arithmetic construct, the reasons why it requires a separate lexer-parser and how this pair differs from the one used for the general shell language.
 
-The process of evaluating math is sufficiently complex, especially with the additional features the shell adds such as assignments and a ternary operator, to require the separate construct to parse it.
 
 
 
