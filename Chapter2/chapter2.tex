@@ -124,9 +124,7 @@ This text is then used to construct a lexer, parser pair.
 \subsection{Lexer}
 The lexer I chose to write was a coroutine based non-deterministic finite automaton as described by rob pike in one of the presentations that inspired this project\cite{PIKE-LEXING-VIDEO}.
 However as I came to learn this was not the ideal choice (See XXX).
-There was also the choice of using a lexer generator such as ANTLR or Ragel.
-Also with Go being such a recent language these tools generally dont have good support for it, Ragel being the exception.
-
+There was also the choice of using a lexer generator such as ANTLR or Ragel but with Go being such a recent language these tools generally don't have good support for it, Ragel being an exception.
 
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
 These runes are turned into a stream of normalized tokens, removing comments and whitespace.
@@ -137,7 +135,7 @@ However the POSIX spec is very lenient in most scenarios and many things that wo
 An example of this is the variable symbol '\$'.
 By itself or when followed by a invalid substitution character it becomes a literal character with no special meaning.
 
-The lexer also handles alias expansion.
+The lexer also handles other complex tasks such as command substitution lexing, which requires a sub lexer parser pair to evaluate correctly and alias expansion.
 This means that the first word of any line should be checked against a list of expansions, if it matches the word is replaced by the expanded text and lexing begins again at the start of the line.
 
 However as this example shows this can result in the common compiler construction problem known as left recursion.
@@ -152,6 +150,7 @@ $ foo
 Care must be taken to avoid this as it will cause an infinite loop breaking the lexer.
 Gosh does not currently support aliases for this reason but structures have been put in place so adding support in the future will be possible.
 
+In conclusion I went with a hand written lexer as certain shell constructs would have been extremely difficult to encode using a tool 
 XXX %Lexer generators, ANTLR (Doesnt support GO), Ragel (Does), Hard to do things like substiutions embedded in strings etc. NDFA cite lexing video, Point to section implemtation/review about why this may have been a bad idea.
 
 \subsection{Parser}
