@@ -190,7 +190,7 @@ The Abstract Syntax Tree (AST) returned from the parser can consist of any numbe
 Go allowed me to express nodes in a clean way through the use of interfaces and structs.
 This is a big change from how they are expressed in dash's C code.
 
-Nodes in this tree satisfy an interface called Node, which contains a single method called Eval  (See code in \ref{code:node-interface}).
+Nodes in this tree satisfy an interface called Node, which contains a single method called Eval (See code in~\ref{code:node-interface}).
 Each Node is a separate type that contains fields relevant to itself.
 The types then satisfy this interface with code that knows how to perform the actions of that node and hand execution off to child nodes when appropriate.
 
@@ -201,12 +201,15 @@ The NodeCommand is terminal since it returns an exit code, but it is also a vali
 This node handles execution of system utilities, builtins and user defined functions as well as the redirection of their input and output to the requested files, pipes or file descriptors.
 This is known as a 'simple command' in the specification and is the building block for 'compound commands'.
 
+The NodeNoop which is used in a case list, and as the condition for an else statement.
+It ignores its arguments, does no work and returns a successful exit code.
+
+
 The NodeEOF indicate that the input has been exhausted and the shell should return with the last exit code it received.
+It is a subtype of the NodeNoop which is achieved by Go's struct embedding feature. (See code in~\ref{code:node-eof-noop})
 The main loop checks explicitly for it with a type check.
 The layout of the parser means that nothing else can receive this as a valid node.
 
-Finally there is 'nil' which is to be used as a signal to the interactive session.
-It is also used in the NodeCaseList to indicate that the case contains no code.
 XXX %.
 
 
