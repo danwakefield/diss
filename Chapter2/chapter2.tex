@@ -187,8 +187,10 @@ This leads to a lack of prior art and other material to study and is the reason 
 
 \subsection{Nodes \& the AST}
 The Abstract Syntax Tree (AST) returned from the parser can consist of any number of nodes each of which can contain further child trees.
+Go allowed me to express nodes in a clean way through the use of interfaces and structs.
+This is a big change from how they are expressed in dash's C code.
 
-Nodes in this tree satisfy an interface called Node, which contains a single method called Eval.
+Nodes in this tree satisfy an interface called Node, which contains a single method called Eval  (See code in \ref{code:node-interface}).
 Each Node is a separate type that contains fields relevant to itself.
 The types then satisfy this interface with code that knows how to perform the actions of that node and hand execution off to child nodes when appropriate.
 
@@ -207,9 +209,6 @@ Finally there is 'nil' which is to be used as a signal to the interactive sessio
 It is also used in the NodeCaseList to indicate that the case contains no code.
 XXX %.
 
-Go allowed me to express nodes in a clean way through the use of interfaces and structs.
-This is a big change from how they are expressed in dash's C code.
-There they consist of DEFINED constants, huge union structs and evaluation code in a single function with GOTO's and XXX
 
 \subsection{Expansion}
 While the diagram shows that only NodeCommands undergo expansion this is a slight lie to keep it simple.
