@@ -127,7 +127,7 @@ However as I came to learn this was not the ideal choice (See XXX).
 
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
 These runes are turned into a stream of normalized tokens, removing comments and whitespace.
-In some cases newlines are also removed i.e when we are expecting some other terminating token such as the 'fi' following an 'if' block.
+In some cases newlines are also removed, e.g., when we are expecting some other terminating token such as the 'fi' following an 'if' block.
 The lexer can also detect some errors that don't require deep knowledge of the language grammar such as unterminated strings and incomplete variable substitutions. 
 
 However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
