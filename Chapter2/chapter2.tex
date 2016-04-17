@@ -125,21 +125,24 @@ Figure~\ref{fig:shell-flowchart} is a visual guide to this though it should be n
 \subsection{Input}
 I chose to focus on the internals of the shell before making the input experience 'nicer'.
 Shells can accept input in a variety of ways including reading from a pipe or a file and an interactive session.
-I felt that the base case of these was file input as a pipe can be treated as a file.
+After researching the complexities surrounding interactivity I decided it would have to be left out due to the time restrictions.
+I then felt that the base case of the remaining options was file input as a pipe can be treated as a file.
 
-After researching the complexities surrounding interactivity I decided it would have to be left out due to the time restrictions. The library\cite{GO-READLINE}
+I plan to add interactivity in the future using the go-readline library\cite{GO-READLINE} and because of this some parts of the system where designed so that it could easily be plugged in.
 
-
-
-The first step we need to do is get the text that represents the shell program in some way.
-This can come in from a 
-Due to the time restrictions, gosh does not currently support interactive use though this something I plan to add in the near future.
-This text is then used to construct a lexer, parser pair.
+The input text is important as it is used to construct the lexer which the parser requires to operate.
 
 \subsection{Lexer}
 The lexer I chose to write was a coroutine based non-deterministic finite automaton as described by rob pike in one of the presentations that inspired this project\cite{PIKE-LEXING-VIDEO}.
 However as I came to learn this was not the ideal choice (See XXX).
-There was also the choice of using a lexer generator such as ANTLR or Ragel but with Go being such a recent language these tools generally don't have good support for it, Ragel being an exception.
+There was also the choice of using a lexer generator such as ANTLR, but with Go being such a recent language these tools generally don't have support for it.
+The Ragel tool is an exception to this.
+In this section I will explain the complex shell constr
+
+learn the about their complexities without getting tool specific knowledge.
+
+the fact that certain shell constructs would have been extremely difficult to encode using a tool
+
 
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
 These runes are turned into a stream of normalized tokens, removing comments and whitespace.
@@ -168,11 +171,6 @@ $ foo
 Care must be taken to avoid this as it will cause an infinite loop breaking the lexer.
 Gosh does not currently support aliases for this reason but structures have been put in place so adding support in the future will be possible.
 
-In conclusion the I went with a hand written lexer ...
-
-learn the about their complexities without getting tool specific knowledge.
-
-the fact that certain shell constructs would have been extremely difficult to encode using a tool
 
 XXX %Lexer generators, ANTLR (Doesnt support GO), Ragel (Does), Hard to do things like substiutions embedded in strings etc. NDFA cite lexing video, Point to section implemtation/review about why this may have been a bad idea.
 
