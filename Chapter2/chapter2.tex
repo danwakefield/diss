@@ -128,7 +128,8 @@ In some cases, when we are expecting some other terminating token such as the 'f
 The lexer can also detect some errors that don't require deep knowledge of the language grammar such as unterminated strings and incomplete variable substitutions. 
 
 However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
-An example of this is the variable symbol '\$', by itself or followed by a character that would be invalid in the first position of a variable name it becomes a literal character with no special meaning.
+An example of this is the variable symbol '\$'.
+By itself or when followed by a character that would be invalid in the first position of a variable name it becomes a literal character with no special meaning.
 
 The lexer also handles alias expansion.
 This means that the first word of any line should be checked against a list of expansions, if it matches the word is replaced by the expanded text and lexing begins again at the start of the line.
