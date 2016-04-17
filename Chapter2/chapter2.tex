@@ -124,7 +124,9 @@ This text is then used to construct a lexer, parser pair.
 \subsection{Lexer}
 The lexer I chose to write was a coroutine based non-deterministic finite automaton as described by rob pike in one of the presentations that inspired this project\cite{PIKE-LEXING-VIDEO}.
 However as I came to learn this was not the ideal choice (See XXX).
-There was also the chi
+There was also the choice of using a lexer generator such as ANTLR or Ragel.
+Also with Go being such a recent language these tools generally dont have good support for it, Ragel being the exception.
+
 
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
 These runes are turned into a stream of normalized tokens, removing comments and whitespace.
