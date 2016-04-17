@@ -139,7 +139,6 @@ There was also the choice of using a lexer generator such as ANTLR, but with Go 
 The Ragel tool is an exception to this.
 In this section I will explain some of the lexing complexities that caused me to decide on a handwritten lexer over a generated one.
 
-
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
 These runes are turned into a stream of normalized tokens, removing comments and whitespace.
 In some cases newlines are also removed, e.g., when we are expecting some other terminating token such as the 'fi' following an 'if' block.
@@ -149,7 +148,7 @@ However the POSIX spec is very lenient in most scenarios and many things that wo
 An example of this is the variable symbol '\$'.
 By itself or when followed by a invalid substitution character it becomes a literal character with no special meaning. This is very difficult to encode using a parsing expression grammar(PEG) or in Extended Backus–Naur Form(EBNF).
 
-The lexer also handles other complex tasks such as command substitution lexing, which requires a sub lexer parser pair to evaluate correctly and alias expansion.
+The lexer also handles other complex tasks such as command substitution lexing, which requires the creation of a sub parser to evaluate correctly and alias expansion.
 
 Alias expansion means that the first word of any line should be checked against a list of expansions, if it matches the word is replaced by the expanded text and lexing begins again at the start of the line.
 However as this example shows this can introduce a common compiler construction problems known as left recursion.
@@ -164,11 +163,8 @@ $ alias bar='baz'
 $ alias baz='foo'
 $ foo
 \end{verbatim}
-Care must be taken to avoid this as it will cause an infinite loop breaking the lexer.
-Gosh does not currently support aliases for this reason but structures have been put in place so adding support in the future will be possible.
-
-
-XXX %Lexer generators, ANTLR (Doesnt support GO), Ragel (Does), Hard to do things like substiutions embedded in strings etc. NDFA cite lexing video, Point to section implemtation/review about why this may have been a bad idea.
+Care must be taken to avoid this as it will cause an infinite loop breaking the lexer and code generators are usually stumped by this.
+Gosh does not currently support aliases but structures have been put in place so adding support in the future will be possible.
 
 \subsection{Parser}
 The next step is using the Parser to check the semantic meaning of these Tokens and to use them to create the nodes for an AST.
