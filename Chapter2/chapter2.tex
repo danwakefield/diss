@@ -184,7 +184,7 @@ Chet Ramey, the maintainer of bash has also stated if he was starting over he wo
 This eliminated a LALR parser as a candidate.
 
 The last option was a packrat parser.
-This is an extended recursive descent parser that can backtrack and is guaranteed to parse in linear time.
+This is a top down parser, like recursive descent, with backtracking and is guaranteed to parse any LL(x) or LR(x) grammar in linear time.
 
 
 XXX % Write more.
