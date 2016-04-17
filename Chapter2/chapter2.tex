@@ -123,10 +123,13 @@ Figure~\ref{fig:shell-flowchart} is a visual guide to this though it should be n
 
 
 \subsection{Input}
-I chose to focus on the internals of the shell before making the input experience 'nicer', because of this only file input is currently supported.
-I could also have created a
+I chose to focus on the internals of the shell before making the input experience 'nicer'.
+piping, read from a file or entered into an interactive session. 
+
+
+
 The first step we need to do is get the text that represents the shell program in some way.
-This can come in from a pipe, be read from a file or entered into an interactive session.
+This can come in from a 
 Due to the time restrictions, gosh does not currently support interactive use though this something I plan to add in the near future.
 This text is then used to construct a lexer, parser pair.
 
