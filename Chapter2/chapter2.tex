@@ -127,7 +127,6 @@ I chose to focus on the internals of the shell before making the input experienc
 Shells can accept input in a variety of ways including reading from a pipe or a file and an interactive session.
 After researching the complexities surrounding interactivity I decided it would have to be left out due to the time restrictions.
 I then felt that the base case of the remaining options was file input as a pipe can be treated as a file.
-
 I plan to add interactivity in the future using the go-readline library\cite{GO-READLINE} and because of this some parts of the system where designed so that it could easily be plugged in.
 
 The input text is important as it is used to construct the lexer which the parser requires to operate.
