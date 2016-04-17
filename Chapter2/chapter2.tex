@@ -137,11 +137,7 @@ The lexer I chose to write was a coroutine based non-deterministic finite automa
 However as I came to learn this was not the ideal choice (See XXX).
 There was also the choice of using a lexer generator such as ANTLR, but with Go being such a recent language these tools generally don't have support for it.
 The Ragel tool is an exception to this.
-In this section I will explain the complex shell constr
-
-learn the about their complexities without getting tool specific knowledge.
-
-the fact that certain shell constructs would have been extremely difficult to encode using a tool
+In this section I will explain some of the lexing complexities that caused me to decide on a handwritten lexer over a generated one.
 
 
 The lexer operates on the raw text a rune\footnote{Go has the concept of a rune which is a type alias of an int32 used to hold a unicode character.} at a time.
@@ -151,7 +147,7 @@ The lexer can also detect some errors that don't require deep knowledge of the l
 
 However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
 An example of this is the variable symbol '\$'.
-By itself or when followed by a invalid substitution character it becomes a literal character with no special meaning.
+By itself or when followed by a invalid substitution character it becomes a literal character with no special meaning. This is very difficult to encode using a parsing expression grammar(PEG) or in Extended Backus–Naur Form(EBNF).
 
 The lexer also handles other complex tasks such as command substitution lexing, which requires a sub lexer parser pair to evaluate correctly and alias expansion.
 
