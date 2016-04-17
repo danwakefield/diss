@@ -204,14 +204,14 @@ This is known as a 'simple command' in the specification and is the building blo
 The NodeNoop which is used in a case list, and as the condition for an else statement.
 It ignores its arguments, does no work and returns a successful exit code.
 
-
 The NodeEOF indicate that the input has been exhausted and the shell should return with the last exit code it received.
-It is a subtype of the NodeNoop which is achieved by Go's struct embedding feature. (See code in~\ref{code:node-eof-noop})
+It is a subtype of the NodeNoop which is achieved by Go's struct embedding feature. (See code in~\ref{code:node-noop})
 The main loop checks explicitly for it with a type check.
 The layout of the parser means that nothing else can receive this as a valid node.
 
-XXX %.
-
+The only design decision here was that nodes had their own eval methods that dispatch further methods.
+dash does this through a monolithic function called evaltree which is a big type switch holding all the code required to evaluate any node.
+This makes it hard to read
 
 \subsection{Expansion}
 While the diagram shows that only NodeCommands undergo expansion this is a slight lie to keep it simple.
