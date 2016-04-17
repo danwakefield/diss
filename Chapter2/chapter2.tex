@@ -158,6 +158,9 @@ $ foo
 Care must be taken to avoid this as it will cause an infinite loop breaking the lexer and code generators are usually stumped by this.
 Gosh does not currently support aliases but structures have been put in place so adding support in the future will be possible.
 
+The lexer returns items called Lexemes (See code sample~\ref{code:lexme} which contain the token type and any additional information.
+Both the lexeme and the token type are commonly referred to as tokens.
+
 \subsection{Parser}
 The next step is using the Parser to check the semantic meaning of these Tokens and to use them to create the nodes for an AST.
 This is also the point where any remaining syntax errors should be detected.
