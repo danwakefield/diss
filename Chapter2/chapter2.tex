@@ -123,6 +123,8 @@ Figure~\ref{fig:shell-flowchart} is a visual guide to this though it should be n
 
 
 \subsection{Input}
+I chose to focus on the internals of the shell before making the input experience 'nicer', because of this only file input is currently supported.
+I could also have created a
 The first step we need to do is get the text that represents the shell program in some way.
 This can come in from a pipe, be read from a file or entered into an interactive session.
 Due to the time restrictions, gosh does not currently support interactive use though this something I plan to add in the near future.
@@ -145,12 +147,16 @@ By itself or when followed by a invalid substitution character it becomes a lite
 The lexer also handles other complex tasks such as command substitution lexing, which requires a sub lexer parser pair to evaluate correctly and alias expansion.
 
 Alias expansion means that the first word of any line should be checked against a list of expansions, if it matches the word is replaced by the expanded text and lexing begins again at the start of the line.
-However as this example shows this can result in the common compiler construction problem known as left recursion.
+However as this example shows this can introduce a common compiler construction problems known as left recursion.
 \begin{verbatim}
-$ alias foo=bar
-$ alias bar=baz
-$ alias baz=foo
+# Direct left recursion
+$ alias foo='foo xyx'
+$ foo
 
+# Indirect left recursion
+$ alias foo='bar'
+$ alias bar='baz'
+$ alias baz='foo'
 $ foo
 \end{verbatim}
 Care must be taken to avoid this as it will cause an infinite loop breaking the lexer.
