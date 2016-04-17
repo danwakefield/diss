@@ -108,6 +108,13 @@ I however had no experience at all with OCaml and very little with ML languages 
 \subsection{Python}
 
 
+\begin{figure}[hp]
+    \centering
+    \includegraphics[scale=0.7]{shell-design.png}
+    \caption[Shell execution pipeline]{Shows how input is transformed along the way to being executed commands.}
+    \label{fig:shell-flowchart}
+\end{figure}
+
 
 \section{High level design}
 This section will describe the high level design of the shell and illustrate to a user with no knowledge of the internals of a shell how components interact with each other.
@@ -237,12 +244,7 @@ Bash and other modern shells extend these further to include brace expansion and
 
 XXX
 
-\begin{figure}[hp]
-    \centering
-    \includegraphics[scale=0.7]{shell-design.png}
-    \caption[Shell execution pipeline]{Shows how input is transformed along the way to being executed commands.}
-    \label{fig:shell-flowchart}
-\end{figure}
+
 
 \section{Arithmetic}
 This section is about the arithmetic construct, the reasons why it requires a separate lexer-parser and how this pair differs from the one used for the general shell language.
