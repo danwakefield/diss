@@ -1,7 +1,6 @@
 \chapter{Code Examples}
 
 \begin{figure}[hp]
-\label{code:node-interface}
 \begin{lstlisting}[frame=tb]
 type Node interface {
 	Eval(*variables.Scope, *IOContainer) ExitStatus
@@ -24,11 +23,10 @@ func (n NodeIf) Eval(scp *variables.Scope, ioc *IOContainer) ExitStatus {
 	return ExitSuccess
 }     
 \end{lstlisting}
-\caption[The Node Interface]{The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods.}
+\caption[The Node Interface]{The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods. \label{lst:node-interface}}
 \end{figure}
 
 \begin{figure}[hp]
-\label{code:node-noop}
 \begin{lstlisting}[frame=tb]
 type NodeNoop struct{}
 
@@ -36,10 +34,9 @@ func (NodeNoop) Eval(*variables.Scope, *IOContainer) ExitStatus {
 	return ExitSuccess 
 }
 
-// NodeEOF is end of file sentinal node.
 type NodeEOF struct {
 	NodeNoop
 }
 \end{lstlisting}
-\caption[The EOF and No Op node]{The NodeEOF uses struct embedding to receive the methods of the NodeNoop.}
+\caption[The EOF and No Op node]{The NodeEOF uses struct embedding to receive the methods of the NodeNoop.\label{lst:node-noop}}
 \end{figure}

@@ -113,8 +113,22 @@ XXX
 \section{High level design}
 This section will describe the high level design of the shell and illustrate to a user with no knowledge of the internals of a shell how components interact with each other.
 
-Figure~\ref{fig:shell-flowchart} is a visual guide to this though it should be noted that the flowchart is not totally representative of the system and is just here to show the progression of data.
+Figure~\ref{fig:shell-flowchart} is a visual guide to this though it should be noted that the flowchart is not totally representative of the system and is just here to show the rough progression of data.
 
+Input is received and passed to the lexer.
+The lexer transforms the text into tokens which are passed to the parser.
+The parser uses it's knowledge of the language to group these tokens into Nodes.
+These nodes are then joined to others in a tree structure, also known as a parse tree or abstract syntax tree(AST).
+The tree is then evaluated using a depth first traversal strategy.
+Nodes in the tree can force branches to be skipped or evaluated multiple times.
+Traversal eventually reaches some form of command which requires execution.
+Arguments for commands are then expanded replacing substitution markers where required.
+These are passed through and used as the arguments for the command or function that is to be executed.
+After execution an exit code is returned which is propagated up the tree to make decisions.
+
+
+\section{In depth design}
+This section goes into detail about each of the components, talking about the choices that where made in the design and any of the other options that where considered.
 
 \subsection{Input}
 I chose to focus on the internals of the shell before making the input experience 'nicer'.
@@ -158,7 +172,7 @@ $ foo
 Care must be taken to avoid this as it will cause an infinite loop breaking the lexer and code generators are usually stumped by this.
 Gosh does not currently support aliases but structures have been put in place so adding support in the future will be possible.
 
-The lexer returns items called Lexemes (See code sample~\ref{code:lexme} which contain the token type and any additional information.
+The lexer returns items called Lexemes which contain the token type and any additional information.
 Both the lexeme and the token type are commonly referred to as tokens.
 
 \subsection{Parser}
@@ -186,11 +200,11 @@ This technology is very interesting but as it is still very new compared to othe
 This leads to a lack of prior art and other material to study and is the reason I did not consider it as a candidate further.
 
 \subsection{Nodes \& the AST}
-The Abstract Syntax Tree (AST) returned from the parser can consist of any number of nodes each of which can contain further child trees.
+The AST returned from the parser can consist of any number of nodes each of which can contain further child trees.
 Go allowed me to express nodes in a clean way through the use of interfaces and structs.
 This is a big change from how they are expressed in dash's C code.
 
-Nodes in this tree satisfy an interface called Node, which contains a single method called Eval (See code in~\ref{code:node-interface}).
+Nodes in this tree satisfy an interface called Node, which contains a single method called Eval (See code in~\autoref{lst:node-interface}).
 Each Node is a separate type that contains fields relevant to itself.
 The types then satisfy this interface with code that knows how to perform the actions of that node and hand execution off to child nodes when appropriate.
 
@@ -205,7 +219,7 @@ The NodeNoop which is used in a case list, and as the condition for an else stat
 It ignores its arguments, does no work and returns a successful exit code.
 
 The NodeEOF indicate that the input has been exhausted and the shell should return with the last exit code it received.
-It is a subtype of the NodeNoop which is achieved by Go's struct embedding feature. (See code in~\ref{code:node-noop})
+It is a subtype of the NodeNoop which is achieved by Go's struct embedding feature. (See code in~\autoref{lst:node-noop})
 The main loop checks explicitly for it with a type check.
 The layout of the parser means that nothing else can receive this as a valid node.
 
@@ -247,7 +261,13 @@ XXX
 
 
 \section{Arithmetic}
-This section is about the arithmetic construct, the reasons why it requires a separate lexer-parser and how this pair differs from the one used for the general shell language.
+This section is about the arithmetic construct(AC), the reasons why it requires a separate lexer-parser and how this pair differs from the one used for the general shell language.
+
+While the subset of math that the shell understands is much simpler than the shell's language it is still relatively complex. 
+To simplify the general parser, when it detects the start of an AC it continues gathering text into a separate buffer for later evaluation.
+This is not the only reason it is done this way.
+Variables can be assigned and referenced in these equations so they need to be expanded each time it is evaluated.
+
 
 
 
