@@ -278,7 +278,8 @@ They don't require the overhead of extra interpretation or interaction with syst
 
 \subsubsection{User defined functions}
 User defined functions assign a name to a compound command that can then be used as a simple command.
-When functions are  invoked the special positional variables (\$1, \$@, \$\#, etc.) are modified to contain the arguments following the function call. For example:
+
+When functions are invoked the special positional variables (\$1, \$@, \$\#, etc.) are modified to contain the arguments following the function call. For example:
 \begin{verbatim}
 func() {
 	echo "You passed $# args"
