@@ -299,7 +299,7 @@ This is done for performance reasons as each invocation requires the tree to be 
 Shell functions have dynamic block scoping but it is not an automatic feature, it requires that variables are defined using the \verb!local! command.
 
 \subsubsection{External commands}
-a
+Posix suggests that external commands be launched using \verb!execve! which takes the programs name, its full path, any arguments and a copy of all the environmental variables that have been set.  
 
 \section{Arithmetic}
 This section is about the arithmetic construct(AC), the reasons why it requires a separate lexer-parser and how this pair differs from the one used for the general shell language.
