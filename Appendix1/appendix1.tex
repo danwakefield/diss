@@ -12,6 +12,9 @@
 %. The library is released using the Apache License 
 %. This library was used without modification. 
 
-\lstinputlisting[caption={[fnmatch]fnmatch function code.\label{lst:fnmatch}}]{Appendix1/fnmatch.go}
-
+\lstinputlisting[caption={[fnmatch]fnmatch function. See my fork of the code and tests at \url{https://github.com/Danwakefield/fnmatch}. The original came from a gist published in 2010\label{lst:fnmatch}}]{Appendix1/fnmatch.go}
+While Go has an fnmatch implementation available (import "path/filepath") is is hardcoded with settings for matching against file names. 
+This would not work in the case list where globbing should not expand to a list of filenames but still requires matching against the same pattern syntax.
+Therefore external code to perform this task was included.
+LINK Github + gist.
 
