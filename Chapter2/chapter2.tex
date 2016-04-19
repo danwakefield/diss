@@ -277,8 +277,22 @@ Commonly implemented internal commands are the echo, true, false and test utilit
 They don't require the overhead of extra interpretation or interaction with system utilities and as such are much faster than an external system call or a shell function.
 
 \subsubsection{User defined functions}
-User defined functions assign a name to a compound command that can be used in a simple command.
-When a function is invoked the special positional variables (\$1, \$2, \$\#, etc.) are modified to contain the arguments. 
+User defined functions assign a name to a compound command that can then be used as a simple command.
+When functions are  invoked the special positional variables (\$1, \$@, \$\#, etc.) are modified to contain the arguments following the function call. For example:
+\begin{verbatim}
+func() {
+	echo "You passed $# args"
+    echo "They are: $@"
+    echo "Arg no 3 is: $3"
+}
+
+func a b c d
+## Gives the output
+You passed 4 args
+They are: a b c d
+Arg no 3 is: c
+\end{verbatim}
+
 
 User defined functions are created using the shell syntax and like other shell code they are represented internally as an AST.
 
