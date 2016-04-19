@@ -231,8 +231,8 @@ This makes it hard to read
 While the diagram shows that only NodeCommands undergo expansion this is a slight lie to keep it simple.
 The Arg structures contained in a NodeFor and a NodeCase are also expanded when required but they don't cause any command execution.
 
-When evaluation hits a NodeCommand we know we are going to do either set some variables \verb!A=1 B=2! or run some sort of command, with optionally prepended assignments\verb!A=1 foo!.
-In either case it is possible that a value exists that requires expansion e.g \verb!A="$X $(foo) $((3+4))" B=*.c!.
+When evaluation hits a NodeCommand we know we are going to do either set some variables \\ \verb!A=1 B=2!\\ or run some sort of command, with optionally prepended assignments \\ \verb!A=1 foo!.
+In either case it is possible that a value exists that requires expansion e.g \\ \verb!A="$X $(foo) $((3+4))" B=*.c!.
 
 The expansion pipeline performs these expansions in order returning a list of strings as some of the expansions can result in multiple words.
 These include:
@@ -255,10 +255,32 @@ These include:
 Bash and other modern shells extend these further to include brace expansion and process substitution.
 
 \subsection{Execution}
+Execution is the generic category that encompasses user builtin functions, defined shell functions and calls out to system executables.
 
-XXX
+If the command contains a slash at any position it is assumed to be a system executable and checks for functions and builtins are skipped.
 
+\subsubsection{Builtin Commands}
+Builtin commands are coded in the host language and are part of the gosh codebase.
+They also have the ability to modify parts of the shell's execution scope that are not possible to change externally.
 
+There are two types of builtin commands, the special and regular.
+Special commands are really extensions to the shells programming language.
+They can affect control flow (return, break, continue, etc.), aliases (alias, unalias) and parameters (readonly, local, etc.).
+Errors that occur during these commands are fatal to the shell and cause it to exit.
+Special commands are first in the order of precedence and posix requires that they cannot be shadowed by user functions however they can still be hidden by aliases since they occur in the lexer.
+
+Regular special commands interact with the shells internal state but errors are not fatal.
+These include commands that affect directories (cd, popd), job control (fg, bg), history or manipulate shell attributes.
+
+Other commands can also be builtins for performance reasons.
+Commonly implemented internal commands are the echo, true, false and test utilities as these are often used in scripts.
+They don't require the overhead of extra interpretation or interaction with system utilities and as such are much faster than an external system call or a shell function.
+
+\subsubsection{User defined functions}
+User defined functions are stored in a hash table indexed by the function name.
+
+\subsubsection{External commands}
+a
 
 \section{Arithmetic}
 This section is about the arithmetic construct(AC), the reasons why it requires a separate lexer-parser and how this pair differs from the one used for the general shell language.

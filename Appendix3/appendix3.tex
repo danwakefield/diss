@@ -1,6 +1,6 @@
 \chapter{Code Examples}
 
-\begin{figure}[hp]
+\begin{figure}[h]
 \begin{lstlisting}[frame=tb]
 type Node interface {
 	Eval(*variables.Scope, *IOContainer) ExitStatus
@@ -26,7 +26,7 @@ func (n NodeIf) Eval(scp *variables.Scope, ioc *IOContainer) ExitStatus {
 \caption[The Node Interface]{The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods. \label{lst:node-interface}}
 \end{figure}
 
-\begin{figure}[hp]
+\begin{figure}[h]
 \begin{lstlisting}[frame=tb]
 type NodeNoop struct{}
 
