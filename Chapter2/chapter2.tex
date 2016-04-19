@@ -296,7 +296,8 @@ Arg no 3 is: c
 These functions are stored internally as AST's in a hash table indexed by their names.
 This is done for performance reasons as each invocation requires the tree to be re-evaluated.
 
-Shell functions have a dynamic scope, using the \verb!local! function to define variables inside a function.
+Shell functions have a dynamic scope, using the \verb!local! command to define variables inside the current variables scope.
+
 
 \subsubsection{External commands}
 a
