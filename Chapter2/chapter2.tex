@@ -277,7 +277,9 @@ Commonly implemented internal commands are the echo, true, false and test utilit
 They don't require the overhead of extra interpretation or interaction with system utilities and as such are much faster than an external system call or a shell function.
 
 \subsubsection{User defined functions}
-User defined functions are stored in a hash table indexed by the function name.
+User defined functions are created using the shell syntax.
+Like all other shell code they are represented as an AST.
+This means that with each call they are reinterpreted.
 
 \subsubsection{External commands}
 a
