@@ -13,6 +13,8 @@
 %. This library was used without modification. 
 
 \lstinputlisting[caption={[fnmatch]fnmatch function. Originally from a gist published in 2010 \url{https://gist.github.com/kballard/272720}. See my fork of the code at \url{https://github.com/Danwakefield/fnmatch}. Forking was required as the code was created before Go V1 and I had to correct behaviour that had changed in that time. Attempted contact with the author failed\label{lst:fnmatch}}]{Appendix1/fnmatch.go}
+
+XXX Move somewhere it counts. 
 While Go has an fnmatch implementation available (import "path/filepath") is is hardcoded with settings for matching against file names. 
 This would not work in the case list where globbing should not expand to a list of filenames but still requires matching against the same pattern syntax.
 Therefore external code to perform this task was included.
