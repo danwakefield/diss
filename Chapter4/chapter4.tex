@@ -7,13 +7,15 @@
 %the following sections indicate some areas you might include. Other sections may be more appropriate to your project. 
 
 \section{Overall Approach to Testing}
-The project used a combination of unit test for small components and integration tests to test for behaviour and regressions.
+This project took an in depth approach to testing during t and it paid of in some big ways catching bugs and regressions that might not have otherwise noticed.
+
+TDD was used heavily in the earlier stages of the project but later on as large components where added focus shifted to integration testing.
+This is mainly due to how complex an AST for even a simple program can be
 
 
 \subsection{Unit Tests}
 The unit tests for my code leveraged Go's builtin testing package and the idiom of table driven tests.
-Functions without side effects can easily be tested this way and many others can be provided mocks to work in similar ways.
-Providing the inputs and expected outputs for each function under test is perhaps the simplest way to 
+Providing a list of inputs and expected outputs for each function is generally more than enough to prove it works.
 
 I created unit tests for most of the code in this project.
 This was done using Go's built in testing package which follows the philosophy that no output is a good sign. 
