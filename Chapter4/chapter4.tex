@@ -10,6 +10,15 @@
 
 \subsection{Unit Tests}
 
+I created unit tests for most of the code in this project.
+This was done using Go's built in testing package which follows the philosophy that no output is a good sign. 
+The only time something is printed is after calling one of the methods to indicate failure of a test.
+
+Because the testing package is so simple almost everyone writing go unit tests do so in a tables driven approach.
+This is where you create a list of structs which contain the input(s) and expected output(s) for a number of test cases.
+These are looped over and tested in turn.
+It may sound simplistic but for black box testing this is a very 
+
 \subsection{User Interface Testing}
 
 \subsection{Stress Testing}
