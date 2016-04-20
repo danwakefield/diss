@@ -21,7 +21,11 @@
 \section{Automated Testing}
 Towards the end of the project I started using a continuous integration service called drone.io\footnote{My project's public page is available at \url{https://drone.io/github.com/Danwakefield/gosh}}.
 Every time I pushed a commit to my github repository it would clone the code and run the both the unit and integration tests against the changes.
-A notifcation email 
+A notification email was sent if a build failed.
+
+The system just ran the normal unit and integration tests however since this codebase can issue system calls it is safer to run these tests in a disposa  
+The reason I switched to this style of testing was that if The code went horribly wrong it would not affect my system and it would be inside a container that is immediately disposed of.
+This aided in my
 
 \subsection{Other types of testing}
 
