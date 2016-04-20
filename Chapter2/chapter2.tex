@@ -303,9 +303,9 @@ Posix suggests that external commands be launched using \verb!execve! which take
 Go provides a much higher level interface as an alternative to these system calls and so things are modified a bit differently.
 
 Currently all variables are considered exported if they are set with any value.
-The spec requires that they are explictly marked using the \verb!export! command and everything is in place for this, namely the Scope and Variable structures, but it is not currently implemented.
+The spec requires that they are explicitly marked using the \verb!export! command and everything is in place for this, namely the Scope and Variable structures, but it is not currently implemented.
 
-If calling a command fails with the ENOEXEC error, it should be retrying by starting a new shell which is passed the full command to parser. For example:
+If calling a command fails with the ENOEXEC error, it should be retrying by starting a new shell which is passed the full command as arguments. For example:
 \begin{verbatim}
 foo a b c           # Fails
 gosh 'foo a b c'    # Retry
@@ -318,20 +318,6 @@ While the subset of math that the shell understands is much simpler than the she
 To simplify the general parser, when it detects the start of an AC it continues gathering text into a separate buffer for later evaluation.
 This is not the only reason it is done this way.
 Variables can be assigned and referenced in these equations so they need to be expanded each time it is evaluated.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
