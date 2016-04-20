@@ -11,6 +11,9 @@ The project used a combination of unit test for small components and integration
 
 
 \subsection{Unit Tests}
+The unit tests for my code leveraged Go's builtin testing package and the idiom of table driven tests.
+Functions without side effects can easily be tested this way and many others can be provided mocks to work in similar ways.
+Providing the inputs and expected outputs for each function under test is perhaps the simplest way to 
 
 I created unit tests for most of the code in this project.
 This was done using Go's built in testing package which follows the philosophy that no output is a good sign. 
@@ -31,8 +34,6 @@ A notification email was sent if a build failed.
 
 The system just ran the normal unit and integration tests however since this codebase can issue system calls it is safer to run these tests in a disposable container in case of a severe bug.  
 CI systems also make it easy for contributors to see the status of the code and ensure that pull requests will not cause any regression.
-
-\subsection{Other types of testing}
 
 \section{Integration Testing}
 
