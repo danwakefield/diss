@@ -38,20 +38,17 @@ They also saw it as an opportunity to improve upon the aspects of C that have be
 	\item Confusing side effects of post/pre increment and decrement. Go only allows the post version and only as a standalone expression.
 	\item GOTO statements that can jump anywhere at any time.
     \item Overloaded return values used to indicate errors.
+    \item Unused imports and variables are a compile time error.
+    \item The use of interface composition over polymorphism, generics and inheritance.
+    \item One loop construct, the for loop. Used with a break statement to create a while or until loop.
 \end{itemize*}
 
 The language also avoided style wars as it came with a tool, gofmt, that formats code 'the right way'.
 This is just one of the ways in which Go is extremely opinionated.
-Others include:
-\begin{itemize*}
-	\item Unused imports and variables are a compile time error.
-    \item Variables names should be generally be short. The longer they are in scope the longer and more descriptive the name should be.
-    \item The use of interface composition over polymorphism, generics and inheritance.
-    \item One loop construct, the for loop. Use with a break statement to create a while or until loop.
-\end{itemize*}
 
 It also comes with a simple built in testing framework that encourages tests right from the start and a documentation generator emphasising that.
 
+Variables names should be generally be short. The longer they are in scope the longer and more descriptive the name should be.
 XXX
 It also doesn't hurt that Go has been found that to be a great language to build components traditionally done with C, including things as complicated as a kernel subsystem\cite{GONET}.
 
