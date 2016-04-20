@@ -303,7 +303,13 @@ Posix suggests that external commands be launched using \verb!execve! which take
 Go provides a much higher level interface as an alternative to these system calls and so things are modified a bit differently.
 
 Currently all variables are considered exported if they are set with any value.
-The spec requires you to explictly mark them using the \verb!export! command and everything is in place for this, namely the Scope and Variable structures.
+The spec requires that they are explictly marked using the \verb!export! command and everything is in place for this, namely the Scope and Variable structures, but it is not currently implemented.
+
+If calling a command fails with the ENOEXEC error, it should be retrying by starting a new shell which is passed the full command to parser. For example:
+\begin{verbatim}
+foo a b c           # Fails
+gosh 'foo a b c'    # Retry
+\end{verbatim}
 
 \section{Arithmetic}
 This section is about the arithmetic construct(AC), the reasons why it requires a separate lexer-parser and how this pair differs from the one used for the general shell language.
