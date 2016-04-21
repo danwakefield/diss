@@ -22,22 +22,22 @@ The final section describes the development process that was used throughout the
 
 
 \section{Background}
-A shell is the smallest possible interface between a user and the operating system kernel API functions.
-These functions perform complex tasks like launching executables, connecting to the network and accessing files.
+A shell is the smallest possible interface between a user and the operating system kernel and they have been ingrained into everyday computer science since the first generation where developed at Bell Labs (See figure~\ref{fig:shell-history}).
+The kernel provides API functions that perform complex tasks like launching executables, connecting to the network and accessing files.
 The Domain Specific Language(DSL) of the shell simplifies these common interactions and allows the user to focus on the things they want to do.
 
 As well as providing this interface almost all shells can be used to interpret stored commands known as batch files or shell scripts.
-These group commands that a user may type to avoid repetition.
+These group commands to avoid repetition and to automate common tasks
 Shell range in their support of these but all modern shells have conditionals, variables and structures that mean they are also powerful scripting languages.
-
 Shell syntax has been influential in the design of other modern scripting languages such as Perl and PHP.
 
-Every operating system I know of comes with some form of shell, Windows with cmd.exe and Powershell, OSX with bash and linux distributions 
+Every linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell.
+Until recently these where used to interpret sysVinit scripts to boot the system but focus has moved to systemD style startup managers 
 
 \section{Motivations}
 A shell is the minimal interface between the user and the operating system kernel allowing users to directly execute programs, interact with files and devices (which can provide network access, e.g /dev/tcp/host/port) as well as providing a turing complete environment to perform interactive or automated tasks.
 All linux distributions right down to the very smallest\cite{ALPINE-LINUX} include a shell and until recently many used sysVinit scripts to boot the system.
-Shells have been ingrained into everyday computer science since the first generation where developed at Bell Labs (See figure~\ref{fig:shell-history}).
+Shells have 
 They have also been very influential in the design of scripting languages such as Perl and PHP. 
 I began using bash once I switched my operating system to Linux in 2009 and have become a fan of it's terse syntax and quirks especially for codegolf\cite{CODE-GOLF}. %XXX
 
