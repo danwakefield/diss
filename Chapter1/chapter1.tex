@@ -175,18 +175,16 @@ While these do not cover the full range of redirections, such as redirecting sta
 
 Along with these we can gather more required from the specification including:
 \begin{itemize*}
-    \item Variables, variable substitution and scoped variables
+    \item Variables, variable substitution and variable scoping.
     \item Shell functions.
     \item Command substitution / Subshells.
     \item Arithmetic substitution.
-    \item Shebang support (e.g \#!/bin/foo)
-    \item Control structures (if, while, until, for, case)
+    \item Shebang support (e.g \#!/bin/foo).
+    \item Control structures (if, while, until, for, case).
 \end{itemize*}
 
 Most shells can run in two modes, interactive and non-interactive.
-Depending on the mode of the shell different files are loaded
 
-This leaves out an important aspect of most shells, interactivity.
 I decided that sticking to a shell that runs shell scripts well would be preferable to having one with readline support but that didn't work properly. There is a Go implementation that offers the required functionality\cite{GO-READLINE} so this would be a good extension if time allows.
 
 My main analysis was based on the dash shell\cite{DASH} as it conforms to the POSIX shell standard\cite{POSIX-SHELL-STANDARD} while still having a reasonably small code base.
