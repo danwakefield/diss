@@ -184,8 +184,8 @@ Along with these we can gather more required from the specification including:
 \end{itemize*}
 
 Most shells can run in two modes, interactive and non-interactive.
-
-I decided that sticking to a shell that runs shell scripts well would be preferable to having one with readline support but that didn't work properly. There is a Go implementation that offers the required functionality\cite{GO-READLINE} so this would be a good extension if time allows.
+I decided that sticking to a shell that runs shell scripts well, ie non-interactive mode, would be preferable to having one with readline support, interactive mode, but that didn't work properly.
+There is a Go implementation of readline that offers the required functionality\cite{GO-READLINE} so this would be a good extension if time allows.
 
 My main analysis was based on the dash shell\cite{DASH} as it conforms to the POSIX shell standard\cite{POSIX-SHELL-STANDARD} while still having a reasonably small code base.
 I also used the ash shell implementation included in busybox\cite{BUSYBOX} because of it's similarities.
