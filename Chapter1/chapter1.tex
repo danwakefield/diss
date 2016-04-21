@@ -173,7 +173,7 @@ For example; output to a file \verb!foo | tee [--append] output_file! \\
 and for input to a command \verb!cat input_file | foo!.\\
 While these do not cover the full range of redirections, such as redirecting standard error, they will suffice to cover most situations and mean that development can be focused in other areas.
 
-Along with these we can gather more required from the specification includings:
+Along with these we can gather more required from the specification including:
 \begin{itemize*}
     \item Variables, variable substitution and scoped variables
     \item Shell functions.
@@ -183,7 +183,6 @@ Along with these we can gather more required from the specification includings:
     \item Control structure (if, while, until, for, case, functions)
 \end{itemize*}
 
-These features are gathered from the POSIX specification.
 
 This leaves out an important aspect of most shells, interactivity.
 I decided that sticking to a shell that runs shell scripts well would be preferable to having one with readline support but that didn't work properly. There is a Go implementation that offers the required functionality\cite{GO-READLINE} so this would be a good extension if time allows.
