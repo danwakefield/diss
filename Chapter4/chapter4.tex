@@ -31,7 +31,7 @@ It may sound simplistic but for black box testing this is a very
 
 \section{Automated Testing}
 Towards the end of the project I started using a continuous integration service called drone.io\footnote{My project's public page is available at \url{https://drone.io/github.com/Danwakefield/gosh}}.
-Every time I pushed a commit to my github repository it would clone the code and run the both the unit and integration tests against the changes.
+Every time a commit was pushed to the github repository it would clone the code and run the both the unit and integration tests against the changes.
 A notification email was sent if a build failed.
 
 The system just ran the normal unit and integration tests however since this codebase can issue system calls it is safer to run these tests in a disposable container in case of a severe bug.  
