@@ -183,7 +183,8 @@ Along with these we can gather more required from the specification including:
     \item Control structures (if, while, until, for, case)
 \end{itemize*}
 
-Most shells can run in two modes, interactive (or login
+Most shells can run in two modes, interactive and non-interactive.
+Depending on the mode of the shell different files are loaded
 
 This leaves out an important aspect of most shells, interactivity.
 I decided that sticking to a shell that runs shell scripts well would be preferable to having one with readline support but that didn't work properly. There is a Go implementation that offers the required functionality\cite{GO-READLINE} so this would be a good extension if time allows.
