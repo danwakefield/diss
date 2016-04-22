@@ -31,11 +31,26 @@ These group commands to avoid repetition and to automate common tasks
 Shells range in their support of these but all modern shells have conditionals, variables and structures that make them powerful scripting languages.
 Shell syntax has been influential in the design of other modern scripting languages such as Perl and PHP.
 
-Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with the POSIX shell specification\cite{POSIX-SHELL-STANDARD}. The Almquist Shell(ash) and the Debian Almquist Shell(dash) are minimal shells that implement the spec.
+There are two families of shells, those descended from sh and csh, (See figure~\ref{fig:shell-history}), known as traditional shells and those that have a largely incompatible syntax and/or behaviour known as exotic shells. Fish\cite{FISH}, es\cite{ES-SHELL} and oh\cite{OH-SHELL} are examples of exotic shells.
+
+Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with the POSIX shell specification\cite{POSIX-SHELL-STANDARD}.
+The Almquist Shell(ash) and the Debian Almquist Shell(dash) are minimal shells that implement the spec.
 However the most widely used shell, bash, implements an incompatible superset of the POSIX functionality.
 It comes with a flag to switch off the additional features and enable POSIX compatibility and when the binary is symlinked to \verb!/bin/sh! this flag is implicitly set.
 
+\begin{figure}[hp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{xyz.png}
+    \caption[Lineage of the main shells]{Lineage of the main shells\cite{SHELL-HISTORY}. Features where also incorporated across branches in many cases.}
+    \label{fig:shell-history}
+\end{figure}
+
 This spec was introduced 'ex post facto' and was based on the ksh88 shell which  brought together the features from csh and the syntax from the bourne shell.  
+
+
+dash is a POSIX compliant shell which lacks many features useful in an interactive context.
+Bash adds things such as history control, line editing and arrays but also has a compatibility mode for POSIX scripts.
+Zsh has many extra features but also has emulation modes for its major rivals though they are not 100\% compatible. 
 
 \section{Motivations}
 I have been using a shell ever I switched my operating system to Linux in 2009 it was my first introduction to useful programming.
@@ -78,22 +93,14 @@ SUM:               & 486   & 34531 & 30296   & 183672 \\ \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{figure}[hp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{xyz.png}
-    \caption[Lineage of the main shells]{Lineage of the main shells\cite{SHELL-HISTORY}. Features where also incorporated across branches in many cases.}
-    \label{fig:shell-history}
-\end{figure}
+
 
 \section{Preparation}
-There are two families of shells, those descended from sh and csh, (See figure~\ref{fig:shell-history}), known as traditional shells and the so called exotic shells that have a syntax largely incompatible with other shells. Fish\cite{FISH}, es\cite{ES-SHELL} and oh\cite{OH-SHELL} are examples of exotic shells.
+
 
 To prepare for this project I started examining the source code for some of the modern traditional shells, including bash, dash and zsh.
 
 
-dash is a POSIX compliant shell which lacks many features useful in an interactive context.
-Bash adds things such as history control, line editing and arrays but also has a compatibility mode for POSIX scripts.
-Zsh has many extra features but also has emulation modes for its major rivals though they are not 100\% compatible. 
 
 To learn about compiler construction and language design I started studying from some of the courses available online that don't advocate using auto generation tools\cite{COMPILERS-COURSE,CRENSHAW}.
 I also scanned through a book on lex\&yacc as both the are used in the bash source code and I wanted to be able to understand their use.
