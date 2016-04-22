@@ -39,10 +39,20 @@ The POSIX shell specification\cite{POSIX-SHELL-STANDARD} describes
 (See figure~\ref{fig:shell-history}),
 
 
+
+dash is a POSIX compliant shell which lacks many features useful in an interactive context.
+Bash adds things such as history control, line editing and arrays but also has a compatibility mode for POSIX scripts.
+Zsh has many extra features but also has emulation modes for its major rivals though they are not 100\% compatible. 
+
+
 Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with 
 The Almquist Shell(ash) and the Debian Almquist Shell(dash) are minimal shells that implement the spec.
 However the most widely used shell, bash, implements an incompatible superset of the POSIX functionality.
 It comes with a flag to switch off the additional features and enable POSIX compatibility and when the binary is symlinked to \verb!/bin/sh! this flag is implicitly set.
+
+
+
+This spec was introduced 'ex post facto' and was based on the ksh88 shell which  brought together the features from csh and the syntax from the bourne shell.  
 
 \begin{figure}[hp]
     \centering
@@ -50,13 +60,6 @@ It comes with a flag to switch off the additional features and enable POSIX comp
     \caption[Lineage of the main shells]{Lineage of the main shells\cite{SHELL-HISTORY}. Features where also incorporated across branches in many cases.}
     \label{fig:shell-history}
 \end{figure}
-
-This spec was introduced 'ex post facto' and was based on the ksh88 shell which  brought together the features from csh and the syntax from the bourne shell.  
-
-
-dash is a POSIX compliant shell which lacks many features useful in an interactive context.
-Bash adds things such as history control, line editing and arrays but also has a compatibility mode for POSIX scripts.
-Zsh has many extra features but also has emulation modes for its major rivals though they are not 100\% compatible. 
 
 \section{Motivations}
 I have been using a shell ever I switched my operating system to Linux in 2009 it was my first introduction to useful programming.
