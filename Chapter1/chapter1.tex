@@ -33,10 +33,12 @@ Shell syntax has been influential in the design of other modern scripting langua
 
 There are two families of shells, those descended from sh and csh known as traditional shells and those that have a largely incompatible syntax and/or behaviour, known as exotic shells.
 Fish\cite{FISH}, es\cite{ES-SHELL} and oh\cite{OH-SHELL}, which happens to also be written in Golang too, are examples of exotic shells.
+
+However this thesis will focus on the traditional shells, The POSIX shell specification\cite{POSIX-SHELL-STANDARD} describes 
 (See figure~\ref{fig:shell-history}),
 
 
-Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with the POSIX shell specification\cite{POSIX-SHELL-STANDARD}.
+Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with 
 The Almquist Shell(ash) and the Debian Almquist Shell(dash) are minimal shells that implement the spec.
 However the most widely used shell, bash, implements an incompatible superset of the POSIX functionality.
 It comes with a flag to switch off the additional features and enable POSIX compatibility and when the binary is symlinked to \verb!/bin/sh! this flag is implicitly set.
