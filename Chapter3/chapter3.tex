@@ -29,6 +29,7 @@ Unfortunately during testing I discovered that the checks where not through enou
 The fix for this would be quite simple, it just requires the addition of a division helper function similar to that used for shifting (See \ref{lst:arith-shift}). XXX % Add reference to integration test that caught it.
 \newpage %XXX NEWPAGE 
 \subsection{Lexer}
+The Lexer was completed during the first iteration.
 The syntax for an equation is quite simple, consisting of just:
 \begin{itemize*}
 	\item Variable Names
@@ -47,6 +48,8 @@ Symbols are the simplest thing to detect, as the code in~\ref{lst:arith-symbol-l
 Simple lookaheads are that is needed.
 
 \subsection{Parser}
+As mentioned early the parser used was a Pratt parser.
+It was not completed along with the lexer in the first iteration as had been planned, It took another  
 
 
 \subsection{Variables}
