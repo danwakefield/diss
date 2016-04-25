@@ -100,9 +100,13 @@ Commands take a list of environment variables each as a string in the form, "VAR
 This meant that when I got to the stage when commands where being executed I had to add an Environ function to get them in the correct form.
 The complexity of this function is O(2n), where n is the number of variables set in the shell, but I could not see a way to improve this without harming the performance of other aspects.
 
-The design does not currently support integer typed variables but It could be applied with a m
-
+The design does not currently support integer typed variables but It could be added with minimal effort.
+Change the Variable struct to contain an isInteger bool and when updating this variable using the result of arith.Parse as the new value. 
 \subsection{User Functions}
+User functions where added in the penultimate iteration.
+The way they are stored in the Scope object showcases the worse 
+
+
 \subsection{Aliases}
 
 \section{Main Lexer}
