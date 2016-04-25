@@ -69,25 +69,25 @@ func RightShift(a, b int64) int64 {
 \begin{figure}[h]
 \begin{lstlisting}[frame=tb]
 switch currentCharacter:
-...
 case '<':
-		switch l.next() {
-		case '<':
-			t = ArithLeftShift
-			checkAssignmentOp = true
-		case '=':
-			t = ArithLessEqual
-		default:
-			t = ArithLessThan
-			l.backup()
-		}
-...
+	switch l.next() {
+	case '<':
+		t = ArithLeftShift
+		checkAssignmentOp = true
+	case '=':
+		t = ArithLessEqual
+	default:
+		t = ArithLessThan
+		l.backup()
+	}
+}
 if checkAssignmentOp {
 	if l.hasNext('=') {
-			t += ArithAssignDiff
-		}
+		t += ArithAssignDiff
+	}
 }
+return t
 \end{lstlisting}
-\caption[Shift helper functions]{Go's compile time checks prevent using an int64 as an argument to a shift.\label{lst:arith-shift}}
+\caption[Sample of Arithmetic Symbol Lexing]{Portion of the switch statement used to parse symbols. It shows how detection of the next token is possible using just 1 character of lookahead. '<', '<<', '<=' and '<<=' are all covered here.\label{lst:arith-symbol-lex}}
 \end{figure}
 
