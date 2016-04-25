@@ -90,7 +90,12 @@ as I started to implement user functions in the penultimate iteration.
 At this point it would have taken significant work to correct and the benefits would have been minimal.
 
 \subsection{Variables}
-The original Scope object was over comp
+The original Scope object only held information about variables but it was still over designed.
+It contains a list of hash tables which are searched in reverse order when setting, updating or retrieving anything.
+The first value matching the name is used.
+
+I created it this way as I knew that it would affect both commands with temporary assignments and functions using the local builtin.
+
 
 
 \subsection{User Functions}
