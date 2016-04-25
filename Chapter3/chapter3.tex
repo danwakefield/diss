@@ -24,14 +24,10 @@ This is an implementation detail of the language parser and can of course be tre
 In bash the '++' symbol has a meaning, it can represent post-increment or pre-increment depending on its position.
 The numbers could be joined together into a single literal; Python, Java and others do this with underscores rather than spaces\cite{UNDERSCORE-NUM-LITERAL}.
 
-Another of Go's golden rules is never to raise a panic across package boundaries
-The recovered panic was then turned into an error and passed back as the return value as is idiomatic in Go.
-Panicking across package boundaries is   
-
-
-
-Most of my research was done during this stage as I was still unsure on the type of lexer or parser that would best suit my project.
-Once 
+Another of Go's golden rules is never to raise a panic across package boundaries and to do this we defer a recover function.
+If recover detects we have panicked it checks to see if it should be returned as an error instead.
+Unfortunately during testing I discovered that the checks where not through enough and allowed division by zero errors to bubble up crashing the whole program. 
+The fix for this would be very simple, it just requires the addition of a division helper function similar to that used for shifting\cite{lst:arith-shift}. XXX % Add reference to integration test that caught it.
 
 The lexer is simple as symbols are either digits, variable names --- which always start with a letter or underscore --- or identifiers which are special characters like '+'.
 

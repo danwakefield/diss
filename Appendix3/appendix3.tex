@@ -41,3 +41,28 @@ type NodeEOF struct {
 \caption[The EOF and No Op node]{The NodeEOF uses struct embedding to receive the methods of the NodeNoop.\label{lst:node-noop}}
 \end{figure}
 
+
+\begin{figure}[h]
+\begin{lstlisting}[frame=tb]
+func LeftShift(a, b int64) int64 {
+	c := int64(math.Pow(2, float64(b)))
+	if c == 0 {
+		return a
+	} else if c < 0 {
+		panic("Negative Left Shift")
+	}
+	return a * c
+}
+func RightShift(a, b int64) int64 {
+	c := int64(math.Pow(2, float64(b)))
+	if c == 0 {
+		return 0
+	} else if c < 0 {
+		panic("Negative Right Shift")
+	}
+	return a / c
+}
+\end{lstlisting}
+\caption[Shift helper functions]{Go's compile time checks prevent using an int64 as an argument to a shift, these functions perform the same math.\label{lst:arith-shift}}
+\end{figure}
+
