@@ -8,19 +8,20 @@
 
 \section{Arithmetic}
 The arithmetic construct was the first thing I created.
-It is a standalone piece of code only exposing a single method, Parse, which takes a string representing an equation and returning the integer value it evaluates too or an error.
-Because of this isolation I created it as a sub package which also allowed me to simplify the error handling.
+It is a standalone piece of code only exposing a single method, Parse, which takes a string representing an equation and returning the integer value it evaluates to or an error.
+Because of this isolation I created it as a subpackage which also allowed me to simplify the error handling.
+
 I was able to panic and recover\footnote{Panic is similar to an exception in other languages but has different semantics. Errors in Go should be passed through the use of multiple return values instead.} to completely unwind the parser and lexer.
 Although panics are reserved for truly exceptional cases in Go, they had to be used in this case.
 Errors encountered during lexing or parsing of a language are almost always fatal as they leave the system in an indeterminate state.
-For example, the following make no sense in the context of a mathematical equation:
+For example, the following make no sense in the context of a shell mathematical equation:
 \begin{verbatim}
 ++
   or
 35 67 89
 \end{verbatim}
 This is an implementation detail and can of course be treated differently.
-In bash the '++' symbol has a meaning, it can represent post-increment or pre-increment depending on its position.
+In bash the '++' symbol can represent post-increment or pre-increment depending on its position.
 The numbers could also be joined together into a single literal; Python and Java do something similar with underscores rather than spaces\cite{UNDERSCORE-NUM-LITERAL}.
 
 Another of Go's golden rules is never to raise a panic across package boundaries and to do this we defer a recover function.
@@ -29,7 +30,8 @@ Unfortunately during testing I discovered that the checks where not through enou
 The fix for this would be quite simple, it just requires the addition of a division helper function similar to that used for shifting (See \ref{lst:arith-shift}). XXX % Add reference to integration test that caught it.
 \newpage %XXX NEWPAGE 
 \subsection{Lexer}
-The Lexer was completed during the first iteration.
+The Lexer was completed during the first iteration as planned and has a good set of unit tests that where used to ensure the correctness of returned tokens.
+
 The syntax for an equation is quite simple, consisting of just:
 \begin{itemize*}
 	\item Variable Names
@@ -40,8 +42,8 @@ The syntax for an equation is quite simple, consisting of just:
 Variable names are detected using the following simple regular expression, \verb![a-zA-Z_][a-zA-Z0-9_]*!.
 
 POSIX requires that detection of numeric values can be done in base 8 (Octal), 10 (Decimal) and 16 (Hexadecimal).
-Whatever type is detected it is converted to base 10 inside the lexer.
-If the literal is invalid, e.g \verb!0xffk! an error is returned that unwinds the parser
+Values are always converted to base 10 for use inside the lexer.
+If the literal is invalid, e.g \verb!0xffk! an error is returned that unwinds the parser.
 With the current design if assignments have been applied before the error they would remain in effect, see~\ref{sec:scope}.
 
 Symbols are the simplest thing to detect, as the code in~\ref{lst:arith-symbol-lex} shows, they only require one character of lookahead.
@@ -79,7 +81,10 @@ I left the bug with a failing test case but went back to fix it in the last iter
 
 \section{Scope}
 \label{sec:scope}
-The scope object was created during the second iteration along side the arith parser.
+The scope object was created during the second iteration alongside the arith parser.
+It was also created as a subpackage because putting it in the main package was impossible since Go completely disallows circular references.
+
+
 
 \subsection{Variables}
 \subsection{User Functions}
@@ -110,7 +115,8 @@ The scope object was created during the second iteration along side the arith pa
 
 \section{Builtin Commands}
 
-\section{Circular Imports}
+\section{Circular References}
+\label{sec:circular-refs}
 
 
 
