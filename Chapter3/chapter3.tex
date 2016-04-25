@@ -66,7 +66,7 @@ When they are retrieved if they can be parsed as any of octal, decimal or hex th
 Variables that cannot be parsed are returned with a value of zero.
 
 Variables can only be accessed by using their unprefixed form in the construct, i.e \verb!(( a = 5 ))! will work but \verb!(( $a = 5 ))! will not.
-The v in a separate before arith
+The variables are expanded before arith but due to time constraints this doesnt work here (See~\ref{sec:main-lexer-arith}
 \subsection{Ternary}
 The ternary operator is unique in that it operates on three values.
 Unfortunately due to the fact that the tree is constructed and then evaluated immediately this led to a bug.
@@ -86,6 +86,7 @@ When both sides of the environment contained assignment operators variables coul
 \subsection{Variables}
 \subsection{Subshells}
 \subsection{Arithmetic}
+\label{sec:main-lexer-arith}
 
 \section{Main Parser, AST \& Nodes}
 
