@@ -29,18 +29,26 @@ Unfortunately during testing I discovered that the checks where not through enou
 The fix for this would be very simple, it just requires the addition of a division helper function similar to that used for shifting (See \ref{lst:arith-shift}). XXX % Add reference to integration test that caught it.
 
 \subsection{Lexer}
-The syntax for an equation is quite simple, consisting of:
+The syntax for an equation is quite simple, consisting of just:
 \begin{itemize*}
-	\item Numeric Literals --- POSIX requires detection of bases 10 (Deciaml, 8 (Octal) and 16 (Hexadeciaml). They are all converted to base 10 inside the lexer and errors are thrown if the literal is invalid.
-    \item 
-
+	\item Variable Names
+    \item Symbols
+	\item Numeric Literals
 \end{itemize*}
-numeric literal, variable names --- which always start with a letter or underscore --- or identifiers which are special characters like '+'.
 
+Variable names are detected using the following simple regular expression, '[a-zA-Z_][a-zA-Z0-9_]*'.
+
+POSIX requires that detection of numeric values can be done in base 10 (Decimal, 8 (Octal) and 16 (Hexadecimal).
+Whatever type is detected it is converted to base 10 inside the lexer.
+If the literal is invalid, e.g \verb!0xffk! an error is returned that unwinds the parse.
+With the current design if assignments have been applied before the error they would remain in effect, see~\ref{sec:scope}.
+
+Symbols are the simplest thing to detect, See one and return the Token representing them.
 
 \subsection{Parser}
 
 \subsection{Variables}
+--- Follow the simple regex . The arith construct cannot access the values of special variables such as '\$#'
 \subsection{Ternary Bug}
 
 \section{Scope}

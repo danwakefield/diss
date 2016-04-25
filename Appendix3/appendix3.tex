@@ -66,3 +66,28 @@ func RightShift(a, b int64) int64 {
 \caption[Shift helper functions]{Go's compile time checks prevent using an int64 as an argument to a shift.\label{lst:arith-shift}}
 \end{figure}
 
+\begin{figure}[h]
+\begin{lstlisting}[frame=tb]
+switch currentCharacter:
+...
+case '<':
+		switch l.next() {
+		case '<':
+			t = ArithLeftShift
+			checkAssignmentOp = true
+		case '=':
+			t = ArithLessEqual
+		default:
+			t = ArithLessThan
+			l.backup()
+		}
+...
+if checkAssignmentOp {
+	if l.hasNext('=') {
+			t += ArithAssignDiff
+		}
+}
+\end{lstlisting}
+\caption[Shift helper functions]{Go's compile time checks prevent using an int64 as an argument to a shift.\label{lst:arith-shift}}
+\end{figure}
+
