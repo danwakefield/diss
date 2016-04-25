@@ -52,8 +52,12 @@ The parser was not completed along with the lexer in the first iteration as had 
 It was finished in the second one along with extensions to Scope.
 
 The tokens passed from the lexer are assigned to their node type by a simple switch statement.
-Nodes are simple, including among other LiteralNode, InfixNode and InfixAssignNode.
-The node types are used to abstract the functionality of similar operations, 
+The node types are used to abstract the functionality of similar operations.
+E.g \verb!a + b!, \verb!a * b! and \verb!a *= b!, \verb!a += b! show that behaviour is similar and it is just the operation that differs.
+Respectively they would be created as InfixNode and InfixAssignNode with their Types set to indicate what operation is desired.
+ 
+
+
 
 \subsection{Variables}
 Special variables access
