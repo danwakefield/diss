@@ -8,10 +8,23 @@
 
 \section{Arithmetic}
 The arithmetic construct was the first thing I created.
-It is a standalone piece of code only exposing a single method Parse which takes a string representing an equation and returning the integer value it evaluates too or an 
+It is a standalone piece of code only exposing a single method, Parse, which takes a string representing an equation and returning the integer value it evaluates too or an error.
+Because of this isolation I created it as a sub package which also allowed me to simplify the error handling.
+I was able to panic and recover\footnote{Panic is similar to an exception in other languages but has different semantics.Errors should be passed through the use of multiple return values instead.} to completely unwind the parser and lexer.
+Although panics are reserved for truly exceptional cases in Go, they had to be used in this case.
+Errors encountered during lexing or parsing of a language are almost always fatal as they leave the system in an indeterminate state.
+For example:
+\begin{verbatim}
+
+\end{verbatim}
+
+The recovered panic was then turned into an error and passed back as the return value as is idiomatic in Go.
+Panicking across package boundaries is   
+
+
 
 , apart from the fact that it can get and set variables.
-Because of this isolation I created it as a sub package 
+
 
 
 Most of my research was done during this stage as I was still unsure on the type of lexer or parser that would best suit my project.
