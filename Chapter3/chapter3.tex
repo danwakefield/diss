@@ -118,11 +118,26 @@ It shows that I have had to use a map of interface\{\} to store the NodeFunction
 It is similar to a \verb!void *! in C as Go's implicit satisfaction of interfaces mean that everything satisfies the empty one.
 
 This was done as storage and usage of a NodeFunction is done during the Eval phase which is defined in package main.
-
-The solution will be to create a subpackage for nodes.
+The solution would have been to create a subpackage for nodes.
 However the work required to change the parser during the last week was greater than the bad practice of using interface\{\} here.
 
 \subsection{Aliases}
+Aliases where not done in the time frame.
+They will however require storage in the Scope object and creation of a builtin command to put them there.
+
+The way the main parser and lexer is created will also have to be different as the lexer expands aliases when they occur so needs knowledge of them.
+
+They also only take effect after after the compound block they are declared in.
+\begin{verbatim}
+foofunc() {
+	alias foo=echo
+    foo "IT WORKS"
+}
+
+foofunc
+\end{verbatim}
+This would cause the shell to print an error as the alias is not yet visible as the function was parsed without it existing.
+
 
 \section{Main Lexer}
 
