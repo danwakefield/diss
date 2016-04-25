@@ -41,7 +41,7 @@ Variable names are detected using the following simple regular expression, \verb
 
 POSIX requires that detection of numeric values can be done in base 10 (Decimal, 8 (Octal) and 16 (Hexadecimal).
 Whatever type is detected it is converted to base 10 inside the lexer.
-If the literal is invalid, e.g \verb!0xffk! an error is returned that unwinds the parse.
+If the literal is invalid, e.g \verb!0xffk! an error is returned that unwinds the parser
 With the current design if assignments have been applied before the error they would remain in effect, see~\ref{sec:scope}.
 
 Symbols are the simplest thing to detect, as the code in~\ref{lst:arith-symbol-lex} shows.
@@ -53,15 +53,14 @@ It was finished in the second one along with extensions to Scope.
 
 The tokens passed from the lexer are assigned to their node type by a simple switch statement.
 The node types are used to abstract the functionality of similar operations.
-For example \verb!a + b!, \verb!a * b! and \verb!a *= b!, \verb!a += b! show that behaviour is similar and it is just the operation that differs in most cases .
+For example $a + b$, $a * b$ and $a \mathrel{+}= b$, $a \mathrel{*}= b$ show that behaviour is similar and it is just the operation that differs in most cases .
 Respectively they would be created as InfixNode and InfixAssignNode with their Types set to indicate what operation is desired.
 
 The Pratt parser requires that each node have two functions and one value, see~\ref{lst:arith-node-interface}.
-Since Go interfaces can only consist of methods I just changed this to a getter method instead.
-
+Since Go interfaces can only consist of methods I just changed the value to a getter method instead.
 
 \subsection{Variables}
-Special variables access
+To begin with I created stub methods on the parse
 
 \subsection{Ternary}
 
