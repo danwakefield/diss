@@ -90,12 +90,18 @@ as I started to implement user functions in the penultimate iteration.
 At this point it would have taken significant work to correct and the benefits would have been minimal.
 
 \subsection{Variables}
-The original Scope object only held information about variables but it was still over designed.
+The original Scope object was only used to get and set variables but it has lots of complexity.
 It contains a list of hash tables which are searched in reverse order when setting, updating or retrieving anything.
 The first value matching the name is used.
 
 I created it this way as I knew that it would be needed by both commands with temporary assignments and functions using the local builtin.
 
+Commands take a list of environment variables each as a string in the form, "VAR_NAME=FOO".
+This meant that when I got to the stage when commands where being executed I had to add the environ function to convert the scope to this style of list with the correct precedence.
+
+
+As I went further into the project I came to the point when commands where being executed on the machine.
+To give them access to the variables that had been set 
 
 \subsection{User Functions}
 \subsection{Aliases}
