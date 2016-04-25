@@ -6,9 +6,13 @@
 
 %You can conclude this section by reviewing the end of the implementation stage against the planned requirements. 
 
-\section{Arithmetic Lexer \& Parser}
-This was the first component that was created.
-The fact that it stands alone and its only interactions are getting and setting variables made it the perfect starting point.
+\section{Arithmetic}
+The arithmetic construct was the first thing I created.
+It is a standalone piece of code only exposing a single method Parse which takes a string representing an equation and returning the integer value it evaluates too or an 
+
+, apart from the fact that it can get and set variables.
+Because of this isolation I created it as a sub package 
+
 
 Most of my research was done during this stage as I was still unsure on the type of lexer or parser that would best suit my project.
 Once 
@@ -18,6 +22,10 @@ The lexer is simple as symbols are either digits, variable names --- which alway
 
 
 
+\subsection{Lexer}
+
+
+\subsection{Parser}
 
 \subsection{Variables}
 \subsection{Ternary Bug}
