@@ -61,14 +61,17 @@ Since Go interfaces can only consist of methods I just changed the value to a ge
 
 \subsection{Variables}
 To begin with I created stub methods on the parser that would eventually interact with with the supplied scope.
-Values are converted to strings before being stored and when retrieving them if they can be parsed as any of octal, decimal or hex they are converted to decimal and returned.
-If they cannot be parsed they return a value of zero.
+Values are converted to strings before being stored.
+When they are retrieved if they can be parsed as any of octal, decimal or hex they are converted before being returned.
+Variables that cannot be parsed are returned with a value of zero.
 
+Variables can only be accessed by using their unprefixed form in the construct, i.e \verb!(( a = 5 ))! will work but \verb!(( $a = 5 ))! will not.
+The v in a separate before arith
 \subsection{Ternary}
 The ternary operator is unique in that it operates on three values.
 Unfortunately due to the fact that the tree is constructed and then evaluated immediately this led to a bug.
 
-When both sides of the environment contained assignment operators variables could be modified twice or always assigned the second value, E.g given $y = 0$, $x ? y += 1 : y += 3$ would make $y == 4$ not matter what x was.
+When both sides of the environment contained assignment operators variables could be modified twice or always assigned the second value, E.g given \verb!y = 0! an equation like \\ \verb!x ? y += 1 : y += 3! would make \verb!y == 4! no matter what x was.
 
 \section{Scope}
 \label{sec:scope}
