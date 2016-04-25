@@ -84,9 +84,14 @@ I left the bug with a failing test case but went back to fix it in the last iter
 The scope object was created during the second iteration alongside the arith parser.
 It was also created as a subpackage because putting it in the main package was impossible since Go completely disallows circular references.
 
-
+As is obvious from the package name, 'variables.Scope' and the headings in this section, the responsibilities of the class grew quickly and it quickly became mislabeled.
+I realised the problems that had been created by the package layout
+as I started to implement user functions in the penultimate iteration.
+At this point it would have taken significant work to correct and the benefits would have been minimal.
 
 \subsection{Variables}
+
+
 \subsection{User Functions}
 \subsection{Aliases}
 
