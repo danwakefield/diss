@@ -127,7 +127,7 @@ They will however require storage in the Scope object and creation of a builtin 
 
 The way the main parser and lexer is created will also have to be different as the lexer expands aliases when they occur so needs knowledge of them.
 
-They also only take effect after after the compound block they are declared in.
+They also only take effect after after the compound block they are declared in is evaluated.
 \begin{verbatim}
 foofunc() {
 	alias foo=echo
@@ -136,7 +136,9 @@ foofunc() {
 
 foofunc
 \end{verbatim}
-This would cause the shell to print an error as the alias is not yet visible as the function was parsed without it existing.
+This would cause the shell to print an error as the alias did not exist before the function was lexed and parsed.
+foo will become available for the rest of the script after foofunc has been called but the foofunc function will always return an error.
+Functions defined before the call will also error if they attempt to use foo
 
 
 \section{Main Lexer}
