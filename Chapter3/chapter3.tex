@@ -52,7 +52,8 @@ The parser was not completed along with the lexer in the first iteration as had 
 It was finished in the second one along with extensions to Scope.
 
 The tokens passed from the lexer are assigned to their node type by a simple switch statement.
-There 
+Nodes are simple, including among other LiteralNode, InfixNode and InfixAssignNode.
+The node types are used to abstract the functionality of similar operations, 
 
 \subsection{Variables}
 Special variables access
