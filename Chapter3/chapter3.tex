@@ -29,12 +29,8 @@ If recover detects we have panicked it checks to see if it should be returned as
 Unfortunately during testing I discovered that the checks where not through enough and allowed division by zero errors to bubble up crashing the whole program. 
 The fix for this would be very simple, it just requires the addition of a division helper function similar to that used for shifting\cite{lst:arith-shift}. XXX % Add reference to integration test that caught it.
 
-The lexer is simple as symbols are either digits, variable names --- which always start with a letter or underscore --- or identifiers which are special characters like '+'.
-
-
-
-
 \subsection{Lexer}
+The lexer is simple as symbols are either digits, variable names --- which always start with a letter or underscore --- or identifiers which are special characters like '+'.
 
 
 \subsection{Parser}
