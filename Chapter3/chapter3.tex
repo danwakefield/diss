@@ -15,15 +15,18 @@ Although panics are reserved for truly exceptional cases in Go, they had to be u
 Errors encountered during lexing or parsing of a language are almost always fatal as they leave the system in an indeterminate state.
 For example:
 \begin{verbatim}
-
+++
+or
+35 67 89
 \end{verbatim}
+make no sense at all in the context of a mathematical equation.
+This is an implementation detail of the language parser and can of course be treated differently.
+In bash the '++' symbol has a meaning, it can represent post-increment or pre-increment depending on its position.
+The numbers could be joined together into a single literal; Python, Java and others do this with underscores rather than spaces\cite{UNDERSCORE-NUM-LITERAL}.
 
+Another of Go's golden rules is never to raise a panic across package boundaries
 The recovered panic was then turned into an error and passed back as the return value as is idiomatic in Go.
 Panicking across package boundaries is   
-
-
-
-, apart from the fact that it can get and set variables.
 
 
 
