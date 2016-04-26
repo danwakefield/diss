@@ -147,9 +147,17 @@ The presentation given by Rob Pike\cite{PIKE-LEXING-VIDEO} also made it seem ver
 A concurrent run loop is started when the lexer is created which means that on machines with multiple cores (Almost everything modern) this design will be a performance boost.
 During this run loop state functions are called, beginning with lexStart, which either return another state function or nil to indicate that parsing has completed. 
 Each lexing state has a minimal amount of responsibilities deferring to others when possible.
-i.e given the text \verb!"abc $def"! lexStart will pass control to the lexDoubleQuote function which will pass control
 
+An example of how the lexer works is below.
+Given the text \verb!"abc $def"!.
+lexStart will pass control to the lexDoubleQuote function when it see's the '"' character which will pass control to the lexSubstitution when it see's '\$'.
+This will determine that lexSimpleVariable is needed as neither '{' or '(' follow the dollar.
+Once that completes control is returned to lexDoubleQuote which will see the closing quote, emit the token and return control to lexStart.
+
+Emitting is the term given to passing a token through the lexItems channel which allows the parser to collect them.
+The token is created using information the lexer holds including the string representation, any substitutions the value is quoted
 \subsection{Strings}
+
 \subsection{Variables}
 \subsection{Subshells}
 \subsection{Arithmetic}
