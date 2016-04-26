@@ -272,7 +272,9 @@ I also implemented the 'true' and 'false' for performance reasons.
 While these are not bottlenecks in any program --- the biggest boosts will probably come from implementing 'echo' and 'printf' --- they show that commands can be easily created.
 
 As these commands are logically separate from the functionality of the shell I created a subpackage for them.
-This again showed that package planning had been poor as both IOContainer and ExitStatus then needed to be available as one.
+This again showed that package planning had not been considered well.
+Both IOContainer and ExitStatus had to be moved from 'package main' to a subpackage.
+This package has ended up with the nondescript name of 'package T' as it has no purpose other than to be a temporary home to these types.
 
 \section{Circular References}
 \label{sec:circular-refs}
