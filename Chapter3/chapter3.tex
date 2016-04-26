@@ -195,11 +195,14 @@ This would be better suited in the parser and it would also fix the problems tha
 A complex variable substitution of the form \verb!${foo:-$bar}! does not currently work.
 
 This shows a variable 'foo' being operated on by the ':-' operator.
-When I created the lexComplexVariable function I used a very simple lexer for anything after the operator with the intention of replacing it.
+When I created the lexComplexVariable function I used a naive lexer for anything after the operator with the intention of replacing it.
 It gathers everything as is upto the next '}' character and uses it as the value.
-This means that no substitutions will work.
-It also does not take into account the EOF rune
 
+While writing this section and inspecting the code I also realised the naive collection does not check for the EOF character.
+This means that a memory based DOS attack is possible by just using a file with the contents \verb!${a:!.
+
+One solution I can see is to create another lexer using the remaining input.
+I could then collect tokens until I see 
 \subsection{Subshells}
 
 \subsection{Arithmetic}
