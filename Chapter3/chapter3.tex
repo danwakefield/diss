@@ -100,8 +100,11 @@ Commands take a list of environment variables each as a string in the form, "VAR
 This meant that when I got to the stage when commands where being executed I had to add an Environ function to get them in the correct form.
 The complexity of this function is O(2n), where n is the number of variables set in the shell, but I could not see a way to improve this without harming the performance of other aspects.
 
-The design does not currently support integer typed variables but It could be added with minimal effort.
-Change the Variable struct to contain an isInteger bool and when updating this variable using the result of arith.Parse as the new value. 
+The design does not currently support variable flags.
+This means that everything is exported to the environment of a new command.
+Adding an export flag and a builtin function to set it would take little effort though.
+Flags would also allow integer typed variables.
+Changing the Variable struct to contain an isInteger bool and then when updating this variable use the result of 'arith.Parse(value)' instead of 'value'.
 \subsection{User Functions}
 \label{sec:user-functions}
 User functions where added in the penultimate iteration.
@@ -170,6 +173,8 @@ The word lexing code was completed during the third iteration along with the stu
 
 Word are anything that is not quoted, a variable or a subshell.
 This almost always means that
+
+XXX
 
 \subsection{Strings}
 Two functions are used for strings as the shells has both raw quotes and interpreted quotes.
@@ -279,9 +284,12 @@ This package has ended up with the nondescript name of 'package T' as it has no 
 \section{Circular References}
 \label{sec:circular-refs}
 Circular imports have been a problem during the project, see~\ref{sec:user-functions} and~\ref{sec:builtins}.
-My experience with Go has never been with a project large enough to require its own subpackages.
-While everything could have been created in the main package
+My experience with Go has never been with a project large enough to require subpackages and this was the main reason behind my lack of planning for them.
+While it would have been possible to create everything in the main package this would have have left it quite crowded.
+It is also had for a new person to understand what is important if things are not separated properly.
+I experienced this while trying to learn from the source code of bash and dash.
 
-
+A better design would have been to create a each package for the  nodes, substitutions and the main lexer \& parser.
+The only thing that would be in the main package would be the entrypoint function, in 'main.go', that sets up the run loop of parsing and evaluation.
 
 XXX: % variables dont have options like export. This should be modified and requires another builtin to do so
