@@ -191,7 +191,7 @@ pass control to incorporate them.
 
 \subsection{Variables}
 Variables where completed in two stages.
-Simple ones in the fourth iteration alongside extensions to the parse.
+Simple ones in the fourth iteration alongside extensions to the parser.
 Complex variables during the XXX.
 
 The lexer has a lot of knowledge about variables due to the concurrent design and the interpreted nature of strings.
@@ -235,7 +235,15 @@ Because of this I focused on implementing the modern style as a proof of concept
 
 \subsection{Arithmetic} \label{sec:main-lexer-arith}
 As the heavy lifting is done by its own lexer and parser we only have to gather the contents to pass along.
+The main lexer gained the ability to recognize them during the forth iteration along with simple variables.
 
+This is done by counting the number of parentheses that are encountered while stepping though the input.
+We finish lexing when we see two consecutive right brackets while we are not in a bracketed expression.
+I.e \verb!$(( 2+4 ) ) ))! will lex identically to \verb!$(( 2 + 4 ))! as right brackets are ignored when they are not consecutive or part of an expression.
+
+Everything between the two markers is stored in a substitution object an gets passed to 'arith.Parse' when expansion is done.
+
+In th
 
 
 \section{Main Parser, AST \& Nodes}
