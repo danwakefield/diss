@@ -197,13 +197,18 @@ A complex variable substitution of the form \verb!${foo:-$bar}! does not current
 This shows a variable 'foo' being operated on by the ':-' operator.
 When I created the lexComplexVariable function I used a naive lexer for anything after the operator with the intention of replacing it.
 It gathers everything as is upto the next '}' character and uses it as the value.
+Creating another lexer using the remaining input and extracting tokens would be the solution in the current state.
+However redesigning the lexer to be recursive descent would make it even easier.
+
+XXX
 
 While writing this section and inspecting the code I also realised the naive collection does not check for the EOF character.
 This means that a memory based DOS attack is possible by just using a file with the contents \verb!${a:!.
 
-Creating another lexer using the remaining input and extracting tokens would be the solution in the current state.
-But redesigning the lexer to be recursive descent would   
 \subsection{Subshells}
+Subshells come in two forms, the original which uses grave quotes and the 'modern' version which uses '\$( )' as a delimiter.
+
+Only the modern version is implemented in the code
 
 \subsection{Arithmetic}
 \label{sec:main-lexer-arith}
