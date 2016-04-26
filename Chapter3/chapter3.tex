@@ -174,17 +174,22 @@ Every character is copied as is except the EOF and the matching single quote.
 EOF causes an unterminated string error.
 The end quote causes the string to be emitted.
 
-Interpreted strings should allow variables, both types of subshells and escape sequences.
+Interpreted strings, which use double quotes, should allow variables, both types of subshells and escape sequences.
 Unfortunately escape sequences where not completed so the string '\\n' will be treated as two separate character rather than a newline.
 The position of subshells and variables in a string are indicated by the SentinalSubstitution character.
 The subs list of each lexitem holds the structures that can be called to replace these sentinals.
 This is done to abstract to complexities of substitutions.
 Interpreted strings also throw an error when encountering EOF.
 
-During the third iteration both single and double quotes behaved as raw quotes
+When they where created during the third iteration both single and double quotes behaved as raw strings.
+As the capabilities of the lexer improved the interpreted string function could add a new rule to its switch statement and
+pass control to incorporate them.
 
 \subsection{Variables}
-Variables where completed in two stages, simple ones in the fourth iteration alongside extensions to the parser 
+Variables where completed in two stages.
+Simple ones in the fourth iteration alongside extensions to the parse.
+Complex variables during the XXX.
+
 
 \subsection{Subshells}
 
