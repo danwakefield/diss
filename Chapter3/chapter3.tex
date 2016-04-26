@@ -158,8 +158,11 @@ The emit function takes a token type and constructs a lexitem, sometime know as 
 This includes its line in the source, the string representation, any substitutions it contains and if the string should be treated as quoted
 The values in the lexer that hold this information are cleared when an emit occurs.
 
-For a simpler 
+For a simpler syntax this design is perfect but for the shells problems occur in the more complex parsing situations as the lexer is not re-entrant.
+
 \subsection{Strings}
+Two functions are used for strings as the shells has both raw quotes and interpreted quotes.
+raw
 
 \subsection{Variables}
 \subsection{Subshells}
