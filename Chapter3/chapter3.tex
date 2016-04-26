@@ -267,7 +267,8 @@ In the last iteration some of the most needed built-in commands were developed.
 This included 'cd' and 'local' which have to built-in because they modify the scope in certain ways. 
 
 I also implemented the 'true' and 'false' for performance reasons.
-While this are very unlikely to be the bottleneck for anyone
+While these are unlikely to be the bottleneck in any program --- the biggest boosts will probably come from implementing 'echo' and 'printf' --- they show that commands can be easily created.
+
 
 
 
@@ -277,3 +278,4 @@ While this are very unlikely to be the bottleneck for anyone
 
 
 
+XXX: % variables dont have options like export. This should be modified and requires another builtin to do so
