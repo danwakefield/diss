@@ -122,27 +122,27 @@ The solution would have been to create a subpackage for nodes.
 However the work required to change the parser during the last week was greater than the bad practice of using interface\{\} here.
 
 \subsection{Aliases}
-Aliases where not done in the time frame.
-They will however require storage in the Scope object and creation of a builtin command to put them there.
+Aliases where finished in the time frames.
+They will however require storage in the Scope object and use of a builtin command to put them there.
 
-Aliases are expanded inside the lexer before anything is parsed but only when they are known about.
-
+The way the main lexer is created will also have to be different as aliases are expanded before anything is parsed but only when they are known about.
 
 They also only take effect after after the compound block they are declared in is evaluated.
 \begin{verbatim}
 foofunc() {
-	alias foo=echo
     foo "IT WORKS"
 }
 
+alias foo=echo
 foofunc
 \end{verbatim}
-This would cause the shell to print an error as the alias did not exist before the function was lexer and parsed.
-foo will become available for the rest of the script after foofunc has been called but the foofunc function will always return an error.
-Functions defined before the call will also error if they attempt to use foo
-
+This would cause the shell to print an error as the alias did not exist before the function was parsed.
+foo will be available for the rest of the script but the foofunc function will always cause an error.
 
 \section{Main Lexer}
+The main lexer is a coroutine based Non-Deterministic Finite Automata(NDFA).
+I used this design 
+
 
 \subsection{Strings}
 \subsection{Variables}
