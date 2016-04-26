@@ -69,7 +69,7 @@ Variables that cannot be parsed are returned with a value of zero.
 
 Variables can only be accessed by using their unprefixed form, i.e \verb!(( a = 5 ))! will work but \verb!(( $a = 5 ))! will not.
 This is because variable expansion is done separately and before arithmetic expansion.
-Time constraints and a flawed lexer design means that this does not currently work(See~\ref{sec:main-lexer-arith}.
+Time constraints and an initially flawed lexer design means that this does not currently work(See~\ref{sec:main-lexer-arith}.
 
 \subsection{Ternary}
 The ternary operator is unique in that it operates on three values.
@@ -158,7 +158,11 @@ The emit function takes a token type and constructs a lexitem, sometime know as 
 This includes its line in the source, the string representation, any substitutions it contains and if the string should be treated as quoted
 The values in the lexer that hold this information are cleared when an emit occurs.
 
-For a simpler syntax this design is perfect but for the shells problems occur in the more complex parsing situations as the lexer is not re-entrant.
+For a simpler syntax this design is perfect but it turned out to be quite bad for a shells.
+They are some times in the next section when creating a new lexer and using its output is mentioned.
+It is because the lexer is not re-entrant that a new one must be created whenever we require tokens while in the process of creating one.
+I am uncertain if this workaround suffers from memory leaks.
+As the lexer runs concurrently there is a reference to it in the created thread which may prevent the garbage collector from collecting it.
 
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
