@@ -220,7 +220,8 @@ $( foo $( bar $( baz ) ) )  # Modern
 
 `foo \` bar \\\`baz\\\` \` `  # Old
 \end{verbatim}
-The code above shows how you nest three levels using each type of subshell.
+The code above shows how nesting three levels works using both type of subshell.
+Parsing an old style subshell requires 
 To parse a subshell that uses graves you must find the correct end grave and then remove a level of escaping for 
 every subshell it contains before passing it into a new lexer.
 
