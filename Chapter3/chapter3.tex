@@ -125,7 +125,8 @@ However the work required to change the parser during the last week was greater 
 Aliases where not done in the time frame.
 They will however require storage in the Scope object and creation of a builtin command to put them there.
 
-The way the main parser and lexer is created will also have to be different as the lexer expands aliases when they occur so needs knowledge of them.
+Aliases are expanded inside the lexer before anything is parsed but only when they are known about.
+
 
 They also only take effect after after the compound block they are declared in is evaluated.
 \begin{verbatim}
@@ -136,7 +137,7 @@ foofunc() {
 
 foofunc
 \end{verbatim}
-This would cause the shell to print an error as the alias did not exist before the function was lexed and parsed.
+This would cause the shell to print an error as the alias did not exist before the function was lexer and parsed.
 foo will become available for the rest of the script after foofunc has been called but the foofunc function will always return an error.
 Functions defined before the call will also error if they attempt to use foo
 
