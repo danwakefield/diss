@@ -201,8 +201,8 @@ It gathers everything as is upto the next '}' character and uses it as the value
 While writing this section and inspecting the code I also realised the naive collection does not check for the EOF character.
 This means that a memory based DOS attack is possible by just using a file with the contents \verb!${a:!.
 
-One solution I can see is to create another lexer using the remaining input.
-I could then collect tokens until I see 
+Creating another lexer using the remaining input and extracting tokens would be the solution in the current state.
+But redesigning the lexer to be recursive descent would   
 \subsection{Subshells}
 
 \subsection{Arithmetic}
