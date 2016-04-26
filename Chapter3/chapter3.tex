@@ -206,10 +206,23 @@ While writing this section and inspecting the code I also realised the naive col
 This means that a memory based DOS attack is possible by just using a file with the contents \verb!${a:!.
 
 \subsection{Subshells}
-The original form uses grave quotes as delimiters and the 'modern' version uses '\$( foo )'.
+The original form uses grave quotes as delimiters and the 'modern' version uses '\$( command )'.
 They work similarly to user defined functions but output is captured instead of being output to the terminal.
 Changes to the environment that take place inside a subshell are not propagated. 
-Only the modern version is implemented in the code
+
+For the modern version when the start of a subshell is detected a new lexer and parser pair is created with the remaining input.
+This parser is started with IgnoreNewlines option and returns an AST of everything contained in the the brackets.
+The lexer on the current level then adjusts its position in the input to the character after the closing bracket.
+This works quite well but the same thing cannot be used for the old style.
+
+\begin{verbatim}
+$( foo $( bar $( baz ) ) )  # Modern
+
+`foo \` bar \\\`baz\\\` \` `  # Old
+\end{verbatim}
+The code above shows how you nest three levels using each type of subshell.
+To parse a subshell that uses graves you must find the correct end grave and everything contained within it and the
+
 
 \subsection{Arithmetic}
 \label{sec:main-lexer-arith}
