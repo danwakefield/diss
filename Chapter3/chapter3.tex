@@ -160,6 +160,11 @@ The values in the lexer that hold this information are cleared when an emit occu
 
 For a simpler syntax this design is perfect but for the shells problems occur in the more complex parsing situations as the lexer is not re-entrant.
 
+\subsection{Words}
+The word lexing code was completed during the third iteration.
+
+Word are anything that is not quoted, a variable or a subshell.
+This almost always means that
 \subsection{Strings}
 Two functions are used for strings as the shells has both raw quotes and interpreted quotes.
 
@@ -168,7 +173,13 @@ EOF causes an unterminated string error.
 The end quote causes the string to be emitted.
 
 Interpreted strings should allow variables, both types of subshells and escape sequences.
-Unfortunately escape sequences where not completed so the string '\\n' will be treated as two separate character rather than a newline. 
+Unfortunately escape sequences where not completed so the string '\\n' will be treated as two separate character rather than a newline.
+The position of subshells and variables in a string are indicated by the SentinalSubstitution character.
+The subs list of each lexitem holds the structures that can be called to replace these sentinals.
+This is done to abstract to complexities of substitutions.
+
+Again these was not done completely due to the lexers design.
+A complex variable substitution of the form
 
 \subsection{Variables}
 \subsection{Subshells}
