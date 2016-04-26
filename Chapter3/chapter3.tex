@@ -206,8 +206,9 @@ While writing this section and inspecting the code I also realised the naive col
 This means that a memory based DOS attack is possible by just using a file with the contents \verb!${a:!.
 
 \subsection{Subshells}
-Subshells come in two forms, the original which uses grave quotes and the 'modern' version which uses '\$( )' as a delimiter.
-
+The original form uses grave quotes as delimiters and the 'modern' version uses '\$( foo )'.
+They work similarly to user defined functions but output is captured instead of being output to the terminal.
+Changes to the environment that take place inside a subshell are not propagated. 
 Only the modern version is implemented in the code
 
 \subsection{Arithmetic}
