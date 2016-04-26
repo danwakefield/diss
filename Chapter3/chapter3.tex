@@ -162,7 +162,13 @@ For a simpler syntax this design is perfect but for the shells problems occur in
 
 \subsection{Strings}
 Two functions are used for strings as the shells has both raw quotes and interpreted quotes.
-raw
+
+Raw quotes are very simple, every character is copied as is except the EOF and the matching single quote.
+EOF causes an unterminated string error.
+The end quote causes the string to be emitted.
+
+Interpreted strings should allow variables, both types of subshells and escape sequences.
+Unfortunately escape sequences where not completed so the string '\\n' will be treated as two separate character rather than a newline. 
 
 \subsection{Variables}
 \subsection{Subshells}
