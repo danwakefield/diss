@@ -238,13 +238,14 @@ As the heavy lifting is done by its own lexer and parser we only have to gather 
 The main lexer gained the ability to recognize them during the forth iteration along with simple variables.
 
 This is done by counting the number of parentheses that are encountered while stepping though the input.
-We finish lexing when we see two consecutive right brackets while we are not in a bracketed expression.
+We finish lexing when we see two consecutive righ
+t brackets while we are not in a bracketed expression.
 I.e \verb!$(( 2+4 ) ) ))! will lex identically to \verb!$(( 2 + 4 ))! as right brackets are ignored when they are not consecutive or part of an expression.
+Everything between the two markers is stored in a substitution object to be passed to 'arith.Parse'.
 
-Everything between the two markers is stored in a substitution object an gets passed to 'arith.Parse' when expansion is done.
-
-In th
-
+In the specification this construct is expanded after applying other substitutions.
+E.g \verb!$(( 2 + $(echo 4) ))! should reduce to \verb!$(( 2 + 4 ))! and then be evaluated as math.
+Again this was not done because of the non re-entrant nature of the lexer.
 
 \section{Main Parser, AST \& Nodes}
 
