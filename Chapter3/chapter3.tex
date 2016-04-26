@@ -154,8 +154,11 @@ lexStart will pass control to the lexDoubleQuote function when it see's the '"' 
 This will determine that lexSimpleVariable is needed as neither '{' or '(' follow the dollar.
 Once that completes control is returned to lexDoubleQuote which will see the closing quote, emit the token and return control to lexStart.
 
-Emitting is the term given to passing a token through the lexItems channel which allows the parser to collect them.
-The token is created using information the lexer holds including the string representation, any substitutions the value is quoted
+The emit function takes a token type and constructs a lexitem, sometime know as a lexeme, that contains the required information to be parsed and evaluated successfully.
+This includes its line in the source, the string representation, any substitutions it contains and if the string should be treated as quoted
+The values in the lexer that hold this information are cleared when an emit occurs.
+
+For a simpler 
 \subsection{Strings}
 
 \subsection{Variables}
