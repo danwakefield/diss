@@ -190,6 +190,11 @@ Variables where completed in two stages.
 Simple ones in the fourth iteration alongside extensions to the parse.
 Complex variables during the XXX.
 
+The lexer has a lot of knowledge about variables due to the concurrent design and the interpreted nature of strings.
+This would be better suited in the parser and it would also fix the problems that exist with more complex substitutions.
+A complex variable substitution of the form \verb!${foo:-$bar}! does not currently work.
+Following the '-' character anything
+
 
 \subsection{Subshells}
 
