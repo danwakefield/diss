@@ -141,8 +141,13 @@ foo will be available for the rest of the script but the foofunc function will a
 
 \section{Main Lexer}
 The main lexer is a coroutine based Non-Deterministic Finite Automata(NDFA).
-I used this design 
+I used this design as the code for the Go template parser was done in the same style.
+The presentation given by Rob Pike\cite{PIKE-LEXING-VIDEO} also made it seem very simple.
 
+A concurrent run loop is started when the lexer is created which means that on machines with multiple cores (Almost everything modern) this design will be a performance boost.
+During this run loop state functions are called, beginning with lexStart, which either return another state function or nil to indicate that parsing has completed. 
+Each lexing state has a minimal amount of responsibilities deferring to others when possible.
+i.e given the text \verb!"abc $def"! lexStart will pass control to the lexDoubleQuote function which will pass control
 
 \subsection{Strings}
 \subsection{Variables}
