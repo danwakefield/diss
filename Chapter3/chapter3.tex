@@ -266,17 +266,18 @@ Again this was not done because of the non re-entrant nature of the lexer.
 \section{Builtin Cosmmands}
 \label{sec:builtins}
 In the last iteration some of the most needed built-in commands were developed.
-This included 'cd' and 'local' which have to built-in because they modify the scope in certain ways. 
+This included 'cd' and 'local' which have to be built-in because they modify internal state in the Scope struct. 
 
 I also implemented the 'true' and 'false' for performance reasons.
-While these are unlikely to be the bottleneck in any program --- the biggest boosts will probably come from implementing 'echo' and 'printf' --- they show that commands can be easily created.
+While these are not bottlenecks in any program --- the biggest boosts will probably come from implementing 'echo' and 'printf' --- they show that commands can be easily created.
 
 As these commands are logically separate from the functionality of the shell I created a subpackage for them.
 This again showed that package planning had been poor as both IOContainer and ExitStatus then needed to be available as one.
 
 \section{Circular References}
 \label{sec:circular-refs}
-Circular imports bit me a few times during the project, see~\ref{sec:nodefunction-circular-import} and~\ref{sec:builtins}
+Circular imports bit me a few times during the project, see~\ref{sec:user-functions} and~\ref{sec:builtins}.
+
 
 
 
