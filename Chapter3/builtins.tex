@@ -2,7 +2,8 @@
 \label{sec:builtins}
 Builtin commands are used for two reasons, they either modify internal state and as such cannot be replaced by external commands or they are used often enough that the startup overhead of the executables being called could affect performance.
 
-In the last iteration, 'cd' and 'local, some of the most needed built-in commands were implemented.
+In the last iteration some of the most needed built-in commands were implemented.
+These where 'cd' and 'local'.
 
 I also implemented the 'true' and 'false' commands for performance reasons.
 While these will not be bottlenecks in any program they show that commands can be easily created.
