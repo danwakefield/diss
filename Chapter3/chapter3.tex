@@ -263,9 +263,13 @@ Again this was not done because of the non re-entrant nature of the lexer.
 \subsection{List}
 
 \section{Expansion}
-Expansions are performed in a few places throughout the code though most require only a subset of the possible ones.
-Pattern matching for the case statement should only perform expansion of variables.
-During expansion. 
+Expansions are performed throughout the code to different degrees.
+Some places dont require all of the possible expansions and explicitly pass flags to disable them.
+This is a change from the C expansion code where the use of bitflags for every call was required.
+I decided that the change was needed as it is rare to not want and expansion and it is easier to understand the logic of
+'NoExpandTilde' than a series of or'ed flags.
+
+Expansions are evaluated everytime they are reached  
 
 as the last step before a command executes.
 They could also occur when assigning to a variable with an integer type.
