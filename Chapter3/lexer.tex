@@ -10,7 +10,7 @@ Each lexing state has a minimal amount of responsibilities deferring to others w
 An example of how the lexer works is below.
 Given the text \verb!"abc $def"!.
 lexStart will pass control to the lexDoubleQuote function when it see's the '"' character which will pass control to the lexSubstitution when it see's '\$'.
-This will determine that lexSimpleVariable is needed as neither '\{' or '(' follow the dollar.
+This will determine that lexSimpleVariable is needed as neither '\{' or '(' follow the dollar sign.
 Once that completes control is returned to lexDoubleQuote which will see the closing quote, emit the token and return control to lexStart.
 
 The emit function takes a token type and constructs a lexitem, sometime know as a lexeme, that contains the required information to be parsed and evaluated successfully.
