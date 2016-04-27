@@ -87,4 +87,20 @@ I left the bug with a failing test case while I continued the project.
 I then went back to fix it in the last iteration using the knowledge I had gained during the project.
 
 My fix \textit{feels} ugly and I am not completely happy with it despite the fact it works.
-At each point of the ternary the position of the lexer is recorded and when the end of the equation has been de
+Assignments are blocked by setting a flag and then at each significant point of the ternary the position of the lexer is recorded.
+When the end of the equation has been detected we record it and rewind the lexer.
+The parser runs again across the section of the ternary the condition indicated should be run with the assignment blocking flag turned off.
+The lexer is then moved forward to just after the end of the ternary.
+This is of course not an ideal solution as three equations are parsed when only one is applied.
+
+
+
+
+
+
+
+
+
+
+
+
