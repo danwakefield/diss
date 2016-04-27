@@ -255,8 +255,11 @@ E.g \verb!$(( 2 + $(echo 4) ))! should reduce to \verb!$(( 2 + 4 ))! and then be
 Again this was not done because of the non re-entrant nature of the lexer.
 
 \section{Main Parser, AST \& Nodes}
+The parser turns the tokens into nodes and constructs AST's with them.
+It was developed iteratively as other elements of the code where completed.
 
 \subsection{Simple Command}
+
 \subsection{Command}
 \subsection{Pipeline}
 \subsection{And Or}
