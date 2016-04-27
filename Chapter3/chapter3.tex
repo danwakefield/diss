@@ -315,9 +315,13 @@ Since the fnmatch library is only used in a few places and it is a single functi
 
 \subsection{Word Splitting}
 Word splitting uses the value of a variable called the Internal Field Separator(IFS) to split expansions into multiple words.
-This occurs when variable and command substitutions are unquoted.
+The default value of this variable is ' \\n\\t' which splits on spaces, tabs and newlines.
+While this may seem sensible it can lead to confusing behaviour and it is commonly changed to '\\n\\t'
+for a so called strict mode.
 
-Some variables are special and splitting happens even when they are quoted.
+This usually only occurs when variable and command substitutions are unquoted but some variables are special and have different behaviour.
+
+t
 When the '\$*' variable occurs quoted it uses the first character of IFS to join the shells positional parameter into a single string.
 \begin{verbatim}
 IFS='-'
