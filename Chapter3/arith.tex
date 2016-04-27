@@ -74,12 +74,17 @@ If a variable cannot be parsed as a number or doesn't exist a value of zero is u
 
 Variables can only be accessed by using their unprefixed form, i.e \verb!(( a = 5 ))! will work, but \verb!(( $a = 5 ))! will not.
 This is because variable expansion is a separate process and is done before arithmetic expansion.
-Because of the lexer design prefixed variables are not detected properly when used inside the construct and will cause an error (See~\ref{sec:main-lexer-arith}).
+Because of the flawed lexer design prefixed variables are not detected properly when used inside the construct and will cause an error (See~\ref{sec:main-lexer-arith}).
 
 \subsection{Ternary}
-The ternary operator is unique in that it operates on three values whereas most other operators use two.
-Unfortunately due to the fact that the tree is constructed and then evaluated immediately this led to a bug.
+The ternary operator is unique in that it operates on three values.
 
-When both sides of the environment contained assignment operators variables could be modified twice or always assigned the second value, E.g given \verb!y = 0! an equation like \\ \verb!x ? y += 1 : y += 3! would make \verb!y == 4! no matter what x was.
+Unfortunately due to the fact that the tree is evaluated as it is constructed by my version of the pratt parser a bug surfaced.
+When both sides of the environment contained assignment operators variables could be modified twice or always assigned the second value.
+E.g With \verb!y = 0! an equation like \\ \verb!x ? y += 1 : y += 3! would make \verb!y == 4! no matter which side was meant to execute.
 
-I left the bug with a failing test case but went back to fix it in the last iteration using the knowledge I had gained during the project.
+I left the bug with a failing test case while I continued the project.
+I then went back to fix it in the last iteration using the knowledge I had gained during the project.
+
+My fix \textit{feels} ugly and I am not completely happy with it despite the fact it works.
+At each point of the ternary the position of the lexer is recorded and when the end of the equation has been de
