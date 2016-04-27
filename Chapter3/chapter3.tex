@@ -269,13 +269,7 @@ This is a change from the C expansion code where the use of bitflags for every c
 I decided that the change was needed as it is rare to not want and expansion and it is easier to understand the logic of
 'NoExpandTilde' than a series of or'ed flags.
 
-Expansions are evaluated everytime they are reached  
-
-as the last step before a command executes.
-They could also occur when assigning to a variable with an integer type.
-They are triggered by a call to Expand.
-This is done as expansions are reevaluated on each execution. 
-There are some places in the code where expansions are desired 
+Expansions are evaluated every time they are reached because of their 'impure' nature.
 
 \subsection{Tilde}
 When a tilde occurs either as the first character of a word or immediately following a ':' in a word it should be expanded.
@@ -288,9 +282,15 @@ The location of this directory comes from the 'os/user' package which wraps the 
 POSIX requires that the 'HOME' variable is checked before a lookup is conducted but the shell does not currently do this.
 
 \subsection{Substitutions}
-Substitutions affect variables, commands and arithmetic
+Substitutions affect variables, commands and arithmetic.
+Currently only commands can contain embedded substitutions but in the future all three will be able to nest each other.
+This nesting means that it is possible to reach
 
 \subsection{Globbing}
+Globbing is the act of expanding the shells simple builtin pattern matching language to a list of files.
+I
+
+
 \subsection{Word Splitting}
 
 \section{Builtin Cosmmands}
