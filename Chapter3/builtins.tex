@@ -3,8 +3,8 @@
 Builtin commands are used for two reasons, they either modify internal state and as such cannot be replaced by external commands or they are used often enough that the startup overhead of the executables being called could affect performance.
 
 In the last iteration some of the most needed built-in commands were implemented.
-These where 'cd' and 'local'.
-The spec requires that these commands take some options 
+These where included limited versions of 'cd' and 'local'.
+Both commands can take a set of options which are currently not supported by the shell.
 
 I also implemented the 'true' and 'false' commands for performance reasons.
 While these will not be bottlenecks in any program they show that commands can be easily created.
@@ -14,5 +14,3 @@ As these commands are logically separate from the functionality of the shell I c
 This again showed that package planning had not been considered well.
 Both IOContainer and ExitStatus had to be moved from 'package main' to a subpackage.
 This package has ended up with the nondescript name of 'package T' as it has no purpose other than to be a temporary home to these types.
-
-XXX
