@@ -288,7 +288,15 @@ This nesting means that it is possible to reach
 
 \subsection{Globbing}
 Globbing is the act of expanding the shells simple builtin pattern matching language to a list of files.
-I
+This look similar to regex syntax but isnt.
+'*' can match any amount of any character, '?' any single character, and '[a-z]' a single character from the range.
+
+By default glob looks in the current directory for files matching the provided pattern.
+However if the pattern starts with a path that is the directory that will be searched.
+
+I did not find a fnmatch function when I searched Go's documentation as so began looking online.
+I eventually came across a years old gist that I forked, updated and used for this task.
+It was only later that I realised that Go does provide the functionality I was looking for in the 'path/filepath' package.
 
 
 \subsection{Word Splitting}
