@@ -1,5 +1,9 @@
 \section{Builtin Commands}
 \label{sec:builtins}
+Builtin commands are used for two reasons, they either modify internal state and as such cannot be replaced by external commands or they are used often enough that the startup overhead of the executables being called could affect performance
+
+or they are builtin to reduce the performance costs of starting up new executables for commonly used commands.
+
 In the last iteration some of the most needed built-in commands were developed.
 This included 'cd' and 'local' which have to be built-in because they modify internal state in the Scope struct. 
 
