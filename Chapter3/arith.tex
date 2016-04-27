@@ -1,12 +1,12 @@
 \section{Arithmetic}
-The arithmetic construct was the first thing I created.
-It is a standalone piece of code only exposing a single method, Parse, which takes a string representing an equation and returning the integer value it evaluates to or an error.
+The arithmetic construct was the first thing implemented.
+It is a standalone piece of code only exposing a single method, Parse, which takes a string representing an equation and returning a tuple of the evaluated value and an error.
 Because of this isolation I created it as a subpackage which also allowed me to simplify the error handling.
 
 I was able to panic and recover\footnote{Panic is similar to an exception in other languages but has different semantics. Errors in Go should be passed through the use of multiple return values instead.} to completely unwind the parser and lexer.
 Although panics are reserved for truly exceptional cases in Go, they had to be used in this case.
 Errors encountered during lexing or parsing of a language are almost always fatal as they leave the system in an indeterminate state.
-For example, the following make no sense in the context of a shell mathematical equation:
+For example, the following make no sense in the context of a POSIX shell equation:
 \begin{verbatim}
 ++
   or
@@ -16,9 +16,12 @@ This is an implementation detail and can of course be treated differently.
 In bash the '++' symbol can represent post-increment or pre-increment depending on its position.
 The numbers could also be joined together into a single literal; Python and Java do something similar with underscores rather than spaces\cite{UNDERSCORE-NUM-LITERAL}.
 
-Another of Go's golden rules is never to raise a panic across package boundaries and to do this we defer a recover function.
-If recover detects we have panicked it checks to see if it should be returned as an error instead.
-Unfortunately during testing I discovered that the checks where not through enough and allowed division by zero errors to bubble up crashing the whole program. 
+One of Go's golden rules is 'never raise a panic across package boundaries' and to do this we defer\footnote{A Go construct that allows running a final function no matter how the function returns. the os.Exit is the only way to skip these.} a recover function.
+If recover detects we have panicked it checks to see if it was a panic we created.
+If it was then it is turned into an error and retuned normally. 
+Runtime errors are allowed to crash the program.
+
+During testing It was discovered that in the case of zero division the checks where not through enough and allowed this to bubble up. 
 The fix for this would be quite simple, it just requires the addition of a division helper function similar to that used for shifting (See \ref{lst:arith-shift}). XXX % Add reference to integration test that caught it.
 \newpage %XXX NEWPAGE 
 \subsection{Lexer}
