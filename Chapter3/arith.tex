@@ -21,25 +21,31 @@ If recover detects we have panicked it checks to see if it was a panic we create
 If it was then it is turned into an error and retuned normally. 
 Runtime errors are allowed to crash the program.
 
-During testing It was discovered that in the case of zero division the checks where not through enough and allowed this to bubble up. 
-The fix for this would be quite simple, it just requires the addition of a division helper function similar to that used for shifting (See \ref{lst:arith-shift}). XXX % Add reference to integration test that caught it.
+During testing it was discovered that in the case of zero division the checks where not through enough the was allowed panic to bubble up rather than being converted into an informative error. 
+The fix for this would be the addition of a division helper function similar to that used for shifting (See \ref{lst:arith-shift}) which would catch the runtime panic and raise a custom one that could be detected properly. XXX % Add reference to integration test that caught it.
+
 \newpage %XXX NEWPAGE 
 \subsection{Lexer}
 The Lexer was completed during the first iteration as planned and has a good set of unit tests that where used to ensure the correctness of returned tokens.
 
-The syntax for an equation is quite simple, consisting of just:
-\begin{itemize*}
-	\item Variable Names
-    \item Symbols
-	\item Numeric Literals
-\end{itemize*}
+The syntax for equations can consist of just variable names, symbols and numeric literals.
 
-Variable names are detected using the following simple regular expression, \verb![a-zA-Z_][a-zA-Z0-9_]*!.
+Variable names are detected using a state machine version of the following regular expression, \verb![a-zA-Z_][a-zA-Z0-9_]*!.
 
 POSIX requires that detection of numeric values can be done in base 8 (Octal), 10 (Decimal) and 16 (Hexadecimal).
 Values are always converted to base 10 for use inside the lexer.
 If the literal is invalid, e.g \verb!0xffk! an error is returned that unwinds the parser.
-With the current design if assignments have been applied before the error they would remain in effect, see~\ref{sec:scope}.
+The Scope struct (See~\ref{sec:scope}) does not yet have a way to perform transactions so any assignments that have already been conducted when an error occurs will persist.
+Figure~\ref{fig:arith-assign-fail} shows that dash also does this and the spec does not mention how it should work.
+and bash both
+
+\begin{figure}[hp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{arith-fail-with-assign.png}
+    \caption[Lineage of the main shells]{Lineage of the main shells\cite{SHELL-HISTORY}. Features where also incorporated across branches in many cases.}
+    \label{fig:shell-history}
+\end{figure}
+
 
 Symbols are the simplest thing to detect, as the code in~\ref{lst:arith-symbol-lex} shows, they only require one character of lookahead.
 
