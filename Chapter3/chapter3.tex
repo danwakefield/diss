@@ -286,6 +286,7 @@ Substitutions affect variables, commands and arithmetic.
 Currently only commands can contain embedded substitutions but in the future all three will be able to nest each other.
 This nesting means that it is possible to reach
 
+XXX
 \subsection{Globbing}
 Globbing is the act of expanding the shells simple builtin pattern matching language to a list of files.
 This look similar to regex syntax but isnt.
@@ -302,6 +303,7 @@ Since the fnmatch library is only used in a few places and it is a single functi
 \subsection{Word Splitting}
 Word splitting uses the value of a variable called the Internal Field Separator(IFS) to split expansions into multiple words.
 This occurs when variable and command substitutions are unquoted.
+
 Some variables are special and splitting happens even when they are quoted.
 When the '\$*' variable occurs quoted it uses the first character of IFS to join the shells positional parameter into a single string.
 \begin{verbatim}
@@ -312,15 +314,17 @@ echo $*    # "a" "b" "c"
 echo "$@"  # "a" "b" "c"
 echo "$*"  # "a-b-c"
 \end{verbatim}
-The above code shows how these special variables operate and a second less well known use of IFS.
 
-\section{Builtin Cosmmands}
+
+
+\section{Builtin Commands}
 \label{sec:builtins}
 In the last iteration some of the most needed built-in commands were developed.
 This included 'cd' and 'local' which have to be built-in because they modify internal state in the Scope struct. 
 
 I also implemented the 'true' and 'false' for performance reasons.
-While these are not bottlenecks in any program --- the biggest boosts will probably come from implementing 'echo' and 'printf' --- they show that commands can be easily created.
+While these are not bottlenecks in any program they show that commands can be easily created.
+The biggest boosts will probably come from implementing 'echo' and 'printf' as these are commonly used commands.
 
 As these commands are logically separate from the functionality of the shell I created a subpackage for them.
 This again showed that package planning had not been considered well.
@@ -338,4 +342,4 @@ I experienced this while trying to learn from the source code of bash and dash.
 A better design would have been to create a package each for the nodes, substitutions and the main lexer \& parser.
 The only thing that would be in the main package would be the entrypoint function, in 'main.go', that sets up the run loop of parsing and evaluation.
 
-XXX: % variables dont have options like export. This should be modified and requires another builtin to do so
+XXX:
