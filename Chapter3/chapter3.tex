@@ -264,7 +264,11 @@ The command can be a builtin (See~\ref{sec:builtins}), a function (See~\ref{sec:
 
 If the line with assignments also has an external command call, the assignments are temporary and are removed when the command completes.
 
-During the third iteration this was created to support commands with argue
+During the third iteration this was created to support commands with arguments.
+It was expanded during the fourth to accommodate variables assignments and during the fifth, for arguments that contained substitutions.
+The simple command function is also the place that function definitions are detected and this was added during the penultimate iteration.
+
+
 
 \subsection{Command}
 \subsection{Pipeline}
