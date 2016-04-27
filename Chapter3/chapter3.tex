@@ -259,6 +259,12 @@ The parser turns the tokens into nodes and constructs AST's with them.
 It was developed iteratively as other elements of the code where completed.
 
 \subsection{Simple Command}
+A simple command is a line that contains a command with optional arguments and variable assignments.
+The command can be a builtin (See~\ref{sec:builtins}), a function (See~\ref{sec:user-functions}) or an external command.
+
+If the line with assignments also has an external command call, the assignments are temporary and are removed when the command completes.
+
+During the third iteration this was created to support commands with argue
 
 \subsection{Command}
 \subsection{Pipeline}
