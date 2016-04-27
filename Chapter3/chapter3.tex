@@ -302,7 +302,17 @@ Since the fnmatch library is only used in a few places and it is a single functi
 \subsection{Word Splitting}
 Word splitting uses the value of a variable called the Internal Field Separator(IFS) to split expansions into multiple words.
 This occurs when variable and command substitutions are unquoted.
-Some variables are special, \$* and \$@, and splitting happens even when these are quoted . 
+Some variables are special and splitting happens even when they are quoted.
+When the '\$*' variable occurs quoted it uses the first character of IFS to join the shells positional parameter into a single string.
+\begin{verbatim}
+IFS='-'
+set - a b c
+echo $@    # "a" "b" "c"
+echo $*    # "a" "b" "c"
+echo "$@"  # "a" "b" "c"
+echo "$*"  # "a-b-c"
+\end{verbatim}
+The above code shows how these special variables operate and a second less well known use of IFS.
 
 \section{Builtin Cosmmands}
 \label{sec:builtins}
