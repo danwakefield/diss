@@ -48,35 +48,36 @@ Figure~\ref{fig:arith-assign-fail} shows that dash also does this and the spec d
 Symbols are the simplest thing to detect (See code in~\ref{lst:arith-symbol-lex}).
 They only require one character of lookahead to be determined from any other symbol.
 Some symbols also have an assignment variant.
-If we encounter a symbol where this is possible ('<' or '+') a flag it set that will cause a check for a subsequent equal symbol.
-If one is found the code takes advantage of the definition order of the tokens to change them to there equivalents.
-E.g '<' has a token called 
+If we encounter a symbol where this is possible, e.g '+',  a flag it set that will cause a check for a subsequent equal symbol.
+If one is found the code takes advantage of the definition order of the tokens to change them to their equivalents.
 
 \subsection{Parser}
 The parser was not completed along with the lexer in the first iteration as had been planned.
 It was finished in the second one along with extensions to Scope.
 
 The tokens passed from the lexer are assigned to their node type by a simple switch statement.
-The node types are used to abstract the functionality of similar operations.
+These node types are used to abstract the functionality of similar operations.
 For example $a + b$, $a * b$ and $a \mathrel{+}= b$, $a \mathrel{*}= b$ show that behaviour is similar and it is just the operation that differs in most cases .
-Respectively they would be created as InfixNode and InfixAssignNode with their Types set to indicate what operation is desired.
+Respectively they would be created as Infix and InfixAssign nodes with a value set to indicate what operation is desired.
+Operations are functions that are stored in a hash tables for each type of node.
 
 The Pratt parser requires that each node have two functions and one value, see~\ref{lst:arith-node-interface}.
 Since Go interfaces can only consist of methods I just changed the value to a getter method instead.
 
 \subsection{Variables}
 To begin with I created stub methods on the parser that would eventually interact with the supplied scope.
+When arithmetic was complete and I started work on the Scope these methods where changed to actually work.
 
 Values are converted to strings before being stored.
-When they are retrieved if they can be parsed as any of octal, decimal or hex they are converted before being returned.
-Variables that cannot be parsed are returned with a value of zero.
+If a retrieved variable can be parsed as octal, decimal or hex they are converted to base 10 before being returned and used.
+If a variable cannot be parsed as a number or doesn't exist a value of zero is used instead.
 
-Variables can only be accessed by using their unprefixed form, i.e \verb!(( a = 5 ))! will work but \verb!(( $a = 5 ))! will not.
-This is because variable expansion is done separately and before arithmetic expansion.
-Time constraints and an initially flawed lexer design means that this does not currently work(See~\ref{sec:main-lexer-arith}.
+Variables can only be accessed by using their unprefixed form, i.e \verb!(( a = 5 ))! will work, but \verb!(( $a = 5 ))! will not.
+This is because variable expansion is a separate process and is done before arithmetic expansion.
+Because of the lexer design prefixed variables are not detected properly when used inside the construct and will cause an error (See~\ref{sec:main-lexer-arith}).
 
 \subsection{Ternary}
-The ternary operator is unique in that it operates on three values.
+The ternary operator is unique in that it operates on three values whereas most other operators use two.
 Unfortunately due to the fact that the tree is constructed and then evaluated immediately this led to a bug.
 
 When both sides of the environment contained assignment operators variables could be modified twice or always assigned the second value, E.g given \verb!y = 0! an equation like \\ \verb!x ? y += 1 : y += 3! would make \verb!y == 4! no matter what x was.
