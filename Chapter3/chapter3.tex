@@ -250,13 +250,13 @@ Lexing finishes when two consecutive right brackets that are part of a bracketed
 I.e \verb!$(( 2+4 ) ) ))! will lex identically to \verb!$(( 2 + 4 ))! as right brackets are ignored when they are not consecutive or part of an expression.
 Everything between the two markers is stored in a substitution object to be passed to 'arith.Parse'.
 
-In the specification this construct is expanded after applying other substitutions.
+In the specification substitutions contained within this construct are expanded before itself.
 E.g \verb!$(( 2 + $(echo 4) ))! should reduce to \verb!$(( 2 + 4 ))! and then be evaluated as math.
-Again this was not done because of the non re-entrant nature of the lexer.
+Again this was not done because of the non re-entrant nature of the lexer. XXX
 
 \section{Main Parser, AST \& Nodes}
 The parser turns the tokens into nodes and constructs AST's with them.
-It was developed iteratively as other elements of the code where completed.
+It was developed iteratively as other elements of the code where completed. XXX
 
 \subsection{Simple Command}
 A simple command is a line that contains a command with optional arguments and variable assignments.
