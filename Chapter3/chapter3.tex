@@ -267,10 +267,14 @@ Expansions are performed as the last step before a command executes.
 They could also occur when assigning to a variable with an integer type.
 
 \subsection{Tilde}
-When a tilde occurs as either the first character of a word or immediately following a ':' in a word it is expanded.
-Tilde expansion is completely disabled when inside a string.
+When a tilde occurs either as the first character of a word or immediately following a ':' in a word it should be expanded.
+The '\textasciitilde' can also be followed by text to indicate it should expand to the home directory of another system user.
+Some shells have extended support for this and allow setting 'named directories' that can be expanded in the same way.
 
-Expansion 
+Support for this in the shell is basic.
+If the first character is a tilde it is replaced by the path of the current users home directory.
+The location of this directory comes from the 'os/user' package which wraps the platform dependant code needed to get this.
+
 \subsection{Substitutions}
 \subsection{Globbing}
 \subsection{Word Splitting}
