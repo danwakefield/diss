@@ -105,6 +105,7 @@ This means that everything is exported to the environment of a new command.
 Adding an export flag and a builtin function to set it would take little effort though.
 Flags would also allow integer typed variables.
 Changing the Variable struct to contain an isInteger bool and then when updating this variable use the result of 'arith.Parse(value)' instead of 'value'.
+
 \subsection{User Functions}
 \label{sec:user-functions}
 User functions where added in the penultimate iteration.
@@ -262,8 +263,14 @@ Again this was not done because of the non re-entrant nature of the lexer.
 \subsection{List}
 
 \section{Expansion}
+Expansions are performed as the last step before a command executes.
+They could also occur when assigning to a variable with an integer type.
 
 \subsection{Tilde}
+When a tilde occurs as either the first character of a word or immediately following a ':' in a word it is expanded.
+Tilde expansion is completely disabled when inside a string.
+
+Expansion 
 \subsection{Substitutions}
 \subsection{Globbing}
 \subsection{Word Splitting}
@@ -289,7 +296,7 @@ While it would have been possible to create everything in the main package this 
 It is also had for a new person to understand what is important if things are not separated properly.
 I experienced this while trying to learn from the source code of bash and dash.
 
-A better design would have been to create a each package for the  nodes, substitutions and the main lexer \& parser.
+A better design would have been to create a package each for the nodes, substitutions and the main lexer \& parser.
 The only thing that would be in the main package would be the entrypoint function, in 'main.go', that sets up the run loop of parsing and evaluation.
 
 XXX: % variables dont have options like export. This should be modified and requires another builtin to do so
