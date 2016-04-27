@@ -297,9 +297,12 @@ However if the pattern starts with a path that is the directory that will be sea
 I did not find a fnmatch function when I searched Go's documentation as so began looking online.
 I eventually came across a years old gist that I forked, updated and used for this task.
 It was only later that I realised that Go does provide the functionality I was looking for in the 'path/filepath' package.
-
+Since the fnmatch library is only used in a few places and it is a single function call it offers no benefit over using the standard library function and should be swapped at the first opportunity. 
 
 \subsection{Word Splitting}
+Word splitting uses the value of a variable called the Internal Field Separator(IFS) to split expansions into multiple words.
+This occurs when variable and command substitutions are unquoted.
+Some variables are special, \$* and \$@, and splitting happens even when these are quoted . 
 
 \section{Builtin Cosmmands}
 \label{sec:builtins}
