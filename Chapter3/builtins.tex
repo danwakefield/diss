@@ -1,0 +1,15 @@
+\section{Builtin Commands}
+\label{sec:builtins}
+In the last iteration some of the most needed built-in commands were developed.
+This included 'cd' and 'local' which have to be built-in because they modify internal state in the Scope struct. 
+
+I also implemented the 'true' and 'false' for performance reasons.
+While these are not bottlenecks in any program they show that commands can be easily created.
+The biggest boosts will probably come from implementing 'echo' and 'printf' as these are commonly used commands.
+
+As these commands are logically separate from the functionality of the shell I created a subpackage for them.
+This again showed that package planning had not been considered well.
+Both IOContainer and ExitStatus had to be moved from 'package main' to a subpackage.
+This package has ended up with the nondescript name of 'package T' as it has no purpose other than to be a temporary home to these types.
+
+XXX

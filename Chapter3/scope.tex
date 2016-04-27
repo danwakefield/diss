@@ -1,0 +1,64 @@
+\section{Scope}
+\label{sec:scope}
+The scope object was created during the second iteration alongside the arith parser.
+It was also created as a subpackage because putting it in the main package was impossible since Go completely disallows circular references.
+
+As is obvious from the package name, 'variables.Scope' and the headings in this section, the responsibilities of the class grew quickly and it quickly became mislabeled.
+I realised the problems that had been created by the package layout
+as I started to implement user functions in the penultimate iteration.
+At this point it would have taken significant work to correct and the benefits would have been minimal.
+
+\subsection{Variables}
+The original Scope object was only used to get and set variables but it has lots of complexity.
+It contains a list of hash tables which are searched in reverse order when setting, updating or retrieving anything.
+The first value matching the name is used.
+
+I created it this way as I knew that it would be needed by both commands with temporary assignments and functions using the local builtin.
+
+Commands take a list of environment variables each as a string in the form, "VARNAME=FOO".
+This meant that when I got to the stage when commands where being executed I had to add an Environ function to get them in the correct form.
+The complexity of this function is O(2n), where n is the number of variables set in the shell, but I could not see a way to improve this without harming the performance of other aspects.
+
+The design does not currently support variable flags.
+This means that everything is exported to the environment of a new command.
+Adding an export flag and a builtin function to set it would take little effort though.
+Flags would also allow integer typed variables.
+Changing the Variable struct to contain an isInteger bool and then when updating this variable use the result of 'arith.Parse(value)' instead of 'value'.
+
+\subsection{User Functions}
+\label{sec:user-functions}
+User functions where added in the penultimate iteration.
+The way they are stored in the Scope object shows how I was bitten by lack of forethought area of package layout.
+
+\begin{verbatim}
+type Scope struct {
+	...
+	Functions    map[string]interface{}
+	...
+}
+\end{verbatim}
+
+It shows that I have had to use a map of interface\{\} to store the NodeFunctions.
+It is similar to a \verb!void *! in C as Go's implicit satisfaction of interfaces mean that everything satisfies the empty one.
+
+This was done as storage and usage of a NodeFunction is done during the Eval phase which is defined in package main.
+The solution would have been to create a subpackage for nodes.
+However the work required to change the parser during the last week was greater than the bad practice of using interface\{\} here.
+
+\subsection{Aliases}
+Aliases where finished in the time frames.
+They will however require storage in the Scope object and use of a builtin command to put them there.
+
+The way the main lexer is created will also have to be different as aliases are expanded before anything is parsed but only when they are known about.
+
+They also only take effect after after the compound block they are declared in is evaluated.
+\begin{verbatim}
+foofunc() {
+    foo "IT WORKS"
+}
+
+alias foo=echo
+foofunc
+\end{verbatim}
+This would cause the shell to print an error as the alias did not exist before the function was parsed.
+foo will be available for the rest of the script but the foofunc function will always cause an error.

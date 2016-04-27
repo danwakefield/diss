@@ -1,0 +1,72 @@
+\section{Arithmetic}
+The arithmetic construct was the first thing I created.
+It is a standalone piece of code only exposing a single method, Parse, which takes a string representing an equation and returning the integer value it evaluates to or an error.
+Because of this isolation I created it as a subpackage which also allowed me to simplify the error handling.
+
+I was able to panic and recover\footnote{Panic is similar to an exception in other languages but has different semantics. Errors in Go should be passed through the use of multiple return values instead.} to completely unwind the parser and lexer.
+Although panics are reserved for truly exceptional cases in Go, they had to be used in this case.
+Errors encountered during lexing or parsing of a language are almost always fatal as they leave the system in an indeterminate state.
+For example, the following make no sense in the context of a shell mathematical equation:
+\begin{verbatim}
+++
+  or
+35 67 89
+\end{verbatim}
+This is an implementation detail and can of course be treated differently.
+In bash the '++' symbol can represent post-increment or pre-increment depending on its position.
+The numbers could also be joined together into a single literal; Python and Java do something similar with underscores rather than spaces\cite{UNDERSCORE-NUM-LITERAL}.
+
+Another of Go's golden rules is never to raise a panic across package boundaries and to do this we defer a recover function.
+If recover detects we have panicked it checks to see if it should be returned as an error instead.
+Unfortunately during testing I discovered that the checks where not through enough and allowed division by zero errors to bubble up crashing the whole program. 
+The fix for this would be quite simple, it just requires the addition of a division helper function similar to that used for shifting (See \ref{lst:arith-shift}). XXX % Add reference to integration test that caught it.
+\newpage %XXX NEWPAGE 
+\subsection{Lexer}
+The Lexer was completed during the first iteration as planned and has a good set of unit tests that where used to ensure the correctness of returned tokens.
+
+The syntax for an equation is quite simple, consisting of just:
+\begin{itemize*}
+	\item Variable Names
+    \item Symbols
+	\item Numeric Literals
+\end{itemize*}
+
+Variable names are detected using the following simple regular expression, \verb![a-zA-Z_][a-zA-Z0-9_]*!.
+
+POSIX requires that detection of numeric values can be done in base 8 (Octal), 10 (Decimal) and 16 (Hexadecimal).
+Values are always converted to base 10 for use inside the lexer.
+If the literal is invalid, e.g \verb!0xffk! an error is returned that unwinds the parser.
+With the current design if assignments have been applied before the error they would remain in effect, see~\ref{sec:scope}.
+
+Symbols are the simplest thing to detect, as the code in~\ref{lst:arith-symbol-lex} shows, they only require one character of lookahead.
+
+\subsection{Parser}
+The parser was not completed along with the lexer in the first iteration as had been planned.
+It was finished in the second one along with extensions to Scope.
+
+The tokens passed from the lexer are assigned to their node type by a simple switch statement.
+The node types are used to abstract the functionality of similar operations.
+For example $a + b$, $a * b$ and $a \mathrel{+}= b$, $a \mathrel{*}= b$ show that behaviour is similar and it is just the operation that differs in most cases .
+Respectively they would be created as InfixNode and InfixAssignNode with their Types set to indicate what operation is desired.
+
+The Pratt parser requires that each node have two functions and one value, see~\ref{lst:arith-node-interface}.
+Since Go interfaces can only consist of methods I just changed the value to a getter method instead.
+
+\subsection{Variables}
+To begin with I created stub methods on the parser that would eventually interact with the supplied scope.
+
+Values are converted to strings before being stored.
+When they are retrieved if they can be parsed as any of octal, decimal or hex they are converted before being returned.
+Variables that cannot be parsed are returned with a value of zero.
+
+Variables can only be accessed by using their unprefixed form, i.e \verb!(( a = 5 ))! will work but \verb!(( $a = 5 ))! will not.
+This is because variable expansion is done separately and before arithmetic expansion.
+Time constraints and an initially flawed lexer design means that this does not currently work(See~\ref{sec:main-lexer-arith}.
+
+\subsection{Ternary}
+The ternary operator is unique in that it operates on three values.
+Unfortunately due to the fact that the tree is constructed and then evaluated immediately this led to a bug.
+
+When both sides of the environment contained assignment operators variables could be modified twice or always assigned the second value, E.g given \verb!y = 0! an equation like \\ \verb!x ? y += 1 : y += 3! would make \verb!y == 4! no matter what x was.
+
+I left the bug with a failing test case but went back to fix it in the last iteration using the knowledge I had gained during the project.
