@@ -263,8 +263,15 @@ Again this was not done because of the non re-entrant nature of the lexer.
 \subsection{List}
 
 \section{Expansion}
-Expansions are performed as the last step before a command executes.
+Expansions are performed in a few places throughout the code though most require only a subset of the possible ones.
+Pattern matching for the case statement should only perform expansion of variables.
+During expansion. 
+
+as the last step before a command executes.
 They could also occur when assigning to a variable with an integer type.
+They are triggered by a call to Expand.
+This is done as expansions are reevaluated on each execution. 
+There are some places in the code where expansions are desired 
 
 \subsection{Tilde}
 When a tilde occurs either as the first character of a word or immediately following a ':' in a word it should be expanded.
@@ -277,7 +284,7 @@ The location of this directory comes from the 'os/user' package which wraps the 
 POSIX requires that the 'HOME' variable is checked before a lookup is conducted but the shell does not currently do this.
 
 \subsection{Substitutions}
-Substitutions cover variable, command and arithmetic as they all happen
+Substitutions affect variables, commands and arithmetic
 
 \subsection{Globbing}
 \subsection{Word Splitting}
