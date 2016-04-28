@@ -18,14 +18,13 @@ The values in the lexer that hold this information are reset when an emit occurs
 
 For a simpler syntax this design is perfect but it turned out to be unsuited to the shell.
 They are some times in the next section when creating a new lexer and using its output is mentioned.
-It is because the lexer is not re-entrant that a new one must be created whenever we require tokens while in the process of creating one.
-I am also uncertain if this workaround suffers from memory leaks.
-As the lexer runs concurrently there is a reference to it in the created thread which may prevent the garbage collector from collecting it.
+Because of the concurrent nature of the lexer this is the only way to safely get tokens while in the middle of lexing another portion of the input.
+This workaround may also suffer from memory leaks as there is a reference to the lexer in the go-routine thread which might prevent the garbage collector from collecting it.
 
 Tokens returned from the lexer are in three types.
 Word tokens which are strings or unquoted text not recognized as a control word.
-Control tokens which represent things such as 'if', detection of these tokens can be disabled by the parser in certain cases.
-For example the following is allowed \verb!for for in for; do for=for; done; echo $for!
+Control tokens which represent things such as 'for', detection of these tokens can be disabled by the parser in certain cases.
+For example the following is allowed \verb!for for in for; do for=for; done; echo $for! as both the second and third for are parsed with the flag to disable keyword detection.
 
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
