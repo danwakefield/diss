@@ -25,7 +25,7 @@ As the lexer runs concurrently there is a reference to it in the created thread 
 Tokens returned from the lexer are in three types.
 Word tokens which are strings or unquoted text not recognized as a control word.
 Control tokens which represent things such as 'if', detection of these tokens can be disabled by the parser in certain cases.
-The case state
+For example the following is allowed \verb!for for in for; do for=for; done; echo $for!
 
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
