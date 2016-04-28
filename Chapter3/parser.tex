@@ -51,11 +51,12 @@ The Pipeline node reuses the NodeList to store the commands to be executed.
 This means that the only thing that the only thing it has to do is create piped IO channels for each commands input and output and launch them in separate go-routines.
 This is a naive approach as it does not take into account the exit codes of these commands.
 This will be required for the 'set -e' option which exits the shell on any error.
-It will also have to be changed when job control as the ability to suspend and resume commands takes some complex bookkeeping.
-
+It will also have to be changed when job control is added as the ability to suspend and resume commands takes some complex bookkeeping.
 
 The pipeline function also handles negation of the exit code.
 Any Command or pipe prefixed with a '!' returns the opposite of its exit code, for 0 the return becomes 1, for any other value it becomes 0.
+
+The NodeNegate is very simple just encoding this logic after running the AST it contains.
 
 \subsection{And Or}
 
