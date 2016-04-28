@@ -16,10 +16,8 @@ This can be extremely confusing as it contains 7 GOTO statements and 6 blocks of
 \subsection{Simple Command}
 A simple command is a line that contains a command with optional arguments and variable assignments.
 The command can be a builtin (See~\ref{sec:builtins}), a function (See~\ref{sec:user-functions}) or an external command.
-
+Simple commands are stored as NodeCommand's which incorporate the logic of decided what type of command to run as well as expanding the arguments and any variable assignments.
 If the line with assignments also has an external command call, the assignments are temporary and are removed when the command completes.
-
-Simple commands are stored as NodeCommand's which incorporate the logic of 
 
 During the third iteration this was created to support commands with arguments.
 It was expanded during the fourth to accommodate variables assignments and during the fifth, for arguments that contained substitutions.
@@ -30,6 +28,9 @@ Command is the function that parses the command structures of the code.
 This includes the 'if', 'for', 'until', 'while' and 'case' expressions.
 The code for parsing these is separated from the main function as they can be quite long.
 One of the longest functions in the codebase is the parsing routine for a case statement and by splitting these up it allows you to focus on one thing at a time.
+
+Each type of command has its own node that handles the details of its execution.
+The NodeFor, NodeWhile and NodeUntil will have to understand the break and continue commands once they have been implemented.
 
 Along with the commands that people expect this is also the place that command grouping occurs.
 This feature is often seen when defining shell functions and some people may believe that, like in other languages, it is a part of their definition syntax.
