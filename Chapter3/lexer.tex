@@ -30,12 +30,11 @@ Detection of these tokens is disabled by the parser in certain cases.
 For example the following is allowed \verb!for for in for; do for=for; done; echo $for! as both the second and third for are parsed with the flag to disable keyword detection.
 
 The final types are operators like EOF and Newline. 
-Newlines can also be suppressed during the lexing. 
-Instead of being returned as a word like suppressed keywords lexing continues until a non Newline token is found. 
+Newlines can also be suppressed during the lexing which will then continue until a non Newline token is found. 
 
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
-
+Since words 
 Word are anything that is not quoted
 
 \subsection{Strings}
