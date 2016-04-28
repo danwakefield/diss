@@ -32,15 +32,17 @@ Shells range in their support of these but all modern shells have conditionals, 
 Shell syntax has been influential in the design of other modern scripting languages such as Perl and PHP.
 
 There are two families of shells, those descended from sh and csh known as traditional shells and those that have a largely incompatible syntax and/or behaviour, known as exotic shells.
-Fish\cite{FISH}, es\cite{ES-SHELL} and oh\cite{OH-SHELL}, which happens to also be written in Golang, are examples of exotic shells.
+Fish\cite{FISH}, es\cite{ES-SHELL} and oh\cite{OH-SHELL}, which happens to be written in Golang, are examples of exotic shells.
 
 However this thesis will focus entirely on the traditional shells.
-The POSIX shell specification\cite{POSIX-SHELL-STANDARD} describes 
+The POSIX shell specification\cite{POSIX-SHELL-STANDARD} describes XXX
 (See figure~\ref{fig:shell-history}),
 
 dash is a POSIX compliant shell which lacks many features useful in an interactive context.
 Bash adds things such as history control, line editing and arrays but also has a compatibility mode for POSIX scripts.
-Zsh has many extra features but also has emulation modes for its major rivals though they are not 100\% compatible. 
+Zsh has many extra features but also has emulation modes for its major rivals though they are not 100\% compatible.
+These are all examples of modern traditional shells from the simplest to most complex.
+
 
 Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with 
 The Almquist Shell(ash) and the Debian Almquist Shell(dash) are minimal shells that implement the spec.
@@ -69,9 +71,10 @@ When nobody appeared to be attempting anything similar with bash I considered tr
 
 A presentation on handwritten lexers\cite{PIKE-LEXING-VIDEO} given by Rob Pike, one of the creators of GoLang, intrigued me as everything seemed so simple and easy to follow. 
 I had always assumed that implementing any language would have been extremely difficult as I'd only come across codebases in C that made heavy use of code generation.
-Another presentation, given by Stephen Bourne, on the design of the original shell\cite{DESIGN-OF-SH-VIDEO} made it clear that it was originally designed without the use of such tools.
+Another presentation, given by Stephen Bourne, on the design of the original shell\cite{DESIGN-OF-SH-VIDEO} made clear that it was originally designed without the use of such tools.
 
 Along with the book, Apprenticeship Patterns\cite{APPRENTICESHIP-PATTERNS} and the blog post, What Every CompSci Graduate Should Know\cite{EVERY-COMPSCI-GRAD}, these videos made implementing a shell seem like the type of thing that would push me to learn a great deal.
+XXX
 
 \begin{table}[hp]
 \centering
@@ -96,7 +99,6 @@ sed                & 2     & 0     & 0       & 16     \\ \midrule
 SUM:               & 486   & 34531 & 30296   & 183672 \\ \bottomrule
 \end{tabular}
 \end{table}
-
 
 
 \section{Preparation}
