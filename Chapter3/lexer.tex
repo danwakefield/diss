@@ -21,10 +21,17 @@ They are some times in the next section when creating a new lexer and using its 
 Because of the concurrent nature of the lexer this is the only way to safely get tokens while in the middle of lexing another portion of the input.
 This workaround may also suffer from memory leaks as there is a reference to the lexer in the go-routine thread which might prevent the garbage collector from collecting it.
 
-Tokens returned from the lexer are in three types.
-Word tokens which are strings or unquoted text not recognized as a control word.
-Control tokens which represent things such as 'for', detection of these tokens can be disabled by the parser in certain cases.
+Tokens returned from the lexer are one of three types.
+
+Word tokens which are strings or unquoted text not recognized as a keyword.
+
+Control tokens which represent keywords such as 'for'.
+Detection of these tokens is disabled by the parser in certain cases.
 For example the following is allowed \verb!for for in for; do for=for; done; echo $for! as both the second and third for are parsed with the flag to disable keyword detection.
+
+The final types are operators like EOF and Newline. 
+Newlines can also be suppressed during the lexing. 
+Instead of being returned as a word like suppressed keywords lexing continues until a non Newline token is found. 
 
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
