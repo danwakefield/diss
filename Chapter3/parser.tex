@@ -13,7 +13,14 @@ It was expanded during the fourth to accommodate variables assignments and durin
 The simple command function is also the place that function definitions are detected and this was added during the penultimate iteration.
 
 \subsection{Command}
+Command is the function that parses the command structures of the code.
+This includes the 'if', 'for', 'until', 'while' and 'case' expressions.
 
+It also the place that command grouping occurs.
+This feature is often seen when defining shell functions as some people may believe that, like other languages, it is a part of their definition syntax.
+It is not however and can be used in many places to improve code structure.
+A command group begins with a '\{' and ends with a corresponding '\}'.
+Anything contained between the two is parsed as a separate group which allows it to be included
 \subsection{Pipeline}
 \subsection{And Or}
 \subsection{List}
