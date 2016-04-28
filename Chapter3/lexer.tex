@@ -5,17 +5,16 @@ The design is simple and made it very easy to follow along with the path of the 
 
 A concurrent run loop is started when the lexer is created which means that when run on machines with multiple cores (Almost everything modern) performance will be slightly improved.
 During this run loop state functions are called, beginning with lexStart, which either return another state function or nil to indicate that lexing has completed. 
-Each state defers to others when possible to reduce 
+Each state defers to others when possible to reduce code duplication.
 
-An example of how the lexer works is below.
-Given the text \verb!"abc $def"!.
-lexStart will pass control to the lexDoubleQuote function when it see's the '"' character which will pass control to the lexSubstitution when it see's '\$'.
+Given the text \verb!"abc $def"!. lexStart will pass control to the lexDoubleQuote function when it see's the '"' character which will pass control to the lexSubstitution when it see's '\$'.
 This will determine that lexSimpleVariable is needed as neither '\{' or '(' follow the dollar sign.
-Once that completes control is returned to lexDoubleQuote which will see the closing quote, emit the token and return control to lexStart.
+Once that completes control is returned to lexDoubleQuote which will see the closing quote, emit a TokenWord which contains the contents of the string, and finally return control to lexStart.
 
 The emit function takes a token type and constructs a lexitem, sometime know as a lexeme, that contains the required information to be parsed and evaluated successfully.
-This includes its line in the source, the string representation, any substitutions it contains and if the string should be treated as quoted
-The values in the lexer that hold this information are cleared when an emit occurs.
+This information included is the line and position of the token in the source, the string representation, if the string should be treated as quoted and substitution structs.
+Substitution structs hold information on how to replace interpolated values, See~\ref{sec:substitution}.
+The values in the lexer that hold this information are reset when an emit occurs.
 
 For a simpler syntax this design is perfect but it turned out to be quite bad for a shells.
 They are some times in the next section when creating a new lexer and using its output is mentioned.

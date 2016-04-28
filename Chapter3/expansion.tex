@@ -1,0 +1,59 @@
+\section{Expansion}
+Expansions are performed throughout the code to different degrees.
+Some places dont require all of the possible expansions and explicitly pass flags to disable them.
+This is a change from the C expansion code where the use of bitflags for every call was required.
+I decided that the change was needed as it is rare to not want and expansion and it is easier to understand the logic of
+'NoExpandTilde' than a series of or'ed flags.
+
+Expansions are evaluated every time they are reached because of their 'impure' nature.
+
+\subsection{Tilde}
+When a tilde occurs either as the first character of a word or immediately following a ':' in a word it should be expanded.
+The '\textasciitilde' can also be followed by text to indicate it should expand to the home directory of another system user.
+Some shells have extended support for this and allow setting 'named directories' that can be expanded in the same way.
+
+Support for this in the shell is basic.
+If the first character is a tilde it is replaced by the path of the current users home directory.
+The location of this directory comes from the 'os/user' package which wraps the platform dependant code needed to get this.
+POSIX requires that the 'HOME' variable is checked before a lookup is conducted but the shell does not currently do this.
+
+\subsection{Substitutions}
+\label{sec:substitution}
+Substitutions affect variables, commands and arithmetic.
+Currently only commands can contain embedded substitutions but in the future all three will be able to nest each other.
+This nesting means that it is possible to reach
+
+XXX
+\subsection{Globbing}
+Globbing is the act of expanding the shells simple builtin pattern matching language to a list of files.
+This look similar to regex syntax but isnt.
+'*' can match any amount of any character, '?' any single character, and '[a-z]' a single character from the range.
+
+By default glob looks in the current directory for files matching the provided pattern.
+However if the pattern starts with a path that is the directory that will be searched.
+
+I did not find a fnmatch function when I searched Go's documentation as so began looking online.
+I eventually came across a years old gist that I forked, updated and used for this task.
+It was only later that I realised that Go does provide the functionality I was looking for in the 'path/filepath' package.
+Since the fnmatch library is only used in a few places and it is a single function call it offers no benefit over using the standard library function and should be swapped at the first opportunity. 
+
+\subsection{Word Splitting}
+Word splitting uses the value of a variable called the Internal Field Separator(IFS) to split expansions into multiple words.
+The default value of this variable is ' \\n\\t' which splits on spaces, tabs and newlines.
+While this may seem sensible it can lead to confusing behaviour and it is commonly changed to '\\n\\t'
+for a so called strict mode.
+
+This usually only occurs when variable and command substitutions are unquoted but some variables are special and have different behaviour.
+E.g When the '\$*' variable occurs quoted it uses the first character of IFS to join the shells positional parameter into a single string.
+\begin{verbatim}
+IFS='-'
+set - a b c
+echo $@    # "a" "b" "c"
+echo $*    # "a" "b" "c"
+echo "$@"  # "a" "b" "c"
+echo "$*"  # "a-b-c"
+\end{verbatim}
+
+Gosh does not perform word splitting of any kind.
+This is probably the biggest problem with the implementation.
+
