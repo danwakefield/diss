@@ -59,10 +59,11 @@ Any Command or pipe prefixed with a '!' returns the opposite of its exit code, f
 The NodeNegate is very simple just encoding this logic after running the AST it contains.
 
 \subsection{And Or}
-The AndOr function takes the nodes produced by pipeline and joins them together into NodeBinary's when appropriate.
+The AndOr function takes the nodes produced by pipeline and joins them together.
 
+The NodeBinary is used to do this and since everything is built on the node interface the can accept another NodeBinary as one of its arguments allowing easy conditional chaining.
 
-
+The Node has the logic for both 'or' and 'and' since they work the similarly, just comparing to a different return value from the left side of the conditional.
 
 
 \subsection{List}
