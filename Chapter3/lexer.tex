@@ -1,7 +1,7 @@
 \section{Main Lexer}
 The main lexer is a coroutine based Non-Deterministic Finite Automata(NDFA).
-The inspired to use this design by Rob Pike's presentation of the Go template parser\cite{PIKE-LEXING-VIDEO}.
-The design is simple and made it very easy to follow along with the path of the code.
+I was inspired to use this design by Rob Pike's presentation of Go's template parser\cite{PIKE-LEXING-VIDEO}.
+The code in the standard library is quite simple and is easy to follow along with.
 
 A concurrent run loop is started when the lexer is created which means that when run on machines with multiple cores (Almost everything modern) performance will be slightly improved.
 During this run loop state functions are called, beginning with lexStart, which either return another state function or nil to indicate that lexing has completed. 
