@@ -117,3 +117,8 @@ echo "SUXXESS" | { tr X C && echo "Finished transform"} | tee /dev/null
 \caption[Shell Command Grouping]{Shows command grouping being used in the definition of a function, a conditional list and in a pipe.
 \label{lst:arith-node-interface}}
 \end{figure}
+
+\lstinputlisting[language=c,caption={
+[dash - evaltree]
+The dispatch functions for evaluation of nodes in dash. Particularly confusing sections include the use of bit flags in the NAND/NOR/NSEMI case.
+\label{lst:dash-evaltree}}]{Appendix3/evaltree.c}
