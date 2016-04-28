@@ -10,13 +10,16 @@ Terminal nodes such as NodeCommand, NodeEOF and NodeNoop are what other commands
 
 The use of a node interface allows the behaviour of every node to be separated.
 This is contrary to the design of dash which uses global state and a single function to dispatch to other evaluation functions.
-This function can be extremely confusing as it contains 7 GOTO statements and 6 blocks of conditional defines in 128 lines (See~\ref{lst:dash-evaltree}).
+This can be extremely confusing as it contains 7 GOTO statements and 6 blocks of conditional defines in only 128 lines (See~\ref{lst:dash-evaltree}).
+
 
 \subsection{Simple Command}
 A simple command is a line that contains a command with optional arguments and variable assignments.
 The command can be a builtin (See~\ref{sec:builtins}), a function (See~\ref{sec:user-functions}) or an external command.
 
 If the line with assignments also has an external command call, the assignments are temporary and are removed when the command completes.
+
+Simple commands are stored as NodeCommand's which incorporate the logic of 
 
 During the third iteration this was created to support commands with arguments.
 It was expanded during the fourth to accommodate variables assignments and during the fifth, for arguments that contained substitutions.
