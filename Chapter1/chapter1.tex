@@ -214,7 +214,7 @@ I decided against this for multiple reasons.
 	\item All the texts I read encourage creating an AST for any future translations or optimizations. If at some point I decide I wanted to compile shell scripts to native binaries it would be impossible without one.
 \end{enumerate*}
 
-While these are the most important parts of the system as a whole I decided that starting with the arithmetic environment ( \$(( )) ) would be a good idea.
+While these are the most important parts of the system as a whole I decided that starting with the arithmetic environment ( \verb!$(( ))! ) would be a good idea.
 This construct is sufficiently complex that it requires it own lexer and parser pair to keep the overall structure of the code simple but it is still just a glorified calculator.
 Creating the lexer \& parser for this relatively simple language would give me experience working with them before I attempted to move onto the more complex main parser.
 
