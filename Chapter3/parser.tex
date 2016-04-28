@@ -1,6 +1,12 @@
 \section{Main Parser, AST \& Nodes}
 The parser turns the tokens into nodes and constructs AST's with them.
-It was developed iteratively as other elements of the code where completed. XXX
+It was developed iteratively as nodes and elements of the lexer where completed. 
+
+Almost every node has a default exit status of success.
+This is helpful as statements that dont run because their conditions evaluated false are showing correct behaviour.
+
+Nodes also contain a number of other nodes depending on what they represent.
+Terminal nodes such as NodeCommand, NodeEOF, NodeNoop,
 
 \subsection{Simple Command}
 A simple command is a line that contains a command with optional arguments and variable assignments.
