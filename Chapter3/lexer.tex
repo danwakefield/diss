@@ -12,23 +12,25 @@ This will determine that lexSimpleVariable is needed as neither '\{' or '(' foll
 Once that completes control is returned to lexDoubleQuote which will see the closing quote, emit a TokenWord which contains the contents of the string, and finally return control to lexStart.
 
 The emit function takes a token type and constructs a lexitem, sometime know as a lexeme, that contains the required information to be parsed and evaluated successfully.
-This information included is the line and position of the token in the source, the string representation, if the string should be treated as quoted and substitution structs.
+This information includes the line number and position of the token in the source, its string representation, if the string should be treated as quoted and substitution structs.
 Substitution structs hold information on how to replace interpolated values, See~\ref{sec:substitution}.
 The values in the lexer that hold this information are reset when an emit occurs.
 
-For a simpler syntax this design is perfect but it turned out to be quite bad for a shells.
+For a simpler syntax this design is perfect but it turned out to be unsuited to the shell.
 They are some times in the next section when creating a new lexer and using its output is mentioned.
 It is because the lexer is not re-entrant that a new one must be created whenever we require tokens while in the process of creating one.
-I am uncertain if this workaround suffers from memory leaks.
+I am also uncertain if this workaround suffers from memory leaks.
 As the lexer runs concurrently there is a reference to it in the created thread which may prevent the garbage collector from collecting it.
+
+Tokens returned from the lexer are in three types.
+Word tokens which are strings or unquoted text not recognized as a control word.
+Control tokens which represent things such as 'if', detection of these tokens can be disabled by the parser in certain cases.
+The case state
 
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
 
-Word are anything that is not quoted, a variable or a subshell.
-This almost always means that
-
-XXX
+Word are anything that is not quoted
 
 \subsection{Strings}
 Two functions are used for strings as the shells has both raw quotes and interpreted quotes.
