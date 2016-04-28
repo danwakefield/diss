@@ -15,6 +15,8 @@ The simple command function is also the place that function definitions are dete
 \subsection{Command}
 Command is the function that parses the command structures of the code.
 This includes the 'if', 'for', 'until', 'while' and 'case' expressions.
+The code for parsing these is separated from the main functions as the logic can be many lines long.
+The longest functionin the codebase is the parsing routine for a case statement at over 
 
 It also the place that command grouping occurs.
 This feature is often seen when defining shell functions and some people may believe that, like other languages, it is a part of their definition syntax.
@@ -24,6 +26,7 @@ Anything contained between the two is parsed as a separate group which allows re
 See the code in~\ref{lst:command-grouping} for examples.
 
 \subsection{Pipeline}
+The pipe
 \subsection{And Or}
 \subsection{List}
 

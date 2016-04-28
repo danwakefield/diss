@@ -112,8 +112,8 @@ foofunc() {
 }
 
 true && {false; true} && echo "Reaches here"
-echo "SUXXESS" | { tr X C && echo "Finished transform"} | tee - >/dev/null
+echo "SUXXESS" | { tr X C && echo "Finished transform"} | tee /dev/null
 \end{lstlisting}
-\caption[Shell Command Grouping]{The interface required by the pratt parser for each node\cite{CROCKFORD-TDOP}. Differs from the examples by the addition of the parser arg to maintain state.
+\caption[Shell Command Grouping]{Shows command grouping being used in the definition of a function, a conditional list and in a pipe.
 \label{lst:arith-node-interface}}
 \end{figure}
