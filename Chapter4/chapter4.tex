@@ -32,16 +32,12 @@ This was part of the test first mantra of TDD and having a second implementation
 
 Golden files containing this proven correct output where created.
 A helper script that rebuilt the program and ran each test file against its corresponding golden file was created.
-It could then be easily seen when the implentation of a feature was complete
-
-
-
-
+Running the tests after each change could then be easily show when the implementation of a feature was complete and correct.
 
 \section{Automated Testing}
-Towards the end of the project I started using a continuous integration service called drone.io\footnote{My project's public page is available at \url{https://drone.io/github.com/Danwakefield/gosh}}.
-Every time a commit was pushed to the github repository it would clone the code and run the both the unit and integration tests against the changes.
-A notification email was sent if a build failed.
+During my project I used Github and a hosted continuous integrations service called drone.io\footnote{My project's public page is available at \url{https://drone.io/github.com/Danwakefield/gosh}}.
+Every time a commit was pushed to the repository the service would clone the code and run both the unit and integration tests against the changes.
+Notification emails were sent with the status of the build.
 
 The system just ran the normal unit and integration tests however since this codebase can issue system calls it is safer to run these tests in a disposable container in case of a severe bug.  
 CI systems also make it easy for contributors to see the status of the code and ensure that pull requests will not cause any regression.
