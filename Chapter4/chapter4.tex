@@ -39,10 +39,13 @@ During my project I used Github and a hosted continuous integrations service cal
 Every time a commit was pushed to the repository the service would clone the code and run both the unit and integration tests against the changes.
 Notification emails were sent with the status of the build.
 
-The system just ran the normal unit and integration tests however since this codebase can issue system calls it is safer to run these tests in a disposable container in case of a severe bug.  
-CI systems also make it easy for contributors to see the status of the code and ensure that pull requests will not cause any regression.
+Developing as a single person team this was only partly helpful.
+The system ran no extra tests just the ones that would be run locally.
+However they are run in a container system which means that destructive regressions or malicious patches can be caught before they affect anyones real system. 
+CI systems also make it easy for any future contributors to see the status of the code and they show that code quality and reliability is considered.
 
 \section{User Testing}
+
 
 
 
