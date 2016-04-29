@@ -37,7 +37,7 @@ The word lexing code was completed during the third iteration along with the stu
 
 Words are any text that is not a control operator, symbol or substitution.
 They contain a field that allows the parser to check if it is a string.
-This information will eventually be used to determine the expansions and splits to perform on it.
+This information will eventually be used to determine the expansions and word splits to perform on it.
 
 \subsubsection{Strings}
 Two functions are used for strings as the shells has both raw quotes and interpreted quotes.
@@ -55,8 +55,7 @@ This is done to abstract to complexities of substitutions.
 Interpreted strings also throw an error when encountering EOF.
 
 When they where created during the third iteration both single and double quotes behaved as raw strings.
-As the capabilities of the lexer improved the interpreted string function could add a new rule to its switch statement and
-pass control to incorporate them.
+As the capabilities of the lexer improved the lexDoubleQuote function could add a new rule to its switch statement and pass control to incorporate them.
 
 \subsection{Variables}
 Variables where completed in two stages.
