@@ -1,7 +1,7 @@
 \chapter{Code Examples}
 
-\begin{figure}[h]
-\begin{lstlisting}[frame=tb]
+\begin{figure}[hp]
+\begin{lstlisting}[frame=tb,language=Golang]
 type Node interface {
 	Eval(*variables.Scope, *IOContainer) ExitStatus
 }
@@ -26,8 +26,8 @@ func (n NodeIf) Eval(scp *variables.Scope, ioc *IOContainer) ExitStatus {
 \caption[The Node Interface]{The Node interface used in the AST. Also shows the NodeIf as an example of implementation. Interfaces are implicitly satisfied if the type has the required methods. \label{lst:node-interface}}
 \end{figure}
 
-\begin{figure}[h]
-\begin{lstlisting}[frame=tb]
+\begin{figure}[hp]
+\begin{lstlisting}[frame=tb,language=Golang]
 type NodeNoop struct{}
 
 func (NodeNoop) Eval(*variables.Scope, *IOContainer) ExitStatus {
@@ -42,8 +42,8 @@ type NodeEOF struct {
 \end{figure}
 
 
-\begin{figure}[h]
-\begin{lstlisting}[frame=tb]
+\begin{figure}[hp]
+\begin{lstlisting}[frame=tb,language=Golang]
 func LeftShift(a, b int64) int64 {
 	c := int64(math.Pow(2, float64(b)))
 	if c == 0 {
@@ -66,8 +66,8 @@ func RightShift(a, b int64) int64 {
 \caption[Shift helper functions]{Go's compile time checks prevent using an int64 as an argument to a shift.\label{lst:arith-shift}}
 \end{figure}
 
-\begin{figure}[h]
-\begin{lstlisting}[frame=tb]
+\begin{figure}[hp]
+\begin{lstlisting}[frame=tb,language=Golang]
 switch currentCharacter:
 case '<':
 	switch l.next() {
@@ -92,8 +92,8 @@ return t
 \end{figure}
 
 
-\begin{figure}[h]
-\begin{lstlisting}[frame=tb]
+\begin{figure}[hp]
+\begin{lstlisting}[frame=tb,language=Golang]
 type ArithNode interface {
 	nud(*Parser) int64
 	led(int64, *Parser) int64
@@ -105,8 +105,8 @@ type ArithNode interface {
 \end{figure}
 
 
-\begin{figure}[h]
-\begin{lstlisting}[frame=tb]
+\begin{figure}[hp]
+\begin{lstlisting}[frame=tb,language=bash]
 foofunc() {
 	foo
 }
@@ -118,19 +118,8 @@ echo "SUXXESS" | { tr X C && echo "Finished transform"} | tee /dev/null
 \label{lst:command-grouping}}
 \end{figure}
 
-
-
-\begin{figure}[h]
-\lstinputlisting[language=c,caption={
-[dash - evaltree]
-The dispatch functions for evaluation of nodes in dash. Particularly confusing sections include the use of bit flags in the NAND/NOR/NSEMI case.
-\label{lst:dash-evaltree}}]{Appendix3/evaltree.c}
-\end{figure}
-
-
-
-\begin{figure}[h]
-\begin{lstlisting}[frame=tb]
+\begin{figure}[hp]
+\begin{lstlisting}[frame=tb,language=bash]
 if false; then
     $noop
 else
@@ -140,13 +129,16 @@ fi
 \caption[Code for a simple if statement]{Shell code for an if statement. 'A' and 'noop' are previously set. The value of A is checked after the statement to ensure the code operated correctly.\label{lst:if-ast-1}}
 \end{figure}
 
-\begin{figure}[h]
 \lstinputlisting[caption={
 [AST for a simple if statement]
-The AST produced for the code in~\ref{lst:if-ast-1}. 
+The AST produced for the code in~\ref{lst:if-ast-1}. LineNo values are different as this has been extracted from a larger test file. 
 \label{lst:if-ast-2}}]{Appendix3/AST-if.txt}
-\end{figure}
 
+\pagebreak
+\lstinputlisting[language=c,caption={
+[dash - evaltree]
+The dispatch functions for evaluation of nodes in dash. Particularly confusing sections include the use of bit flags in the NAND/NOR/NSEMI case.
+\label{lst:dash-evaltree}}]{Appendix3/evaltree.c}
 
 
 
