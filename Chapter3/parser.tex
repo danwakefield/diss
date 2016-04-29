@@ -11,6 +11,7 @@ Terminal nodes such as NodeCommand, NodeEOF and NodeNoop are what other commands
 The use of a node interface allows the behaviour of every node to be separated.
 This is contrary to the design of dash which uses global state and a single function to dispatch to other evaluation functions.
 This can be extremely confusing as it contains 7 GOTO statements and 6 blocks of conditional defines in only 128 lines (See~\ref{lst:dash-evaltree}).
+While the single clear purpose of all the current Nodes means that changing behaviour in the future will be easy.
 
 
 \subsection{Simple Command}
@@ -68,7 +69,7 @@ The Node has the logic for both 'or' and 'and' since they work the similarly, ju
 
 \subsection{List}
 
-The list 
+The list   XXX
 
 
 
