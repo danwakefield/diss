@@ -15,7 +15,7 @@
       "Else": nil,
       "Body":[{
           "Assign":[
-            "A=SUCCESS 6"
+            "A=SUCCESS"
           ],
           "Args":[],
           "LineNo":42

@@ -118,16 +118,35 @@ echo "SUXXESS" | { tr X C && echo "Finished transform"} | tee /dev/null
 \label{lst:command-grouping}}
 \end{figure}
 
+
+
+\begin{figure}[h]
 \lstinputlisting[language=c,caption={
 [dash - evaltree]
 The dispatch functions for evaluation of nodes in dash. Particularly confusing sections include the use of bit flags in the NAND/NOR/NSEMI case.
 \label{lst:dash-evaltree}}]{Appendix3/evaltree.c}
+\end{figure}
 
+
+
+\begin{figure}[h]
+\begin{lstlisting}[frame=tb]
+if false; then
+    $noop
+elif true; then
+    A="SUCCESS 5"
+fi
+\end{lstlisting}
+\caption[Code for a ]{Shows command grouping being used in the definition of a function, a conditional list and in a pipe.
+\label{lst:if-ast-1}}
+\end{figure}
+
+\begin{figure}[h]
 \lstinputlisting[language=json,caption={
 [AST for a simple if statement]
-a
-\label{lst:if-ast}}]{Appendix3/AST-if.txt}
-
+The AST produced for the code in~\ref{lst:if-ast-1}. 
+\label{lst:if-ast-2}}]{Appendix3/AST-if.txt}
+\end{figure}
 
 
 
