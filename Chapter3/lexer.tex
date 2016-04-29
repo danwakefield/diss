@@ -72,10 +72,11 @@ It gathers everything as is upto the next '\}' character and uses it as the valu
 Creating another lexer using the remaining input and extracting tokens would be the solution in the current state.
 However redesigning the lexer to be recursive descent would make it even easier.
 
-XXX
-
-While writing this section and inspecting the code I also realised the naive collection does not check for the EOF character.
+\subsubsection{Variable Lexing Bug.}
+While writing this section and inspecting the code I noticed that the naive collection does not check for the EOF character.
 This means that a memory based DOS attack is possible by just using a file with the contents \verb!${a-!.
+The lexing code will continue appending the EOF character to the buffer as calls to 'next' continuously return it once it has been reached.
+
 
 \subsection{Subshells}
 The original form uses grave quotes as delimiters and the 'modern' version uses '\$( command )'.
