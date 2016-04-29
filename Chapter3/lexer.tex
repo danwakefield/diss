@@ -68,9 +68,11 @@ A complex variable substitution of the form \verb!bar=abc; ${foo=$bar}! does not
 This shows a variable 'foo' being assigned too with the 'bar' variable as the value.
 However when I created the lexComplexVariable function I used a naive lexer for anything after the operator with the intention of replacing it.
 It gathers everything as a raw string upto the next '\}' character and uses that as the value.
-This means that instead of 
-Creating another lexer using the remaining input and extracting tokens would be the solution in the current state.
-However redesigning the lexer to be recursive descent would make it even easier.
+This means that instead of 'foo' holding the value 'abc' it will hold the literal string '\$bar'.
+
+The solution to this would be the redesign of the lexer to be straight recursive descent but the effor.
+Creating another lexer using the current lexers remaining input and extracting tokens would work in the current state.
+
 
 \subsubsection{Variable Lexing Bug.}
 While writing this section and inspecting the code I noticed that the naive collection does not check for the EOF character.
