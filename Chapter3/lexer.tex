@@ -92,7 +92,7 @@ The lexer on the current level then adjusts its position in the input to the cha
 This works quite well but the same thing cannot be used for the old style.
 
 \begin{verbatim}
-$( foo $( bar $( baz ) ) )  # Modern
+$( foo $( bar $( baz ) ) )    # Modern
 
 `foo \` bar \\\`baz\\\` \` `  # Old
 \end{verbatim}
@@ -104,8 +104,11 @@ The result of this modification can then be passed into a new parser and the pro
 
 Once parsed both styles are represented identically in the AST.
 Because of this I focused on implementing the modern style as the proof of concept.
+The first attempt consisted of using the current parser, saving every piece of information the lexer stored and starting a second run loop.
+This completely failed as both run loops contended over the item channel resulting in races.
 
-
+The second attempt was the current and final design.
+It originally had an intermittent race as it accessed the sublexers position and 
 
 \subsection{Arithmetic} \label{sec:main-lexer-arith}
 As the heavy lifting is done by its own lexer and parser we only have to gather the contents to pass along.
