@@ -70,9 +70,9 @@ However when I created the lexComplexVariable function I used a naive lexer for 
 It gathers everything as a raw string upto the next '\}' character and uses that as the value.
 This means that instead of 'foo' holding the value 'abc' it will hold the literal string '\$bar'.
 
-The solution to this would be the redesign of the lexer to be straight recursive descent but the effor.
-Creating another lexer using the current lexers remaining input and extracting tokens would work in the current state.
-
+The solution to this would be the redesign of the lexer to be straight recursive descent which would allow any tokens to be used for the value.
+To do this under the time constraints would have been very difficult and so a decision was made that over features should be prioritized.
+Creating another lexer using the current lexers remaining input and extracting subsequent tokens would be the easy fix in the current state.
 
 \subsubsection{Variable Lexing Bug.}
 While writing this section and inspecting the code I noticed that the naive collection does not check for the EOF character.
@@ -86,7 +86,7 @@ An unterminated variable is not defined behaviour and while a panic will not be 
 \subsection{Subshells}
 The original form uses grave quotes as delimiters and the 'modern' version uses '\$( command )'.
 They work similarly to user defined functions but output is captured instead of being output to the terminal.
-Changes to the environment that take place inside a subshell are not propagated. 
+Changes to the environment that take place inside a subshell are not propagated to the shell that ran it.
 
 For the modern version when the start of a subshell is detected a new lexer and parser pair is created with the remaining input.
 This parser is started with IgnoreNewlines option and returns an AST of everything contained in the the brackets.
