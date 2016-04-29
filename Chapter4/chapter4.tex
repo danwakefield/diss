@@ -14,8 +14,9 @@ TDD was used throughout but focus switched from unit tests to integration tests 
 The large size of the AST's produced for even simple statements (See~\ref{lst:if-ast-2}) meant that this swap saved significant time.
 
 \subsection{Unit Tests}
-Go comes with a builtin testing package that performs most of the functionality required from one.
-There
+Go comes with a builtin testing package as well as test runner tools to encourage testing from the beginning.
+Tests can be placed in the same package as the code or they can use a special package ('X\_test' with X replaced by the package name) that only allows access to exported values.
+This is a very simple way to ensure that any testing is blackbox and can help 
 The unit tests for my code leveraged Go's builtin testing package and the idiom of table driven tests.
 Providing a list of inputs and expected outputs for each function is generally more than enough to prove it works.
 
