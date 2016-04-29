@@ -23,9 +23,17 @@ This is the practice of testing with sets of inputs and comparing against the ex
 The values used in these tests range from edge cases to common usage and are designed to stress the code.
 
 \section{Integration Testing}
-The integration testing for the project was done through sample shell scripts.
-These exercised portions of the shell syntax and output a string during or after it.
-A manually inspected each test files output to ensure that constructs where working as intended.
+The integration testing for the project was done with shell scripts and golden files.
+These tests exercised portions of shell syntax and output strings indicating success or failure.
+
+Before each feature was developed a script containing actions it should be able to accomplish was created.
+This file was tested by running it in the dash shell and observing if it was successful.
+This was part of the test first mantra of TDD and having a second implementation that could prove the shell scripts worked as intended was very helpful.
+
+Golden files containing this proven correct output where created.
+A helper script that rebuilt the program and ran each test file against its corresponding golden file was created.
+It could then be easily seen when the implentation of a feature was complete
+
 
 
 
