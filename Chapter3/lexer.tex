@@ -63,7 +63,7 @@ Complex variables during the XXX.
 
 The lexer has a lot of knowledge about variables due to the concurrent design and the interpreted nature of strings.
 This would be better suited in the parser and it would also fix the problems that exist with more complex substitutions.
-A complex variable substitution of the form \verb!bar=${foo=$bar}! does not currently work.
+A complex variable substitution of the form \verb!bar=abc; ${foo=$bar}! does not currently work.
 
 This shows a variable 'foo' being assigned too with the 'bar' variable as the value.
 However when I created the lexComplexVariable function I used a naive lexer for anything after the operator with the intention of replacing it.
