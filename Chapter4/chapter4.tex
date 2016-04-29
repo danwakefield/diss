@@ -18,7 +18,7 @@ Go comes with a builtin testing package as well as test runner tools to encourag
 Tests can be placed in the same package as the code or they can use a special package ('X\_test' with X replaced by the package name) that only allows access to exported values.
 This is a very simple way to ensure that any testing is blackbox and can help find places where package boundaries are too strict or weak.
 
-Tests in Go are almost always table driven.
+Tests in Go are almost always table driven (See~\ref{lst:parser-unit-test} for an example).
 This is the practice of testing with sets of inputs and comparing against the expected outputs.
 The values used in these tests range from edge cases to common usage and are designed to stress the code.
 

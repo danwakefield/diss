@@ -129,10 +129,17 @@ fi
 \caption[Code for a simple if statement]{Shell code for an if statement. 'A' and 'noop' are previously set. The value of A is checked after the statement to ensure the code operated correctly.\label{lst:if-ast-1}}
 \end{figure}
 
+\pagebreak
 \lstinputlisting[caption={
 [AST for a simple if statement]
 The AST produced for the code in~\ref{lst:if-ast-1}. LineNo values are different as this has been extracted from a larger test file. 
 \label{lst:if-ast-2}}]{Appendix3/AST-if.txt}
+
+\pagebreak
+\lstinputlisting[language=Golang,caption={
+[Sample of table driven unit testing]
+A single test function in the table driven style.
+\label{lst:parser-unit-test}}]{Appendix3/parser_test.go}
 
 \pagebreak
 \lstinputlisting[language=c,caption={
