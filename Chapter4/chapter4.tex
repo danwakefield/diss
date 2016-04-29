@@ -11,9 +11,11 @@ This project took a detailed approach to testing due to the development process 
 This paid off multiple times catching bugs and regressions that occurred.
 
 TDD was used throughout but focus switched from unit tests to integration tests as the complexity of test cases grew. 
-The large size of the AST produced for even simple statements (See~\ref{lst:if-ast}) meant that swapping saved time crafting replicas.
+The large size of the AST's produced for even simple statements (See~\ref{lst:if-ast-2}) meant that this swap saved significant time.
 
 \subsection{Unit Tests}
+Go comes with a builtin testing package that performs most of the functionality required from one.
+There
 The unit tests for my code leveraged Go's builtin testing package and the idiom of table driven tests.
 Providing a list of inputs and expected outputs for each function is generally more than enough to prove it works.
 
@@ -25,6 +27,9 @@ Almost all unit tests in the Go ecosystem are written using a table driven appro
 These are looped over and tested in turn.
 It may sound simplistic but for black box testing this is a very 
 
+\section{Integration Testing}
+Integration testing 
+
 \section{Automated Testing}
 Towards the end of the project I started using a continuous integration service called drone.io\footnote{My project's public page is available at \url{https://drone.io/github.com/Danwakefield/gosh}}.
 Every time a commit was pushed to the github repository it would clone the code and run the both the unit and integration tests against the changes.
@@ -32,9 +37,6 @@ A notification email was sent if a build failed.
 
 The system just ran the normal unit and integration tests however since this codebase can issue system calls it is safer to run these tests in a disposable container in case of a severe bug.  
 CI systems also make it easy for contributors to see the status of the code and ensure that pull requests will not cause any regression.
-
-\section{Integration Testing}
-Integration testing 
 
 \section{User Testing}
 
