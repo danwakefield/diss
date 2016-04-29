@@ -86,12 +86,13 @@ An unterminated variable is not defined behaviour and while a panic will not be 
 \subsection{Subshells}
 The original form uses grave quotes as delimiters and the 'modern' version uses '\$( command )'.
 They work similarly to user defined functions but output is captured instead of being output to the terminal.
-Changes to the environment that take place inside a subshell are not propagated to the shell that ran it.
+Changes to the environment that take place inside a subshell are not propagated to the shell that executed it.
 
 For the modern version when the start of a subshell is detected a new lexer and parser pair is created with the remaining input.
 This parser is started with IgnoreNewlines option and returns an AST of everything contained in the the brackets.
 The lexer on the current level then adjusts its position in the input to the character after the closing bracket.
-This works quite well but the same thing cannot be used for the old style.
+The AST is stored in a substitution node that is evaluated when required
+This works very well but the old style subshell cannot be lexed in the same way.
 
 \begin{verbatim}
 $( foo $( bar $( baz ) ) )    # Modern
