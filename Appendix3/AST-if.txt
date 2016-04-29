@@ -1,10 +1,7 @@
-[
-  {
-    "Condition":[
-      {
+[{
+    "Condition":[{
         "Assign":[],
-        "Args":[
-          {
+        "Args":[{
    			"Raw":"false",
             "Quoted":false,
             "Subs":[],
@@ -16,8 +13,7 @@
     "Else":{
       "Condition": nil,
       "Else": nil,
-      "Body":[
-        {
+      "Body":[{
           "Assign":[
             "A=SUCCESS 6"
           ],
@@ -26,15 +22,12 @@
         }
       ]
     },
-    "Body":[
-      {
+    "Body":[{
         "Assign":[],
-        "Args":[
-          {
+        "Args":[{
             "Raw":"Ê",
             "Quoted":false,
-            "Subs":[
-              {
+            "Subs":[{
                 "VarName":"noop",
                 "CheckNull":false,
                 "SubType":0

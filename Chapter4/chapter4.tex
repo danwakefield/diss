@@ -10,10 +10,8 @@
 This project took a detailed approach to testing due to the development process including TDD from the start and evolving into FDD when a more concrete product appeared.
 This paid off multiple times catching bugs and regressions that occurred.
 
-TDD was used throughout but focus switched from unit tests to integration tests as the complexity of test cases grew.
-
-Integration testing was the main form of testing throughout as constructing an AST by hand for even a simple if statement is much hander than proving it works by running one.
-
+TDD was used throughout but focus switched from unit tests to integration tests as the complexity of test cases grew. 
+The large size of the AST produced for even simple statements (See~\ref{lst:if-ast}) meant that swapping saved time crafting replicas.
 
 \subsection{Unit Tests}
 The unit tests for my code leveraged Go's builtin testing package and the idiom of table driven tests.
