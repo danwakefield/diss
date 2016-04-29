@@ -35,7 +35,7 @@ Newlines can also be suppressed during the lexing which will then continue until
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
 
-Words are any text that is not a control operator, symbol or substitution.
+Words are any text that is not a control operator or whitespace.
 They contain a field that allows the parser to check if it is a string.
 This information will eventually be used to determine the expansions and word splits to perform on it.
 
@@ -47,12 +47,11 @@ Every character is copied as is except the EOF and the matching single quote.
 EOF causes an unterminated string error.
 The end quote causes the string to be emitted.
 
-Interpreted strings, which use double quotes, should allow variables, both types of subshells and escape sequences.
+Interpreted strings, which use double quotes, should allow variables, subshells and escape sequences and also throw an error when encountering EOF.
 Unfortunately escape sequences where not completed so the string '\\n' will be treated as two separate character rather than a newline.
 The position of subshells and variables in a string are indicated by the SentinalSubstitution character.
 The subs list of each lexitem holds the structures that can be called to replace these sentinals.
-This is done to abstract to complexities of substitutions.
-Interpreted strings also throw an error when encountering EOF.
+This is done to abstract the complexities of substitutions.
 
 When they where created during the third iteration both single and double quotes behaved as raw strings.
 As the capabilities of the lexer improved the lexDoubleQuote function could add a new rule to its switch statement and pass control to incorporate them.
@@ -64,11 +63,12 @@ Complex variables during the XXX.
 
 The lexer has a lot of knowledge about variables due to the concurrent design and the interpreted nature of strings.
 This would be better suited in the parser and it would also fix the problems that exist with more complex substitutions.
-A complex variable substitution of the form \verb!${foo:-$bar}! does not currently work.
+A complex variable substitution of the form \verb!bar=${foo=$bar}! does not currently work.
 
-This shows a variable 'foo' being operated on by the ':-' operator.
-When I created the lexComplexVariable function I used a naive lexer for anything after the operator with the intention of replacing it.
-It gathers everything as is upto the next '\}' character and uses it as the value.
+This shows a variable 'foo' being assigned too with the 'bar' variable as the value.
+However when I created the lexComplexVariable function I used a naive lexer for anything after the operator with the intention of replacing it.
+It gathers everything as a raw string upto the next '\}' character and uses that as the value.
+This means that instead of 
 Creating another lexer using the remaining input and extracting tokens would be the solution in the current state.
 However redesigning the lexer to be recursive descent would make it even easier.
 
