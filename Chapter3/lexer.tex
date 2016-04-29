@@ -34,10 +34,13 @@ Newlines can also be suppressed during the lexing which will then continue until
 
 \subsection{Words}
 The word lexing code was completed during the third iteration along with the stubbed parser.
-Since words 
-Word are anything that is not quoted
 
-\subsection{Strings}
+Words are any text that is not a control operator, symbol or substitution.
+They contain a field that allows the parser to check if it is a string.
+
+
+
+\subsubsection{Strings}
 Two functions are used for strings as the shells has both raw quotes and interpreted quotes.
 
 Raw quotes use the single quote character and are very simple.
