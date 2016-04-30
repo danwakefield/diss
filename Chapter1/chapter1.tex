@@ -23,7 +23,7 @@ The final section describes the development process that was used throughout the
 
 \section{Background}
 A shell is the smallest possible interface between a user and the operating system kernel API functions.
-The kernel provides these functions that perform complex tasks like launching executables, connecting to the network and accessing files.
+The kernel provides these functions to perform complex tasks like launching executables, connecting to the network and accessing files.
 The Domain Specific Language(DSL) of the shell simplifies these interactions and allows the user to focus on the things they want to do.
 
 As well as providing this interface almost all shells can be used to interpret stored commands known as batch files or shell scripts.
@@ -34,18 +34,16 @@ Shell syntax has been influential in the design of other modern scripting langua
 There are two families of shells, those descended from sh and csh known as traditional shells and those that have a largely incompatible syntax and/or behaviour, known as exotic shells.
 Fish\cite{FISH}, es\cite{ES-SHELL} and oh\cite{OH-SHELL}, which happens to be written in Golang, are examples of exotic shells.
 
-However this thesis will focus entirely on the traditional shells as they have been ingrained into everyday computer science since the first generation where developed at Bell Labs (See figure~\ref{fig:shell-history}).
-
 The POSIX shell specification\cite{POSIX-SHELL-STANDARD} describes what a shell should provide and how it should operate to be compatible.
-Shell scripts written using the POSIX dialect are guarenteed,
+Shell scripts written using the POSIX dialect are guaranteed to run in any shell that conforms to it.
 
-dash is a POSIX compliant shell which lacks many features useful in an interactive context.
+dash is a POSIX compliant shell which trades features, especially those useful in an interactive context, for speed.
 Bash adds things such as history control, line editing and arrays but also has a compatibility mode for POSIX scripts.
 Zsh has many extra features but also has emulation modes for its major rivals though they are not 100\% compatible.
 These are all examples of modern traditional shells from the simplest to most complex.
 XXX
 
-Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with 
+Every Linux distribution right down to the very smallest\cite{ALPINE-LINUX} include a shell of some form that complies with POSIX.
 The Almquist Shell(ash) and the Debian Almquist Shell(dash) are minimal shells that implement the spec.
 However the most widely used shell, the Bourne Again Shell(bash), implements an incompatible superset of the POSIX functionality.
 It comes with a flag to switch off the additional features and enable POSIX compatibility and when the binary is symlinked to \verb!/bin/sh! this flag is implicitly set.
