@@ -22,7 +22,16 @@ As the requirements come mostly from the specification, it is hard
 
 
 \section{Design Decisions}
-As has been noted in~\ref{sec:implentation}, a few of the design decisions 
+As has been noted in~\ref{sec:implentation}, a few of the design decisions where clearly  wrong.
+
+The biggest problem was the design of the lexer being non re-entrant.
+This prevented many syntax features from being completed and has left the shell in a non compliant state.
+This things that where affected include:
+\begin{itemize*}
+	\item Embedded variables in both the arithmetic construct and complex substitutions.
+    \item 
+\end{itemize*}
+
 
 
 \section{Suitability of tools}
