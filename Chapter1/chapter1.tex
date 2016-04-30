@@ -22,9 +22,9 @@ The final section describes the development process that was used throughout the
 
 
 \section{Background}
-A shell is the smallest possible interface between a user and the operating system kernel and they have been ingrained into everyday computer science since the first generation where developed at Bell Labs (See figure~\ref{fig:shell-history}).
+A shell is the smallest possible interface between a user and the operating system kernel.
 The kernel provides API functions that perform complex tasks like launching executables, connecting to the network and accessing files.
-The Domain Specific Language(DSL) of the shell simplifies these common interactions and allows the user to focus on the things they want to do.
+The Domain Specific Language(DSL) of the shell simplifies these interactions and allows the user to focus on the things they want to do.
 
 As well as providing this interface almost all shells can be used to interpret stored commands known as batch files or shell scripts.
 These group commands to avoid repetition and to automate common tasks
@@ -34,8 +34,9 @@ Shell syntax has been influential in the design of other modern scripting langua
 There are two families of shells, those descended from sh and csh known as traditional shells and those that have a largely incompatible syntax and/or behaviour, known as exotic shells.
 Fish\cite{FISH}, es\cite{ES-SHELL} and oh\cite{OH-SHELL}, which happens to be written in Golang, are examples of exotic shells.
 
-However this thesis will focus entirely on the traditional shells.
-The POSIX shell specification\cite{POSIX-SHELL-STANDARD} describes XXX
+However this thesis will focus entirely on the traditional shells as they have been ingrained into everyday computer science since the first generation where developed at Bell Labs (See figure~\ref{fig:shell-history}).
+
+The POSIX shell specification\cite{POSIX-SHELL-STANDARD} describes what a shell should provide and how it should operate.
 (See figure~\ref{fig:shell-history}),
 
 dash is a POSIX compliant shell which lacks many features useful in an interactive context.
