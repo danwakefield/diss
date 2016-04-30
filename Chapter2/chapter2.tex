@@ -28,7 +28,7 @@ The creators of the language are all well respected in the world of computing.
 Rob Pike is known for Plan 9 and UTF8. 
 Robert Griesemer for the Java hotspot VM
 Ken Thompson for Unix, Plan 9 and B, the predecessor to C.
-Their combined hatred of the complexity and compile times of C\verb!++! where the catalyst for Go's development.
+Their combined hatred of the complexity and compile times of C\verb!++! was the catalyst for Go's development.
 They also saw it as an opportunity to improve upon the aspects of C that have been most problematic over the years including\cite{GO-DESIGN-EMAIL}.
 
 \begin{itemize*}
@@ -152,7 +152,7 @@ The lexer can also detect some errors that don't require deep knowledge of the l
 
 However the POSIX spec is very lenient in most scenarios and many things that would be considered errors in other languages are ignored or resolved in some way.
 An example of this is the variable symbol '\$'.
-By itself or when followed by a invalid substitution character it becomes a literal character with no special meaning. This is very difficult to encode using a parsing expression grammar(PEG) or in Extended Backus–Naur Form(EBNF).
+By itself or when followed by a invalid substitution character it becomes a literal character with no special meaning. This is very difficult to encode using a parsing expression grammar(PEG) or in Extended Backus-Naur Form(EBNF).
 
 The lexer also handles other complex tasks such as command substitution lexing, which requires the creation of a sub parser to evaluate correctly and alias expansion.
 
