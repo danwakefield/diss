@@ -18,11 +18,11 @@
 %Review the discussion on the Evaluation section from the lectures. A recording is available on Blackboard. 
 
 \section{Requirements}
-As the requirements come mostly from the specification, it is hard 
+XXX
 
 
 \section{Design Decisions}
-As has been noted in~\ref{sec:implementation}, a few of the design decisions where clearly wrong.
+As has been noted in~\ref{sec:implementation}, a few of the design decisions where clearly wrong. This section aims to show the problems and talk about possible future solutions to them.
 
 \subsection{Lexer}
 The biggest problem was the design of the lexer being non re-entrant.
@@ -39,10 +39,15 @@ Each lexer currently requires a complete copy of the remaining input text, a pro
 Switching the lexers to take a Bytes.Buffer instead of a string for the input may help as slices\footnote{An array like structure that uses pointers into an actual array to reduce overhead.} could be taken from it.
 
 Alias expansion is more complex as the input text can be modified considerably.
-As they occur completely in the lexer they can introduce any text including control structures 
-
+As they occur completely in the lexer they can introduce any text including multi-line strings or control structures.
+This places strain on parts of the code that require knowledge of a tokens position in the source.
+Error messages are particularly affected as if they indicate that problems occur on lines that don't exist or don't contain the error it would be very confusing. 
+With a lightweight sublexer aliases could be expanded in a separate context and control returned to after the replacement in the original lexer.
 
 \subsection{Package Layout}
+Another of the bad decisions was the lack of planning in package layout.
+
+
 
 \subsection{a}
 
