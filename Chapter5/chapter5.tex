@@ -22,7 +22,7 @@ As the requirements come mostly from the specification, it is hard
 
 
 \section{Design Decisions}
-As has been noted in~\ref{sec:implentation}, a few of the design decisions where clearly  wrong.
+As has been noted in~\ref{sec:implementation}, a few of the design decisions where clearly wrong.
 
 The biggest problem was the design of the lexer being non re-entrant.
 This prevented many syntax features from being completed and has left the shell in a non compliant state.
@@ -32,6 +32,8 @@ This things that where affected include:
     \item Complex substitutions that take multiple arguments.
     \item Alias expansions.
 \end{itemize*}
+
+While these could all have been accomplished with sublexers this would have been quite inefficient for memory 
 
 
 
