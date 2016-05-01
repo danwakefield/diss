@@ -52,10 +52,11 @@ Other shells also include the ability for expansions happen in places other that
 Another of the bad decisions was the lack of planning in package layout.
 
 A few different workarounds where used as the timeframe would not have accommodated the work required to correct the problems.
-Every files should have been a package from the beginning which would have allowed real cross imports.
-
 The use of a placeholder package, for the ExitStatus and IOContainer types, and the map of empty interfaces for NodeFunctions are the main examples of problems caused by the lack of a decision in this area.
 
+Every logical component should have been a package from the beginning which would have allowed real imports to work as intended.
+It also would have allowed easy renaming of the variables package, using the builtin tool go fix.
+This change has been needed since it became obvious that the package would end up holding more of the state than just 
 
 
 \subsection{a}
