@@ -45,7 +45,8 @@ Error messages are particularly affected as if they indicate that problems occur
 
 With a lightweight sublexer aliases could be expanded in a separate context and control returned to after the replacement in the original lexer.
 Tokens could be modified to indicate how many alias replacements have occurred before they are emitted and the original line that the alias was expanded at.
-This would require careful and complex bookkeeping however as aliases can be expanded multiple times and other shells include features that allow expansions in places other that the first word of a command.
+This would require careful and complex bookkeeping however as aliases can be expanded multiple times.
+Other shells also include the ability for expansions happen in places other that the first word of a command which would make it even more complex.
 
 \subsection{Package Layout}
 Another of the bad decisions was the lack of planning in package layout.
