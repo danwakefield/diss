@@ -55,12 +55,18 @@ A few different workarounds where used as the timeframe would not have accommoda
 The use of a placeholder package, for the ExitStatus and IOContainer types, and the map of empty interfaces for NodeFunctions are the main examples of problems caused by the lack of a decision in this area.
 
 Every logical component should have been a package from the beginning which would have allowed real imports to work as intended.
-It also would have allowed easy renaming of the variables package, using the builtin tool go fix.
+It also would have allowed easy renaming of the variables package, using the builtin go fix tool.
 This change has been needed since it became obvious that the package would end up holding more program state than just variables.
 
 \subsection{Escaping}
-Escaping is the act of turning certain sequences of characters into a single other character with a special meaning.
-The most well know example is '\verb!\n!' which 
+Escaping is the act of turning certain sequences of characters into another character that is hard to input, represent or that has a special meaning.
+The most well know example is '\verb!\n!' which is the ASCII char 92, backslash, followed by char 110, the letter 'n'.
+This is converted into ASCII char 10, the newline.
+
+The code behind this is not too difficult and some parts of it already exist as the lexer supports line continuation i.e. A backslash preceding a literal newline removes both from the input stream.
+This affects backslashes in all portions of the input text except raw strings.
+A backslash can also be used to prevent alias expansion when they precede a word rather than a character
+
 
 
 \section{Suitability of tools}
