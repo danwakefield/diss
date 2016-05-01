@@ -64,12 +64,15 @@ The most well know example is '\verb!\n!' which is the ASCII char 92, backslash,
 This is converted into ASCII char 10, the newline.
 
 The code behind this is not too difficult and some parts of it already exist as the lexer supports line continuation i.e. A backslash preceding a literal newline removes both from the input stream.
-This affects backslashes in all portions of the input text except raw strings.
-A backslash can also be used to prevent alias expansion when they precede a word rather than a character
+However this affects backslashes in all portions of the input text except raw strings.
+A backslash can also be used to prevent alias expansion when it precedes a word rather than a character.
 
 
 
 \section{Suitability of tools}
+I am very happy with the decision to use Go as it has resulted in some extremely readable code in comparison to the C of dash or bash.
+
+
 
 \section{Other project aims}
 
