@@ -24,6 +24,7 @@ As the requirements come mostly from the specification, it is hard
 \section{Design Decisions}
 As has been noted in~\ref{sec:implementation}, a few of the design decisions where clearly wrong.
 
+\subsection{Lexer}
 The biggest problem was the design of the lexer being non re-entrant.
 This prevented many syntax features from being completed and has left the shell in a non compliant state.
 This things that where affected include:
@@ -38,6 +39,9 @@ Each lexer currently requires a complete copy of any remaining input text, a pro
 Switching the lexers to take a Bytes.Buffer instead of a string for the input may help as slices\footnote{An array like structure that uses pointers into an actual array to reduce overhead.} could be taken from it.
 
 
+\subsection{Package Layout}
+
+\subsection{a}
 
 
 \section{Suitability of tools}
