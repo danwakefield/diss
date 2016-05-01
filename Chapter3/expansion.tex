@@ -5,7 +5,7 @@ This is a change from the C expansion code where the use of bitflags for every c
 I decided that the change was needed as it is rare to not want and expansion and it is easier to understand the logic of
 'NoExpandTilde' than a series of or'ed flags.
 
-Expansions are evaluated every time they are reached because of their 'impure' nature.
+Expansions are evaluated every time they are reached because of their 'impure' nature. XXX
 
 \subsection{Tilde}
 When a tilde occurs either as the first character of a word or immediately following a ':' in a word it should be expanded.
